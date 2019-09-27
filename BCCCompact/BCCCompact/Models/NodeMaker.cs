@@ -67,8 +67,8 @@ namespace BCCCompact.Models
 
         private void NodeLabelTagging()
         {
-            BCCAlgorithm bcc = new BCCAlgorithm();
-            vertex_low = bcc.Process(component);
+            BccAlgrtm mmd = new BccAlgrtm();
+            vertex_low = mmd.Process(component);
         }
     }
 }

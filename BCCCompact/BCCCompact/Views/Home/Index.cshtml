@@ -9,7 +9,7 @@
     <SCRIPT LANGUAGE="Javascript">
         document.firstline = "Welcome to this page"
 
-/**/</SCRIPT>
+    </SCRIPT>
     <TITLE>load demo</TITLE>
     <style>
         .fullScreenStyle {
@@ -125,29 +125,57 @@
 
 @section scripts{
     <script>
-    function compact() {
-        const queryText = $('#text').val();
-        $.ajax({
-            url: '/query/compact',
-            method: 'post',
-            data: { query: queryText }
-        }).done((result) => {
-            drawGraph(result);
+        function compact() {
+            const queryText = $('#text').val();
+            $.ajax({
+                url: '/query/compact',
+                method: 'post',
+                data: { query: queryText }
+            }).done((result) => {
+                drawGraph(result);
             });
-    }
-    function randomGraphCompact() {
+        }
+        function randomGraphCompact() {
 
-        const v = $('#V').val();
-        const e = $('#E').val();
-        var queryText = v + "-" + e;
-        $.ajax({
-            url: '/query/randomGraph',
-            method: 'post',
-            data: { query: queryText }
-        }).done((result) => {
-            drawGraph(result);
+            const v = $('#V').val();
+            const e = $('#E').val();
+            var queryText = v + "-" + e;
+            $.ajax({
+                url: '/query/randomGraph',
+                method: 'post',
+                data: { query: queryText }
+            }).done((result) => {
+                drawGraph(result);
             });
-    }
+        }
+
+        function drawGraph(result) {
+            var g = { nodes: [], edges: [] };
+            $.each(result.locations, (index, value) => {
+                g.nodes.push({
+                    id: 'n' + index,
+                    attributes: {
+                        x: value.x,
+                        y: value.y,
+                        text: 'N' + index,
+                        radius: 3
+                    }
+                });
+            });
+            $.each(result.edges, (index, value) => {
+                g.edges.push({
+                    id: 'e' + index,
+                    source: 'n' + value.v,
+                    target: 'n' + value.u,
+                    attributes: { text: 'edge' + index }
+                });
+            });
+            $('#text').html('');
+            var ogma = new Ogma({
+                graph: g,
+                container: 'graph-container'
+            });
+        }
     </script>
 }
 
@@ -197,31 +225,5 @@
         });
     }
 
-    function drawGraph(result) {
-        var g = { nodes: [], edges: [] };
-        $.each(result.locations, (index, value) => {
-            g.nodes.push({
-                id: 'n' + index,
-                attributes: {
-                    x: value.x,
-                    y: value.y,
-                    text: 'N' + index,
-                    radius: 3
-                }
-            });
-        });
-        $.each(result.edges, (index, value) => {
-            g.edges.push({
-                id: 'e' + index,
-                source: 'n' + value.v,
-                target: 'n' + value.u,
-                attributes: { text: 'edge' + index }
-            });
-        });
-        $('#text').html('');
-        var ogma = new Ogma({
-            graph: g,
-            container: 'graph-container'
-        });
-    }
+
 </script>

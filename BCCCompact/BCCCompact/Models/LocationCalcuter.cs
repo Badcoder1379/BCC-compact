@@ -9,8 +9,9 @@ namespace BCCCompact.Models
     {
         private readonly double bounderMLT = 0.7;
 
-        public void CalcuteNodeLocations(Node fatherNode)
+        public void CalcuteNodeLocations(Component component)
         {
+            Node fatherNode = component.lasrgestNode;
             CalcuteNodes(fatherNode);
         }
 
@@ -24,10 +25,11 @@ namespace BCCCompact.Models
             }
         }
 
-        public void CalcuteVerticseLocation(Node fatherNode) => CalcuteVertices(fatherNode);
+        public void CalcuteVerticseLocation(Component component) => CalcuteVertices(component);
 
-        private void CalcuteVertices(Node currentNode)
+        private void CalcuteVertices(Component component)
         {
+            Node currentNode = component.lasrgestNode;
             Dictionary<Vertex, double> vertex_angle = currentNode.innerVertices_angle;
 
             if (vertex_angle.Count == 1)

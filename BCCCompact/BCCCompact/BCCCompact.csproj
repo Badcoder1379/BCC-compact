@@ -126,8 +126,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AroundCirclePicker.cs" />
-    <Compile Include="Models\BCC.cs" />
-    <Compile Include="Models\BCCAlgorithm.cs" />
+    <Compile Include="Models\BccAlgorithm\Path.cs" />
+    <Compile Include="Models\BccCompact.cs" />
     <Compile Include="Models\CompactResult.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="Models\ComponentMaker.cs" />
@@ -137,6 +137,7 @@
     <Compile Include="Models\Importer.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationCalcuter.cs" />
+    <Compile Include="Models\BccAlgorithm\BccAlgrtm.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\NodeMaker.cs" />
     <Compile Include="Models\NodeTreeMaker.cs" />
@@ -167,6 +168,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\ogma.min.js" />
+    <Content Include="Scripts\graph.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

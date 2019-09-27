@@ -17,8 +17,9 @@ namespace BCCCompact.Models
             this.fatherNode = father; ;
         }
 
-        public void process(Node father)
+        public void process(Component component)
         {
+            Node father = component.lasrgestNode;
             SetFatherNode(father);
             Vertex randomVertex = fatherNode.GetVertices().ToList().First();
             visitedNodes.Add(randomVertex.node);

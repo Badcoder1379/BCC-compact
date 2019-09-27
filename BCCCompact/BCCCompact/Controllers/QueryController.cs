@@ -15,8 +15,9 @@ namespace BCCCompact.Controllers
         {
             Importer importer = new Importer(query);
             Graph graph = importer.import();
-            BCC Bcc = new BCC();
-            Bcc.Process(graph);
+
+            BccCompact bcc = new BccCompact();
+            bcc.Process(graph);
             CompactResult result = graph.getResult();
 
             return Json(result);

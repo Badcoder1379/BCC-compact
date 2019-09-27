@@ -11,9 +11,9 @@ namespace BCCCompact.Models
         private readonly double bounderMLT = 0.7;
         private readonly double firstInternallRadius = 30;
 
-        public void Process(Node largestNode)
+        public void Process(Component component)
         {
-            SetLargestNode(largestNode);
+            SetLargestNode(component.lasrgestNode);
             Calcute(largestNode);
         }
 
