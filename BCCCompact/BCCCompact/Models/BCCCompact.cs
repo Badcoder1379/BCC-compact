@@ -16,12 +16,15 @@ namespace BCCCompact.Models
             NodeMaker nodeMaker = new NodeMaker();
             SizeCalcuter sizeCalcuter = new SizeCalcuter();
             NodeTreeMaker nodeTreeMaker = new NodeTreeMaker();
+            AroundCirclePicker picker = new AroundCirclePicker();
 
-            foreach(Component component in components)
+            foreach (Component component in components)
             {
                 nodeMaker.Process(component);
                 nodeTreeMaker.process(component);
                 sizeCalcuter.Process(component);
+                picker.PickNodes(component.lasrgestNode);
+                picker.PickAroundCircle(component.lasrgestNode);
             }
 
             ComponentSetter componentSetter = new ComponentSetter();
