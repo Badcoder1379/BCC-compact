@@ -31,8 +31,8 @@ namespace BCCCompact.Controllers
             int E = int.Parse(str[1]);
 
             Graph graph = Graph.getRandomGraph(V, E);
-            BCC Bcc = new BCC();
-            Bcc.Process(graph);
+            BccCompact bcc = new BccCompact();
+            bcc.Process(graph);
             CompactResult result = graph.getResult();
 
             return Json(result);

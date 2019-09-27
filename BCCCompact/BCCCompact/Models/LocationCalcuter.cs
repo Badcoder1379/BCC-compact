@@ -25,11 +25,12 @@ namespace BCCCompact.Models
             }
         }
 
-        public void CalcuteVerticseLocation(Component component) => CalcuteVertices(component);
-
-        private void CalcuteVertices(Component component)
+        public void CalcuteVerticseLocation(Component component)
         {
-            Node currentNode = component.lasrgestNode;
+            CalcuteVertices(component.lasrgestNode);
+        }
+        private void CalcuteVertices(Node currentNode)
+        {
             Dictionary<Vertex, double> vertex_angle = currentNode.innerVertices_angle;
 
             if (vertex_angle.Count == 1)
