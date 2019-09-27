@@ -121,10 +121,27 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AroundCirclePicker.cs" />
     <Compile Include="Models\BCC.cs" />
+    <Compile Include="Models\BCCAlgorithm.cs" />
+    <Compile Include="Models\CompactResult.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\ComponentMaker.cs" />
+    <Compile Include="Models\ComponentSetter.cs" />
+    <Compile Include="Models\Edge.cs" />
+    <Compile Include="Models\Graph.cs" />
+    <Compile Include="Models\Importer.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LocationCalcuter.cs" />
+    <Compile Include="Models\Node.cs" />
+    <Compile Include="Models\NodeMaker.cs" />
+    <Compile Include="Models\NodeTreeMaker.cs" />
+    <Compile Include="Models\SizeCalcuter.cs" />
+    <Compile Include="Models\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +166,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ogma.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

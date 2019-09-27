@@ -2,30 +2,226 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<HEAD>
+    <SCRIPT LANGUAGE="Javascript">
+        document.firstline = "Welcome to this page"
+
+/**/</SCRIPT>
+    <TITLE>load demo</TITLE>
+    <style>
+        .fullScreenStyle {
+            position: center;
+            height: 100%;
+            width: 100%;
+            min-height: 100%;
+            min-width: 100%;
+            padding: 10px;
+            border: 4px solid green;
+            background-color: aquamarine;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .textInputStyle {
+            font-size: 10px;
+            border: 2px solid green;
+            border-radius: 5px;
+            color: darkslateblue;
+            font-family: 'Comic Sans MS';
+            margin-left: 10px;
+            background-color: azure;
+        }
+
+        .buttonStyle {
+            background-color: darkslateblue;
+            color: aquamarine;
+            margin-left: 150px;
+            text-align: center;
+            font-family: 'Comic Sans MS';
+            font-size: 15px;
+            padding-right: 50px;
+            padding-left: 50px;
+            border: 3px solid darkblue;
+            border-radius: 7px;
+        }
+
+        .randomButtonStyle {
+            background-color: darkslateblue;
+            color: aquamarine;
+            text-align: center;
+            font-family: 'Comic Sans MS';
+            font-size: 15px;
+            padding-right: 20px;
+            padding-left: 20px;
+            border: 3px solid darkblue;
+            border-radius: 7px;
+        }
+
+        .containerStyle {
+            margin-top: 20px;
+            background-color: lightcyan;
+            border: 1px solid darkslateblue;
+            border-radius: 5px;
+            height: 700px;
+            width: 1200px;
+        }
+
+        .textStyle {
+            color: darkslateblue;
+            font-size: 15px;
+            font-family: 'Comic Sans MS';
+        }
+
+        .randomTextStyle {
+            font-size: 10px;
+            border: 2px solid green;
+            border-radius: 5px;
+            color: darkslateblue;
+            font-family: 'Comic Sans MS';
+            margin-right: 50px;
+            background-color: azure;
+        }
+    </style>
+
+</HEAD>
+
+
+
+<BODY>
+
+    <div class="fullScreenStyle">
+        <form>
+            <strong style="color :darkslateblue;align-content : center; font-size : 20px; font-family :  'Comic Sans MS';">
+                Graph Compacter
+            </strong>
+            <br />
+            <strong style="color : darkslateblue; font-size : 15px; font-family :  'Comic Sans MS';"> input your graph file name : </strong>
+            <input type="text" class="textInputStyle" value="test1.txt" id="text" />
+            <input type="button" class="buttonStyle" value="compact" onclick="compact()" />
+            <br />
+
+
+            <strong class="textStyle"> number of vertices : </strong>
+            <input type="text" class="randomTextStyle" value="10" id="V" />
+            <strong class="textStyle"> number of edges : </strong>
+            <input type="text" class="randomTextStyle" value="20" id="E" />
+            <input type="button" class="randomButtonStyle" value="random graph compact" onclick="randomGraphCompact()" />
+            <input type="button" class="randomButtonStyle" value="random graph" onclick="drawRandomGraph()" />
+
+        </form>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div id="graph-container" class="containerStyle">
+        <br />
+        <br />
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</BODY>
+</html>
+
+<script src="~/Scripts/ogma.min.js"></script>
+
+
+@section scripts{
+    <script>
+    function compact() {
+        const queryText = $('#text').val();
+        $.ajax({
+            url: '/query/compact',
+            method: 'post',
+            data: { query: queryText }
+        }).done((result) => {
+            drawGraph(result);
+            });
+    }
+    function randomGraphCompact() {
+
+        const v = $('#V').val();
+        const e = $('#E').val();
+        var queryText = v + "-" + e;
+        $.ajax({
+            url: '/query/randomGraph',
+            method: 'post',
+            data: { query: queryText }
+        }).done((result) => {
+            drawGraph(result);
+            });
+    }
+    </script>
+}
+
+
+
+
+
+
+
+<script>
+    function drawRandomGraph() {
+        var element = document.getElementById('graph-container');
+        var positionInfo = element.getBoundingClientRect();
+        var height = positionInfo.height;
+        var width = positionInfo.width;
+        var v = $('#V').val();
+        var e = $('#E').val();
+        v = parseInt(v);
+        e = parseInt(e);
+        function randomGraph(N, E) {
+            var g = { nodes: [], edges: [] };
+            for (var i = 0; i < N; i++) {
+                g.nodes.push({
+                    id: 'n' + i,
+                    attributes: {
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        text: 'n' + i,
+                        radius: 100
+                    }
+                });
+            }
+            for (var i = 0; i < E; i++) {
+                g.edges.push({
+                    id: 'e' + i,
+                    source: 'n' + (Math.random() * N | 0),
+                    target: 'n' + (Math.random() * N | 0),
+                    attributes: { text: 'edge' + i }
+                });
+            }
+            return g;
+        }
+        var g = randomGraph(v, e);
+        var ogma = new Ogma({
+            graph: g,
+            container: 'graph-container'
+        });
+    }
+
+    function drawGraph(result) {
+        var g = { nodes: [], edges: [] };
+        $.each(result.locations, (index, value) => {
+            g.nodes.push({
+                id: 'n' + index,
+                attributes: {
+                    x: value.x,
+                    y: value.y,
+                    text: 'N' + index,
+                    radius: 3
+                }
+            });
+        });
+        $.each(result.edges, (index, value) => {
+            g.edges.push({
+                id: 'e' + index,
+                source: 'n' + value.v,
+                target: 'n' + value.u,
+                attributes: { text: 'edge' + index }
+            });
+        });
+        $('#text').html('');
+        var ogma = new Ogma({
+            graph: g,
+            container: 'graph-container'
+        });
+    }
+</script>
