@@ -33,7 +33,7 @@ namespace BCCCompact.Models
             }
             Dictionary<Vertex, double> vertex_share = new Dictionary<Vertex, double>();
             double maxExternallRadius = node.internallRadius;
-            foreach (Vertex vertex in node.adjacenty_vertex_nodes.Keys)
+            foreach (Vertex vertex in node.AdjacentNodesWithConnectiongThisVertex.Keys)
             {
                 vertex_share[vertex] = GetSumOfChildrenSizes(vertex,node);
             }
@@ -45,16 +45,16 @@ namespace BCCCompact.Models
                 {
                     allVertexAngel = Math.PI * 2 / 3;
                 }
-                foreach (Node child in node.adjacenty_vertex_nodes[vertex])
+                foreach (Node child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
                 {
-                    if (child == node.parent)
+                    if (child == node.Parent)
                     {
                         continue;
                     }
                     double angel = (child.externallRadius / vertex_share[vertex]) * allVertexAngel;
                     if (angel != 0)
                     {
-                        child.parentAngleShare = angel;
+                        child.AngleShareFromParentCenter = angel;
                         angel /= 2;
                         double minDistanceToCenter = Math.Abs(child.externallRadius / Math.Sin(angel));
                         if (minDistanceToCenter < child.externallRadius + node.internallRadius)
@@ -65,7 +65,7 @@ namespace BCCCompact.Models
                         {
                             maxExternallRadius = minDistanceToCenter + child.externallRadius;
                         }
-                        child.connectionLenght = minDistanceToCenter;
+                        child.EdgeToParentLenght = minDistanceToCenter;
                     }
                 }
             }
@@ -77,9 +77,9 @@ namespace BCCCompact.Models
         { 
             double sumOfSize = 0;
 
-            foreach (Node child in node.adjacenty_vertex_nodes[vertex])
+            foreach (Node child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
             {
-                if (child == node.parent)
+                if (child == node.Parent)
                 {
                     continue;
                 }
@@ -92,7 +92,7 @@ namespace BCCCompact.Models
         private void SetSizes(Node node)
         {
             SetInternallRadius(node);
-            foreach (Node child in node.children)
+            foreach (Node child in node.Children)
             {
                 Calcute(child);
             }
@@ -102,7 +102,7 @@ namespace BCCCompact.Models
         {
             double sum = 0;
 
-            foreach (Node child in node.children)
+            foreach (Node child in node.Children)
             {
                 if (child.externallRadius == 0)
                 {
@@ -115,13 +115,13 @@ namespace BCCCompact.Models
 
         private void SetInternallRadius(Node node)
         {
-            if (node.GetVertices().Count == 1)
+            if (node.Vertices.Count == 1)
             {
                 node.internallRadius = firstInternallRadius;
             }
             else
             {
-                node.internallRadius = node.GetVertices().Count * firstInternallRadius;
+                node.internallRadius = node.Vertices.Count * firstInternallRadius;
             }
         }
 

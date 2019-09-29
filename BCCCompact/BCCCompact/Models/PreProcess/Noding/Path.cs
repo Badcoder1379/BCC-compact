@@ -10,11 +10,10 @@ namespace BCCCompact.Models.BccAlgorithm
         HashSet<Vertex> vertices = new HashSet<Vertex>();
         Stack<Vertex> list = new Stack<Vertex>();
         Dictionary<Vertex, int> children = new Dictionary<Vertex, int>();
-        int time = 0;
+        
 
         public void Push(Vertex vertex)
         {
-            vertex.disc = vertex.low = ++time;
             vertices.Add(vertex);
             list.Push(vertex);
             children[vertex] = 0;

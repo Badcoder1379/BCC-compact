@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BCCCompact.Models
 {
-    public class BccCompact
+    public class BCC
     {
         public void Process(Graph graph)
         {
@@ -21,7 +21,7 @@ namespace BCCCompact.Models
             foreach (Component component in components)
             {
                 nodeMaker.Process(component);
-                nodeTreeMaker.process(component);
+                nodeTreeMaker.Process(component);
                 sizeCalcuter.Process(component);
                 picker.PickNodes(component.lasrgestNode);
                 picker.PickAroundCircle(component.lasrgestNode);

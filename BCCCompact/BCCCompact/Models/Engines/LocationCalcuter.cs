@@ -17,10 +17,10 @@ namespace BCCCompact.Models
 
         private void CalcuteNodes(Node currentNode)
         {
-            foreach (Node child in currentNode.children)
+            foreach (Node child in currentNode.Children)
             {
-                child.XCenter = currentNode.XCenter + child.connectionLenght * Math.Sin(child.angleToConnectToParent);
-                child.YCenter = currentNode.YCenter + child.connectionLenght * Math.Cos(child.angleToConnectToParent);
+                child.XCenter = currentNode.XCenter + child.EdgeToParentLenght * Math.Sin(child.AngleToConnectToParent);
+                child.YCenter = currentNode.YCenter + child.EdgeToParentLenght * Math.Cos(child.AngleToConnectToParent);
                 CalcuteNodes(child);
             }
         }
@@ -31,7 +31,7 @@ namespace BCCCompact.Models
         }
         private void CalcuteVertices(Node currentNode)
         {
-            Dictionary<Vertex, double> vertex_angle = currentNode.innerVertices_angle;
+            Dictionary<Vertex, double> vertex_angle = currentNode.AnglesOfInnerVertices;
 
             if (vertex_angle.Count == 1)
             {
@@ -47,7 +47,7 @@ namespace BCCCompact.Models
                     vertex.setLocation(x, y);
                 }
             }
-            foreach (Node child in currentNode.children)
+            foreach (Node child in currentNode.Children)
             {
                 CalcuteVertices(child);
             }
@@ -55,7 +55,7 @@ namespace BCCCompact.Models
 
         private void SetOwnVertexLocation(Node currentNode)
         {
-            Vertex vertex = currentNode.innerVertices_angle.Keys.ToList().First();
+            Vertex vertex = currentNode.AnglesOfInnerVertices.Keys.ToList().First();
             double x = currentNode.XCenter;
             double y = currentNode.YCenter;
             vertex.setLocation(x, y);

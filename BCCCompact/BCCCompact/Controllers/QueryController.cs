@@ -16,7 +16,7 @@ namespace BCCCompact.Controllers
             Importer importer = new Importer(query);
             Graph graph = importer.import();
 
-            BccCompact bcc = new BccCompact();
+            BCC bcc = new BCC();
             bcc.Process(graph);
             CompactResult result = graph.getResult();
 
@@ -31,7 +31,7 @@ namespace BCCCompact.Controllers
             int E = int.Parse(str[1]);
 
             Graph graph = Graph.getRandomGraph(V, E);
-            BccCompact bcc = new BccCompact();
+            BCC bcc = new BCC();
             bcc.Process(graph);
             CompactResult result = graph.getResult();
 

@@ -16,7 +16,7 @@ namespace BCCCompact.Models
         {
             PickAroundCircle(currentNode);
             Arrange(currentNode);
-            foreach (Node child in currentNode.children)
+            foreach (Node child in currentNode.Children)
             {
                 Pick(child);
             }
@@ -24,20 +24,20 @@ namespace BCCCompact.Models
 
         private LinkedList<Vertex> GetAdjacentyVerticesList(Node currentNode)
         {
-            Dictionary<Vertex, HashSet<Node>> adjacenty = currentNode.adjacenty_vertex_nodes;
+            Dictionary<Vertex, HashSet<Node>> adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
             LinkedList<Vertex> VerticesList = new LinkedList<Vertex>(adjacenty.Keys);
-            if (currentNode.parent != null)
+            if (currentNode.Parent != null)
             {
-                VerticesList.Remove(currentNode.connectedToParent);
-                VerticesList.AddFirst(currentNode.connectedToParent);
+                VerticesList.Remove(currentNode.VertexConnectorToParent);
+                VerticesList.AddFirst(currentNode.VertexConnectorToParent);
             }
             return VerticesList;
         }
 
         public void PickAroundCircle(Node currentNode)
         {
-            HashSet<Vertex> otherVertices = new HashSet<Vertex>(currentNode.vertices);
-            Dictionary<Vertex, HashSet<Node>> adjacenty = currentNode.adjacenty_vertex_nodes;
+            HashSet<Vertex> otherVertices = new HashSet<Vertex>(currentNode.Vertices);
+            Dictionary<Vertex, HashSet<Node>> adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
             LinkedList<Vertex> VerticesList = GetAdjacentyVerticesList(currentNode);
 
             double angleCounter = 0;
@@ -47,20 +47,16 @@ namespace BCCCompact.Models
                 double firstAngle = angleCounter;
                 foreach (Node child in nodes)
                 {
-                    if (child == currentNode.parent)
+                    if (child == currentNode.Parent)
                     {
                         continue;
                     }
-                    double shareAngle = child.parentAngleShare;
+                    double shareAngle = child.AngleShareFromParentCenter;
                     angleCounter += shareAngle / 2;
-                    child.angleToConnectToParent = angleCounter;
+                    child.AngleToConnectToParent = angleCounter;
                     angleCounter += shareAngle / 2;
                 }
                 currentNode.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
-                if (vertex == currentNode.connectedToParent)
-                {
-                    currentNode.bestAngleForRotate = firstAngle;
-                }
                 otherVertices.Remove(vertex);
             }
             SetSomeVerticesAroundANode(currentNode, otherVertices.ToList());
@@ -68,7 +64,7 @@ namespace BCCCompact.Models
 
         private void Arrange(Node currentNode)
         {
-            List<Vertex> verticesList = new List<Vertex>(currentNode.innerVertices_angle.Keys);
+            List<Vertex> verticesList = new List<Vertex>(currentNode.AnglesOfInnerVertices.Keys);
             verticesList.Sort();
             Dictionary<Vertex, double> dic = new Dictionary<Vertex, double>();
             

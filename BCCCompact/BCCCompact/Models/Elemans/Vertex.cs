@@ -11,10 +11,7 @@ namespace BCCCompact.Models
         public HashSet<Vertex> adjacents = new HashSet<Vertex>();
         public double X;
         public double Y;
-        public int NodeId = -1;
-        public int disc = -1;
-        public int low = -1;
-        public Vertex parent;
+        public int type;
         public double angleInNode;
         public Node node;
 
@@ -28,7 +25,7 @@ namespace BCCCompact.Models
             adjacents.Add(vertex);
         }
 
-        public void setLocation(Double X, Double Y)
+        public void setLocation(double X, double Y)
         {
             this.X = X;
             this.Y = Y;

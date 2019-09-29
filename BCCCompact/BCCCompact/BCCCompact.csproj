@@ -125,25 +125,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AroundCirclePicker.cs" />
-    <Compile Include="Models\BccAlgorithm\Path.cs" />
-    <Compile Include="Models\BccCompact.cs" />
-    <Compile Include="Models\JsonCamelCaseResult.cs" />
-    <Compile Include="Models\CompactResult.cs" />
-    <Compile Include="Models\Component.cs" />
-    <Compile Include="Models\ComponentMaker.cs" />
-    <Compile Include="Models\ComponentSetter.cs" />
-    <Compile Include="Models\Edge.cs" />
-    <Compile Include="Models\Graph.cs" />
-    <Compile Include="Models\Importer.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\LocationCalcuter.cs" />
-    <Compile Include="Models\BccAlgorithm\BccAlgrtm.cs" />
-    <Compile Include="Models\Node.cs" />
-    <Compile Include="Models\NodeMaker.cs" />
-    <Compile Include="Models\NodeTreeMaker.cs" />
-    <Compile Include="Models\SizeCalcuter.cs" />
-    <Compile Include="Models\Vertex.cs" />
+    <Compile Include="Models\Engines\AroundCirclePicker.cs" />
+    <Compile Include="Models\PreProcess\Noding\Path.cs" />
+    <Compile Include="Models\Compacts\BCC.cs" />
+    <Compile Include="Models\Elemans\JsonCamelCaseResult.cs" />
+    <Compile Include="Models\Elemans\CompactResult.cs" />
+    <Compile Include="Models\Elemans\Component.cs" />
+    <Compile Include="Models\Engines\ComponentMaker.cs" />
+    <Compile Include="Models\Engines\ComponentSetter.cs" />
+    <Compile Include="Models\Elemans\Edge.cs" />
+    <Compile Include="Models\Elemans\Graph.cs" />
+    <Compile Include="Models\Elemans\Importer.cs" />
+    <Compile Include="Models\Elemans\Location.cs" />
+    <Compile Include="Models\Engines\LocationCalcuter.cs" />
+    <Compile Include="Models\PreProcess\Noding\BccAlgrtm.cs" />
+    <Compile Include="Models\Elemans\Node.cs" />
+    <Compile Include="Models\PreProcess\Noding\NodeMaker.cs" />
+    <Compile Include="Models\PreProcess\NodeTreeMaker.cs" />
+    <Compile Include="Models\Engines\SizeCalcuter.cs" />
+    <Compile Include="Models\Elemans\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

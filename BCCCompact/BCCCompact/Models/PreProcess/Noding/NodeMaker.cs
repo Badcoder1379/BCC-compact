@@ -10,24 +10,14 @@ namespace BCCCompact.Models
         Component component { get; set; }
         HashSet<Node> nodes { get; set; }
         Node largestNode { get; set; }
-        Dictionary<Vertex, int> vertex_low;
-        Dictionary<Vertex, int> vertex_disc;
-        int time = 0;
-        static readonly int DFS_deep = 500;
-
+        Dictionary<Vertex, int> VertexNodeId;
 
 
         private void SetComponent(Component component)
         {
             this.component = component;
-            vertex_low = new Dictionary<Vertex, int>();
-            vertex_disc = new Dictionary<Vertex, int>();
             nodes = new HashSet<Node>();
-        }
-
-        public HashSet<Node> GetNodes()
-        {
-            return nodes;
+            VertexNodeId = new Dictionary<Vertex, int>();
         }
 
         public Node GetLargestNode()
@@ -49,16 +39,16 @@ namespace BCCCompact.Models
             Dictionary<int, Node> nodeId_node = new Dictionary<int, Node>();
             foreach (Vertex vertex in component.GetVertices())
             {
-                int nodeId = vertex_low[vertex];
+                int nodeId = VertexNodeId[vertex];
                 if (!nodeId_node.Keys.Contains(nodeId))
                 {
                     nodeId_node[nodeId] = new Node();
                     nodes.Add(nodeId_node[nodeId]);
                 }
                 Node node = nodeId_node[nodeId];
-                node.addVertices(vertex);
+                node.Vertices.Add(vertex);
                 vertex.SetNode(node);
-                if (node.VerticesCount() > largestNode.VerticesCount())
+                if (node.Vertices.Count > largestNode.Vertices.Count)
                 {
                     largestNode = node;
                 }
@@ -68,16 +58,11 @@ namespace BCCCompact.Models
         private void NodeLabelTagging()
         {
             BccAlgrtm mmd = new BccAlgrtm();
-            vertex_low = mmd.Process(component,component.Vertices.ToList().First());
+            Vertex ARandomVertex = component.Vertices.ToList().First();
+            VertexNodeId = mmd.NodingComponentFromThisVertex(component,ARandomVertex);
             ConstructNodes();
-            foreach(Vertex vertex in component.Vertices)
-            {
-                vertex.low = -1;
-                vertex.disc = -1;
-                vertex.parent = null;
-                vertex.NodeId = -1;
-            }
-            vertex_low = mmd.Process(component, largestNode.vertices.ToList().First());
+            Vertex ARandomVertexFromLargestNode = largestNode.Vertices.ToList().First();
+            VertexNodeId = mmd.NodingComponentFromThisVertex(component, ARandomVertexFromLargestNode);
         }
     }
 }
