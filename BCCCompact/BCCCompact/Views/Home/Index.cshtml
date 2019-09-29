@@ -151,22 +151,22 @@
 
         function drawGraph(result) {
             var g = { nodes: [], edges: [] };
-            $.each(result.locations, (index, value) => {
+            $.each(result.Locations, (index, value) => {
                 g.nodes.push({
                     id: 'n' + index,
                     attributes: {
                         x: value.X,
                         y: value.Y,
                         text: 'N' + index,
-                        radius: 3
+                        radius: 10
                     }
                 });
             });
-            $.each(result.edges, (index, value) => {
+            $.each(result.Edges, (index, value) => {
                 g.edges.push({
                     id: 'e' + index,
-                    source: 'n' + value.v,
-                    target: 'n' + value.u,
+                    source: 'n' + value.A,
+                    target: 'n' + value.B,
                     attributes: { text: 'edge' + index }
                 });
             });

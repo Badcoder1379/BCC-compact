@@ -20,8 +20,8 @@ namespace BCCCompact.Models
             }
             foreach (Edge edge in edges)
             {
-                this.addEdge(edge.FirstVertex, edge.SecondVertex);
-                this.addEdge(edge.SecondVertex, edge.FirstVertex);
+                this.addEdge(edge.A, edge.B);
+                this.addEdge(edge.B, edge.A);
             }
         }
 

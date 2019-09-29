@@ -11,7 +11,7 @@ namespace BCCCompact.Controllers
     {
 
         [HttpPost]
-        public ActionResult compact(string query)
+        public JsonResult compact(string query)
         {
             Importer importer = new Importer(query);
             Graph graph = importer.Import();
@@ -20,11 +20,11 @@ namespace BCCCompact.Controllers
             bcc.Process(graph);
             CompactResult result = graph.getResult();
 
-            return new JsonCamelCaseResult(result, JsonRequestBehavior.AllowGet);
+            return Json(result);
         }
 
         [HttpPost]
-        public ActionResult randomGraph(string query)
+        public JsonResult randomGraph(string query)
         {
             string[] str = query.Split('-');
             int V = int.Parse(str[0]);
@@ -35,7 +35,7 @@ namespace BCCCompact.Controllers
             bcc.Process(graph);
             CompactResult result = graph.getResult();
 
-            return new JsonCamelCaseResult(result, JsonRequestBehavior.AllowGet);
+            return Json(result);
         }
     }
 }

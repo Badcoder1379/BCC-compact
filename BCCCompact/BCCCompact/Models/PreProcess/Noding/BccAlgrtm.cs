@@ -50,8 +50,8 @@ namespace BCCCompact.Models
             while (st.Count > 0)
             {
                 Edge edge = st.Last();
-                NodeIdOfVertex[edge.FirstVertex] = count;
-                NodeIdOfVertex[edge.SecondVertex] = count;
+                NodeIdOfVertex[edge.A] = count;
+                NodeIdOfVertex[edge.B] = count;
                 st.RemoveLast();
             }
         }
@@ -109,16 +109,16 @@ namespace BCCCompact.Models
 
                 if ((disc[u] == 1 && path.Children() > 1) || (disc[u] > 1 && low[adjacent] >= disc[u]))
                 {
-                    while (st.Last().FirstVertex != u.Id || st.Last().SecondVertex != adjacent.Id)
+                    while (st.Last().A != u.Id || st.Last().B != adjacent.Id)
                     {
                         Edge e = st.Last();
-                        NodeIdOfVertex[e.FirstVertex] = count;
-                        NodeIdOfVertex[e.SecondVertex] = count;
+                        NodeIdOfVertex[e.A] = count;
+                        NodeIdOfVertex[e.B] = count;
                         st.RemoveLast();
                     }
                     Edge edge = st.Last();
-                    NodeIdOfVertex[edge.FirstVertex] = count;
-                    NodeIdOfVertex[edge.SecondVertex] = count;
+                    NodeIdOfVertex[edge.A] = count;
+                    NodeIdOfVertex[edge.B] = count;
                     st.RemoveLast();
 
                     count++;

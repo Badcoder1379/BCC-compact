@@ -128,7 +128,6 @@
     <Compile Include="Models\Engines\AroundCirclePicker.cs" />
     <Compile Include="Models\PreProcess\Noding\Path.cs" />
     <Compile Include="Models\Compacts\BCC.cs" />
-    <Compile Include="Models\Elemans\JsonCamelCaseResult.cs" />
     <Compile Include="Models\Elemans\CompactResult.cs" />
     <Compile Include="Models\Elemans\Component.cs" />
     <Compile Include="Models\Engines\ComponentMaker.cs" />
