@@ -50,8 +50,8 @@ namespace BCCCompact.Models
             while (st.Count > 0)
             {
                 Edge edge = st.Last();
-                NodeIdOfVertex[edge.u] = count;
-                NodeIdOfVertex[edge.v] = count;
+                NodeIdOfVertex[edge.FirstVertex] = count;
+                NodeIdOfVertex[edge.SecondVertex] = count;
                 st.RemoveLast();
             }
         }
@@ -62,7 +62,7 @@ namespace BCCCompact.Models
             int i = 0;
             foreach (Vertex vertex in component.Vertices)
             {
-                if (NodeIdOfVertex.Keys.Contains(vertex.Id))
+                if (NodeIdOfVertex.ContainsKey(vertex.Id))
                 {
                     result[vertex] = NodeIdOfVertex[vertex.Id];
                 }
@@ -109,16 +109,16 @@ namespace BCCCompact.Models
 
                 if ((disc[u] == 1 && path.Children() > 1) || (disc[u] > 1 && low[adjacent] >= disc[u]))
                 {
-                    while (st.Last().u != u.Id || st.Last().v != adjacent.Id)
+                    while (st.Last().FirstVertex != u.Id || st.Last().SecondVertex != adjacent.Id)
                     {
                         Edge e = st.Last();
-                        NodeIdOfVertex[e.u] = count;
-                        NodeIdOfVertex[e.v] = count;
+                        NodeIdOfVertex[e.FirstVertex] = count;
+                        NodeIdOfVertex[e.SecondVertex] = count;
                         st.RemoveLast();
                     }
                     Edge edge = st.Last();
-                    NodeIdOfVertex[edge.u] = count;
-                    NodeIdOfVertex[edge.v] = count;
+                    NodeIdOfVertex[edge.FirstVertex] = count;
+                    NodeIdOfVertex[edge.SecondVertex] = count;
                     st.RemoveLast();
 
                     count++;

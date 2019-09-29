@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
     public class ComponentMaker
     {
-
-        Stack<Object[]> VerticesToUtil = new Stack<object[]>();
+        readonly Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>> VerticesToUtil = new Stack<Tuple<Vertex, Dictionary<Vertex, bool>,Component>>();
         HashSet<Component> Components = new HashSet<Component>();
         Dictionary<Vertex, bool> VisitedVertices;
 
@@ -31,7 +28,7 @@ namespace BCCCompact.Models
                 {
                     Component component = new Component();
                     Components.Add(component);
-                    Object[] firstData = { vertex, VisitedVertices, component };
+                    var firstData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(vertex, VisitedVertices, component);
                     VerticesToUtil.Push(firstData);
                     while (VerticesToUtil.Count > 0)
                     {
@@ -41,16 +38,18 @@ namespace BCCCompact.Models
             }
         }
 
+        
+
         public HashSet<Component> MakeComponents()
         {
             return Components;
         }
 
-        private void IterateOnVertices(Object[] data)
+        private void IterateOnVertices(Tuple<Vertex, Dictionary<Vertex, bool>, Component> functionData)
         {
-            Vertex currentVertex = (Vertex)data[0];
-            Dictionary<Vertex, bool> visited = (Dictionary<Vertex, bool>)data[1];
-            Component component = (Component)data[2];
+            Vertex currentVertex = functionData.Item1;
+            Dictionary<Vertex, bool> visited = functionData.Item2;
+            Component component = functionData.Item3;
             visited[currentVertex] = true;
             component.Vertices.Add(currentVertex);
 
@@ -58,7 +57,7 @@ namespace BCCCompact.Models
             {
                 if (!visited[adjacent])
                 {
-                    object[] newData = { adjacent, visited, component };
+                    var newData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(adjacent, visited, component);
                     VerticesToUtil.Push(newData);
                 }
             }

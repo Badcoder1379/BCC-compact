@@ -44,7 +44,7 @@ namespace BCCCompact.Models
                     double angle = vertex_angle[vertex];
                     double x = currentNode.XCenter + currentNode.internallRadius * Math.Sin(angle) * bounderMLT;
                     double y = currentNode.YCenter + currentNode.internallRadius * Math.Cos(angle) * bounderMLT;
-                    vertex.setLocation(x, y);
+                    vertex.SetLocation(x, y);
                 }
             }
             foreach (Node child in currentNode.Children)
@@ -58,7 +58,7 @@ namespace BCCCompact.Models
             Vertex vertex = currentNode.AnglesOfInnerVertices.Keys.ToList().First();
             double x = currentNode.XCenter;
             double y = currentNode.YCenter;
-            vertex.setLocation(x, y);
+            vertex.SetLocation(x, y);
         }
     }
 }

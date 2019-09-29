@@ -21,15 +21,18 @@ namespace BCCCompact.Models
             int lastNumberUsed = 0;
             string[] lines = File.ReadAllLines(@"MmdData/" + FileName);
             HashSet<Edge> edges = new HashSet<Edge>();
+
             foreach (string line in lines)
             {
 
                 string[] parts = line.Split(new char[] { ',' });
-                if (!StrToId.Keys.Contains(parts[0]))
+
+                if (!StrToId.ContainsKey(parts[0]))
                 {
                     StrToId[parts[0]] = lastNumberUsed++;
                 }
-                if (!StrToId.Keys.Contains(parts[1]))
+
+                if (!StrToId.ContainsKey(parts[1]))
                 {
                     StrToId[parts[1]] = lastNumberUsed++;
                 }

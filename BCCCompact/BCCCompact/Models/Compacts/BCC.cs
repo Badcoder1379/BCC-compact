@@ -9,16 +9,15 @@ namespace BCCCompact.Models
     {
         public void Process(Graph graph)
         {
-            ComponentMaker componentMaker = new ComponentMaker();
+            var componentMaker = new ComponentMaker();
             componentMaker.Process(graph);
-            HashSet<Component> components = componentMaker.MakeComponents();
+            var components = componentMaker.MakeComponents();
+            var nodeMaker = new NodeMaker();
+            var sizeCalcuter = new SizeCalcuter();
+            var nodeTreeMaker = new NodeTreeMaker();
+            var picker = new AroundCirclePicker();
 
-            NodeMaker nodeMaker = new NodeMaker();
-            SizeCalcuter sizeCalcuter = new SizeCalcuter();
-            NodeTreeMaker nodeTreeMaker = new NodeTreeMaker();
-            AroundCirclePicker picker = new AroundCirclePicker();
-
-            foreach (Component component in components)
+            foreach (var component in components)
             {
                 nodeMaker.Process(component);
                 nodeTreeMaker.Process(component);
@@ -27,12 +26,12 @@ namespace BCCCompact.Models
                 picker.PickAroundCircle(component.LasrgestNode);
             }
 
-            ComponentSetter componentSetter = new ComponentSetter();
+            var componentSetter = new ComponentSetter();
             componentSetter.Set(components);
 
-            LocationCalcuter locationCalcuter = new LocationCalcuter();
+            var locationCalcuter = new LocationCalcuter();
 
-            foreach(Component component in components)
+            foreach(var component in components)
             {
                 locationCalcuter.CalcuteNodeLocations(component);
                 locationCalcuter.CalcuteVerticseLocation(component);

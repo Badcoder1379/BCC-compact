@@ -7,12 +7,12 @@ namespace BCCCompact.Models
 {
     public class Edge
     {
-        public int u { get; set; }
-        public int v { get; set; }
+        public int FirstVertex { get; set; }
+        public int SecondVertex { get; set; }
         public Edge(int u, int v)
         {
-            this.u = u;
-            this.v = v;
+            this.FirstVertex = u;
+            this.SecondVertex = v;
         }
     }
 }

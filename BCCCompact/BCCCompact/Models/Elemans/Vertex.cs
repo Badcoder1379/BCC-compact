@@ -7,7 +7,7 @@ namespace BCCCompact.Models
 {
     public class Vertex : IEquatable<Vertex>, IComparable<Vertex>
     {
-        public int Id { get; set; }
+        public int Id;
         public HashSet<Vertex> adjacents = new HashSet<Vertex>();
         public double X;
         public double Y;
@@ -21,12 +21,12 @@ namespace BCCCompact.Models
             this.Id = Id;
         }
 
-        public void addAdjacent(Vertex vertex)
+        public void AddAdjacent(Vertex vertex)
         {
             adjacents.Add(vertex);
         }
 
-        public void setLocation(double X, double Y)
+        public void SetLocation(double X, double Y)
         {
             this.X = X;
             this.Y = Y;
@@ -34,14 +34,7 @@ namespace BCCCompact.Models
 
         public bool Equals(Vertex other)
         {
-            if (other.Id == Id)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return other.Id == Id;
         }
 
         public int CompareTo(Vertex other)

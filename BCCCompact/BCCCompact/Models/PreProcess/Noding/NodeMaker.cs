@@ -40,7 +40,7 @@ namespace BCCCompact.Models
             foreach (Vertex vertex in component.Vertices)
             {
                 int nodeId = VertexNodeId[vertex];
-                if (!nodeId_node.Keys.Contains(nodeId))
+                if (!nodeId_node.ContainsKey(nodeId))
                 {
                     nodeId_node[nodeId] = new Node();
                     nodes.Add(nodeId_node[nodeId]);

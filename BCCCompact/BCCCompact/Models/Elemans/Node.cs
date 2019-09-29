@@ -24,10 +24,11 @@ namespace BCCCompact.Models
 
         public void AddAdjacenty(Vertex vertex, Node node)
         {
-            if (!AdjacentNodesWithConnectiongThisVertex.Keys.Contains(vertex))
+            if (!AdjacentNodesWithConnectiongThisVertex.ContainsKey(vertex))
             {
                 AdjacentNodesWithConnectiongThisVertex[vertex] = new HashSet<Node>();
             }
+
             AdjacentNodesWithConnectiongThisVertex[vertex].Add(node);
         }
 

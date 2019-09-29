@@ -20,19 +20,20 @@ namespace BCCCompact.Models
             }
             foreach (Edge edge in edges)
             {
-                this.addEdge(edge.u, edge.v);
-                this.addEdge(edge.v, edge.u);
+                this.addEdge(edge.FirstVertex, edge.SecondVertex);
+                this.addEdge(edge.SecondVertex, edge.FirstVertex);
             }
         }
 
         public void addEdge(int v, int w)
         {
-            Vertices[v].addAdjacent(Vertices[w]);
+            Vertices[v].AddAdjacent(Vertices[w]);
         }
 
         public CompactResult getResult()
         {
             HashSet<Edge> edges = new HashSet<Edge>();
+
             foreach (Vertex vertex in Vertices)
             {
                 foreach (Vertex adjacent in vertex.adjacents)
@@ -46,11 +47,13 @@ namespace BCCCompact.Models
 
             Location[] locations = new Location[V];
             int i = 0;
+
             foreach (Vertex vertex in Vertices)
             {
                 locations[i] = new Location(vertex.X, vertex.Y);
                 i++;
             }
+
             return new CompactResult(edges, locations);
         }
 
