@@ -23,8 +23,8 @@ namespace BCCCompact.Models
                 nodeMaker.Process(component);
                 nodeTreeMaker.Process(component);
                 sizeCalcuter.Process(component);
-                picker.PickNodes(component.lasrgestNode);
-                picker.PickAroundCircle(component.lasrgestNode);
+                picker.PickNodes(component.LasrgestNode);
+                picker.PickAroundCircle(component.LasrgestNode);
             }
 
             ComponentSetter componentSetter = new ComponentSetter();

@@ -13,7 +13,7 @@ namespace BCCCompact.Models
 
         public void Process(Component component)
         {
-            SetLargestNode(component.lasrgestNode);
+            SetLargestNode(component.LasrgestNode);
             Calcute(largestNode);
         }
 
@@ -31,16 +31,16 @@ namespace BCCCompact.Models
                 node.externallRadius = node.internallRadius;
                 return;
             }
-            Dictionary<Vertex, double> vertex_share = new Dictionary<Vertex, double>();
+            Dictionary<Vertex, double> angleShareOfEachVertex = new Dictionary<Vertex, double>();
             double maxExternallRadius = node.internallRadius;
             foreach (Vertex vertex in node.AdjacentNodesWithConnectiongThisVertex.Keys)
             {
-                vertex_share[vertex] = GetSumOfChildrenSizes(vertex,node);
+                angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex,node);
             }
 
-            foreach (Vertex vertex in vertex_share.Keys)
+            foreach (Vertex vertex in angleShareOfEachVertex.Keys)
             {
-                double allVertexAngel = (vertex_share[vertex] / sumOfAllChildsSizes) * Math.PI * 2;
+                double allVertexAngel = (angleShareOfEachVertex[vertex] / sumOfAllChildsSizes) * Math.PI * 2;
                 if (allVertexAngel > Math.PI * 2 / 3)
                 {
                     allVertexAngel = Math.PI * 2 / 3;
@@ -51,7 +51,7 @@ namespace BCCCompact.Models
                     {
                         continue;
                     }
-                    double angel = (child.externallRadius / vertex_share[vertex]) * allVertexAngel;
+                    double angel = (child.externallRadius / angleShareOfEachVertex[vertex]) * allVertexAngel;
                     if (angel != 0)
                     {
                         child.AngleShareFromParentCenter = angel;

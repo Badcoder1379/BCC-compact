@@ -14,7 +14,7 @@ namespace BCCCompact.Controllers
         public ActionResult compact(string query)
         {
             Importer importer = new Importer(query);
-            Graph graph = importer.import();
+            Graph graph = importer.Import();
 
             BCC bcc = new BCC();
             bcc.Process(graph);

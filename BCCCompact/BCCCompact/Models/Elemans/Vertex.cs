@@ -11,7 +11,8 @@ namespace BCCCompact.Models
         public HashSet<Vertex> adjacents = new HashSet<Vertex>();
         public double X;
         public double Y;
-        public int type;
+        public string Name;
+        public int Type;
         public double angleInNode;
         public Node node;
 

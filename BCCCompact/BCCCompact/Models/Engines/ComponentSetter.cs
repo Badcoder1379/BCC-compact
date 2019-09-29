@@ -12,20 +12,20 @@ namespace BCCCompact.Models
         {
             Component largest = GetLargestComponent(components);
             double sumOfSizes = GetSumOfSizes(components);
-            sumOfSizes -= largest.lasrgestNode.externallRadius;
+            sumOfSizes -= largest.LasrgestNode.externallRadius;
 
             double angleCounter = 0;
             foreach (Component child in components)
             {
                 if (child == largest) continue;
-                double angle = Math.PI * 2 * (child.lasrgestNode.externallRadius / sumOfSizes);
+                double angle = Math.PI * 2 * (child.LasrgestNode.externallRadius / sumOfSizes);
                 angle = Math.Max(angle, Math.PI);
                 angle /= 2;
                 angleCounter += angle;
-                double lenght = child.lasrgestNode.externallRadius / Math.Sin(angle / 2);
-                lenght = Math.Max(lenght, largest.lasrgestNode.externallRadius + child.lasrgestNode.externallRadius);
-                child.lasrgestNode.XCenter = lenght * Math.Sin(angleCounter);
-                child.lasrgestNode.YCenter = lenght * Math.Cos(angleCounter);
+                double lenght = child.LasrgestNode.externallRadius / Math.Sin(angle / 2);
+                lenght = Math.Max(lenght, largest.LasrgestNode.externallRadius + child.LasrgestNode.externallRadius);
+                child.LasrgestNode.XCenter = lenght * Math.Sin(angleCounter);
+                child.LasrgestNode.YCenter = lenght * Math.Cos(angleCounter);
                 angleCounter += angle / 2;
             }
         }
@@ -35,7 +35,7 @@ namespace BCCCompact.Models
             double sumOfSizes = 0;
             foreach (Component component in components)
             {
-                sumOfSizes += component.lasrgestNode.externallRadius;
+                sumOfSizes += component.LasrgestNode.externallRadius;
             }
             return sumOfSizes;
         }
@@ -43,10 +43,10 @@ namespace BCCCompact.Models
         private Component GetLargestComponent(HashSet<Component> components)
         {
             Component largest = new Component();
-            largest.lasrgestNode = new Node();
+            largest.LasrgestNode = new Node();
             foreach (Component component in components)
             {
-                if (component.lasrgestNode.externallRadius > largest.lasrgestNode.externallRadius)
+                if (component.LasrgestNode.externallRadius > largest.LasrgestNode.externallRadius)
                 {
                     largest = component;
                 }

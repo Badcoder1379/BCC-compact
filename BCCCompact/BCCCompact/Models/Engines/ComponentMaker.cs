@@ -8,36 +8,34 @@ namespace BCCCompact.Models
     public class ComponentMaker
     {
 
-        Stack<Object[]> verticesToUtil = new Stack<object[]>();
-        Graph graph;
-        HashSet<Component> components = new HashSet<Component>();
-        Dictionary<Vertex, bool> visited;
+        Stack<Object[]> VerticesToUtil = new Stack<object[]>();
+        HashSet<Component> Components = new HashSet<Component>();
+        Dictionary<Vertex, bool> VisitedVertices;
 
 
         private void SetGraph(Graph graph)
         {
-            this.graph = graph;
-            visited = new Dictionary<Vertex, bool>();
-            foreach (Vertex vertex in graph.vertices)
+            VisitedVertices = new Dictionary<Vertex, bool>();
+            foreach (Vertex vertex in graph.Vertices)
             {
-                visited[vertex] = false;
+                VisitedVertices[vertex] = false;
             }
         }
 
         public void Process(Graph graph)
         {
             SetGraph(graph);
-            foreach (Vertex vertex in graph.vertices)
+            foreach (Vertex vertex in graph.Vertices)
             {
-                if (!visited[vertex])
+                if (!VisitedVertices[vertex])
                 {
                     Component component = new Component();
-                    components.Add(component);
-                    Object[] firstData = { vertex, visited, component };
-                    verticesToUtil.Push(firstData);
-                    while (verticesToUtil.Count > 0)
+                    Components.Add(component);
+                    Object[] firstData = { vertex, VisitedVertices, component };
+                    VerticesToUtil.Push(firstData);
+                    while (VerticesToUtil.Count > 0)
                     {
-                        Util(verticesToUtil.Pop());
+                        IterateOnVertices(VerticesToUtil.Pop());
                     }
                 }
             }
@@ -45,23 +43,23 @@ namespace BCCCompact.Models
 
         public HashSet<Component> MakeComponents()
         {
-            return components;
+            return Components;
         }
 
-        private void Util(Object[] data)
+        private void IterateOnVertices(Object[] data)
         {
             Vertex currentVertex = (Vertex)data[0];
             Dictionary<Vertex, bool> visited = (Dictionary<Vertex, bool>)data[1];
             Component component = (Component)data[2];
             visited[currentVertex] = true;
-            component.addVertex(currentVertex);
+            component.Vertices.Add(currentVertex);
 
             foreach (Vertex adjacent in currentVertex.adjacents)
             {
                 if (!visited[adjacent])
                 {
                     object[] newData = { adjacent, visited, component };
-                    verticesToUtil.Push(newData);
+                    VerticesToUtil.Push(newData);
                 }
             }
         }

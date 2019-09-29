@@ -8,38 +8,38 @@ namespace BCCCompact.Models
 {
     class Importer
     {
-        private string fileName { get; set; }
-        private Dictionary<string, int> strToId;
+        private string FileName { get; set; }
+        private Dictionary<string, int> StrToId;
         public Importer(string fileName)
         {
-            this.fileName = fileName;
+            this.FileName = fileName;
         }
 
-        public Graph import()
+        public Graph Import()
         {
-            strToId = new Dictionary<string, int>();
+            StrToId = new Dictionary<string, int>();
             int lastNumberUsed = 0;
-            string[] lines = File.ReadAllLines(@"MmdData/" + fileName);
+            string[] lines = File.ReadAllLines(@"MmdData/" + FileName);
             HashSet<Edge> edges = new HashSet<Edge>();
             foreach (string line in lines)
             {
 
                 string[] parts = line.Split(new char[] { ',' });
-                if (!strToId.Keys.Contains(parts[0]))
+                if (!StrToId.Keys.Contains(parts[0]))
                 {
-                    strToId[parts[0]] = lastNumberUsed++;
+                    StrToId[parts[0]] = lastNumberUsed++;
                 }
-                if (!strToId.Keys.Contains(parts[1]))
+                if (!StrToId.Keys.Contains(parts[1]))
                 {
-                    strToId[parts[1]] = lastNumberUsed++;
+                    StrToId[parts[1]] = lastNumberUsed++;
                 }
 
-                int u = strToId[parts[0]];
-                int v = strToId[parts[1]];
+                int u = StrToId[parts[0]];
+                int v = StrToId[parts[1]];
 
                 edges.Add(new Edge(u, v));
             }
-            int V = strToId.Count();
+            int V = StrToId.Count();
             Graph graph = new Graph(V, edges);
             return graph;
         }

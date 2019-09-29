@@ -30,14 +30,14 @@ namespace BCCCompact.Models
             SetComponent(component);
             NodeLabelTagging();
             ConstructNodes();
-            component.lasrgestNode = largestNode;
+            component.LasrgestNode = largestNode;
         }
 
         private void ConstructNodes()
         {
             largestNode = new Node();
             Dictionary<int, Node> nodeId_node = new Dictionary<int, Node>();
-            foreach (Vertex vertex in component.GetVertices())
+            foreach (Vertex vertex in component.Vertices)
             {
                 int nodeId = VertexNodeId[vertex];
                 if (!nodeId_node.Keys.Contains(nodeId))

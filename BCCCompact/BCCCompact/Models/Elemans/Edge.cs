@@ -7,8 +7,8 @@ namespace BCCCompact.Models
 {
     public class Edge
     {
-        public int u;
-        public int v;
+        public int u { get; set; }
+        public int v { get; set; }
         public Edge(int u, int v)
         {
             this.u = u;

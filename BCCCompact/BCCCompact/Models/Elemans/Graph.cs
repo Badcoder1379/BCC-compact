@@ -8,24 +8,16 @@ namespace BCCCompact.Models
     public class Graph
     {
         public int V;
-        public Vertex[] vertices;
-        public Vertex leftestVertex;
-        public Vertex rightestVertex;
-        public Vertex topestVertex;
-        public Vertex downestVertext;
-        HashSet<Edge> edges;
-
-        public static int count = 0, time = 0;
-
+        public Vertex[] Vertices;
+        
         public Graph(int v, HashSet<Edge> edges)
         {
             V = v;
-            vertices = new Vertex[V];
+            Vertices = new Vertex[V];
             for (int i = 0; i < V; i++)
             {
-                vertices[i] = new Vertex(i);
+                Vertices[i] = new Vertex(i);
             }
-            this.edges = edges;
             foreach (Edge edge in edges)
             {
                 this.addEdge(edge.u, edge.v);
@@ -35,13 +27,13 @@ namespace BCCCompact.Models
 
         public void addEdge(int v, int w)
         {
-            vertices[v].addAdjacent(vertices[w]);
+            Vertices[v].addAdjacent(Vertices[w]);
         }
 
         public CompactResult getResult()
         {
             HashSet<Edge> edges = new HashSet<Edge>();
-            foreach (Vertex vertex in vertices)
+            foreach (Vertex vertex in Vertices)
             {
                 foreach (Vertex adjacent in vertex.adjacents)
                 {
@@ -54,7 +46,7 @@ namespace BCCCompact.Models
 
             Location[] locations = new Location[V];
             int i = 0;
-            foreach (Vertex vertex in vertices)
+            foreach (Vertex vertex in Vertices)
             {
                 locations[i] = new Location(vertex.X, vertex.Y);
                 i++;

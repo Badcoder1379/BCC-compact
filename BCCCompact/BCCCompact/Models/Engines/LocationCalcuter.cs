@@ -11,7 +11,7 @@ namespace BCCCompact.Models
 
         public void CalcuteNodeLocations(Component component)
         {
-            Node fatherNode = component.lasrgestNode;
+            Node fatherNode = component.LasrgestNode;
             CalcuteNodes(fatherNode);
         }
 
@@ -27,7 +27,7 @@ namespace BCCCompact.Models
 
         public void CalcuteVerticseLocation(Component component)
         {
-            CalcuteVertices(component.lasrgestNode);
+            CalcuteVertices(component.LasrgestNode);
         }
         private void CalcuteVertices(Node currentNode)
         {
