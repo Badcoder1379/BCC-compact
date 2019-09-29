@@ -25,9 +25,6 @@ namespace BCCCompact.Models
         public double angleToConnectToParent;
         public double bestAngleForRotate;
 
-        public Node()
-        {
-        }
 
         public void addVertices(Vertex Vertex)
         {

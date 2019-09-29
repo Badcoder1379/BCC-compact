@@ -13,13 +13,13 @@ namespace BCCCompact.Models
         Dictionary<int, int> vertex_nodeId = new Dictionary<int, int>();
         LinkedList<Edge> st;
         Path path;
-        public Dictionary<Vertex , int> Process(Component component)
+        public Dictionary<Vertex , int> Process(Component component, Vertex vertex)
         {
             count = 0;
             st = new LinkedList<Edge>();
-            Vertex firstVertex = component.Vertices.ToList().First();
             path = new Path();
-            path.Push(firstVertex);
+            path.Push(vertex);
+
             while (path.Count() > 0)
             {
                 Util();
@@ -56,7 +56,7 @@ namespace BCCCompact.Models
             return result;
         }
 
-        public void Util()
+        private void Util()
         {
             Vertex u = path.Peek();
             foreach(Vertex v in u.adjacents)

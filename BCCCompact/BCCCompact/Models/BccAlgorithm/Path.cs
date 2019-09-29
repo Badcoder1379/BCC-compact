@@ -22,14 +22,7 @@ namespace BCCCompact.Models.BccAlgorithm
 
         public bool Contains(Vertex vertex)
         {
-            if (vertices.Contains(vertex))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return vertices.Contains(vertex);
         }
 
         public Vertex Peek()

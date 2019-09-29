@@ -68,7 +68,16 @@ namespace BCCCompact.Models
         private void NodeLabelTagging()
         {
             BccAlgrtm mmd = new BccAlgrtm();
-            vertex_low = mmd.Process(component);
+            vertex_low = mmd.Process(component,component.Vertices.ToList().First());
+            ConstructNodes();
+            foreach(Vertex vertex in component.Vertices)
+            {
+                vertex.low = -1;
+                vertex.disc = -1;
+                vertex.parent = null;
+                vertex.NodeId = -1;
+            }
+            vertex_low = mmd.Process(component, largestNode.vertices.ToList().First());
         }
     }
 }
