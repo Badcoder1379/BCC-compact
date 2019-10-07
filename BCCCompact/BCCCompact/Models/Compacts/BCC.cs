@@ -23,7 +23,7 @@ namespace BCCCompact.Models
                 nodeTreeMaker.Process(component);
                 sizeCalcuter.Process(component);
                 picker.PickNodes(component.LasrgestNode);
-                picker.PickAroundCircle(component.LasrgestNode);
+                picker.PickVerticesAroundCircle(component.LasrgestNode);
             }
 
             var componentSetter = new ComponentSetter();

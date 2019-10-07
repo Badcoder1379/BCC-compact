@@ -14,8 +14,8 @@ namespace BCCCompact.Models
 
         private void Pick(Node currentNode)
         {
-            PickAroundCircle(currentNode);
-            Arrange(currentNode);
+            PickVerticesAroundCircle(currentNode);
+            
 
             foreach (Node child in currentNode.Children)
             {
@@ -39,7 +39,7 @@ namespace BCCCompact.Models
             return VerticesList;
         }
 
-        public void PickAroundCircle(Node currentNode)
+        public void PickVerticesAroundCircle(Node currentNode)
         {
             HashSet<Vertex> otherVertices = new HashSet<Vertex>(currentNode.Vertices);
             Dictionary<Vertex, HashSet<Node>> adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
@@ -61,6 +61,7 @@ namespace BCCCompact.Models
                 otherVertices.Remove(vertex);
             }
             SetSomeVerticesAroundANode(currentNode, otherVertices.ToList());
+            Arrange(currentNode);
         }
 
         private void Arrange(Node currentNode)
@@ -71,7 +72,7 @@ namespace BCCCompact.Models
             SetSomeVerticesAroundANode(currentNode, verticesList);
         }
 
-        public void SetSomeVerticesAroundANode(Node node, List<Vertex> vertices)
+        private void SetSomeVerticesAroundANode(Node node, List<Vertex> vertices)
         {
             int count = vertices.Count;
             int i = 0;

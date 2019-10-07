@@ -26,7 +26,7 @@ namespace BCCCompact.Models
             {
                 if (!VisitedVertices[vertex])
                 {
-                    Component component = new Component();
+                    var component = new Component();
                     Components.Add(component);
                     var firstData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(vertex, VisitedVertices, component);
                     VerticesToUtil.Push(firstData);
@@ -47,9 +47,9 @@ namespace BCCCompact.Models
 
         private void IterateOnVertices(Tuple<Vertex, Dictionary<Vertex, bool>, Component> functionData)
         {
-            Vertex currentVertex = functionData.Item1;
-            Dictionary<Vertex, bool> visited = functionData.Item2;
-            Component component = functionData.Item3;
+            var currentVertex = functionData.Item1;
+            var visited = functionData.Item2;
+            var component = functionData.Item3;
             visited[currentVertex] = true;
             component.Vertices.Add(currentVertex);
 
