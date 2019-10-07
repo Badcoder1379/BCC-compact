@@ -32,7 +32,7 @@ namespace BCCCompact.Models
 
         public CompactResult getResult()
         {
-            HashSet<Edge> edges = new HashSet<Edge>();
+            var edges = new HashSet<Edge>();
 
             foreach (Vertex vertex in Vertices)
             {
@@ -45,8 +45,8 @@ namespace BCCCompact.Models
                 }
             }
 
-            Location[] locations = new Location[V];
-            int i = 0;
+            var locations = new Location[V];
+            var i = 0;
 
             foreach (Vertex vertex in Vertices)
             {
@@ -59,15 +59,15 @@ namespace BCCCompact.Models
 
         public static Graph getRandomGraph(int V, int E)
         {
-            HashSet<Edge> edges = new HashSet<Edge>();
-            Random random = new Random();
+            var edges = new HashSet<Edge>();
+            var random = new Random();
             while (E > 0)
             {
                 int n1 = random.Next() % V;
                 int n2 = random.Next() % V;
                 if (n1 != n2)
                 {
-                    Edge edge = new Edge(n1, n2);
+                    var edge = new Edge(n1, n2);
                     edges.Add(edge);
                     E--;
                 }

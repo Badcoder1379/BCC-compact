@@ -11,13 +11,13 @@ namespace BCCCompact.Models
 
         public void CalcuteNodeLocations(Component component)
         {
-            Node fatherNode = component.LasrgestNode;
+            var fatherNode = component.LasrgestNode;
             CalcuteNodes(fatherNode);
         }
 
         private void CalcuteNodes(Node currentNode)
         {
-            foreach (Node child in currentNode.Children)
+            foreach (var child in currentNode.Children)
             {
                 child.XCenter = currentNode.XCenter + child.EdgeToParentLenght * Math.Sin(child.AngleToConnectToParent);
                 child.YCenter = currentNode.YCenter + child.EdgeToParentLenght * Math.Cos(child.AngleToConnectToParent);
@@ -31,7 +31,7 @@ namespace BCCCompact.Models
         }
         private void CalcuteVertices(Node currentNode)
         {
-            Dictionary<Vertex, double> vertex_angle = currentNode.AnglesOfInnerVertices;
+            var vertex_angle = currentNode.AnglesOfInnerVertices;
 
             if (vertex_angle.Count == 1)
             {
@@ -39,7 +39,7 @@ namespace BCCCompact.Models
             }
             else
             {
-                foreach (Vertex vertex in vertex_angle.Keys)
+                foreach (var vertex in vertex_angle.Keys)
                 {
                     double angle = vertex_angle[vertex];
                     double x = currentNode.XCenter + currentNode.internallRadius * Math.Sin(angle) * bounderMLT;
@@ -47,7 +47,7 @@ namespace BCCCompact.Models
                     vertex.SetLocation(x, y);
                 }
             }
-            foreach (Node child in currentNode.Children)
+            foreach (var child in currentNode.Children)
             {
                 CalcuteVertices(child);
             }
@@ -55,7 +55,7 @@ namespace BCCCompact.Models
 
         private void SetOwnVertexLocation(Node currentNode)
         {
-            Vertex vertex = currentNode.AnglesOfInnerVertices.Keys.ToList().First();
+            var vertex = currentNode.AnglesOfInnerVertices.Keys.ToList().First();
             double x = currentNode.XCenter;
             double y = currentNode.YCenter;
             vertex.SetLocation(x, y);

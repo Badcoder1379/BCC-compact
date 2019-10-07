@@ -10,12 +10,12 @@ namespace BCCCompact.Models
 
         public void Set(HashSet<Component> components)
         {
-            Component largest = GetLargestComponent(components);
+            var largest = GetLargestComponent(components);
             double sumOfSizes = GetSumOfSizes(components);
             sumOfSizes -= largest.LasrgestNode.externallRadius;
 
             double angleCounter = 0;
-            foreach (Component child in components)
+            foreach (var child in components)
             {
                 if (child == largest) continue;
                 double angle = Math.PI * 2 * (child.LasrgestNode.externallRadius / sumOfSizes);
@@ -33,7 +33,7 @@ namespace BCCCompact.Models
         private double GetSumOfSizes(HashSet<Component> components)
         {
             double sumOfSizes = 0;
-            foreach (Component component in components)
+            foreach (var component in components)
             {
                 sumOfSizes += component.LasrgestNode.externallRadius;
             }
@@ -42,9 +42,9 @@ namespace BCCCompact.Models
 
         private Component GetLargestComponent(HashSet<Component> components)
         {
-            Component largest = new Component();
+            var largest = new Component();
             largest.LasrgestNode = new Node();
-            foreach (Component component in components)
+            foreach (var component in components)
             {
                 if (component.LasrgestNode.externallRadius > largest.LasrgestNode.externallRadius)
                 {

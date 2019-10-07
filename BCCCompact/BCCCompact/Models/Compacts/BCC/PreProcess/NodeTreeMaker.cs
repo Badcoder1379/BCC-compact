@@ -15,9 +15,9 @@ namespace BCCCompact.Models
       
         public void Process(Component component)
         {
-            Node father = component.LasrgestNode;
+            var father = component.LasrgestNode;
             this.FatherNode = father;
-            Vertex randomVertex = FatherNode.Vertices.ToList().First();
+            var randomVertex = FatherNode.Vertices.ToList().First();
             VisitedNodes.Add(randomVertex.node);
             VisitedVertices.Add(randomVertex);
             StackOfVertices.Push(randomVertex);
@@ -29,14 +29,14 @@ namespace BCCCompact.Models
 
         public void IterateOnVertices()
         {
-            Vertex current = StackOfVertices.Pop();
-            foreach (Vertex adjacent in current.adjacents)
+            var current = StackOfVertices.Pop();
+            foreach (var adjacent in current.adjacents)
             {
                 if (!VisitedVertices.Contains(adjacent))
                 {
                     VisitedVertices.Add(adjacent);
-                    Node node1 = current.node;
-                    Node node2 = adjacent.node;
+                    var node1 = current.node;
+                    var node2 = adjacent.node;
                     if (node1 != node2 && !VisitedNodes.Contains(node2))
                     {
                         node1.AddAdjacenty(current, node2);

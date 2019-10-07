@@ -36,8 +36,8 @@ namespace BCCCompact.Models
         private void ConstructNodes()
         {
             largestNode = new Node();
-            Dictionary<int, Node> nodeId_node = new Dictionary<int, Node>();
-            foreach (Vertex vertex in component.Vertices)
+            var nodeId_node = new Dictionary<int, Node>();
+            foreach (var vertex in component.Vertices)
             {
                 int nodeId = VertexNodeId[vertex];
                 if (!nodeId_node.ContainsKey(nodeId))
@@ -45,7 +45,7 @@ namespace BCCCompact.Models
                     nodeId_node[nodeId] = new Node();
                     nodes.Add(nodeId_node[nodeId]);
                 }
-                Node node = nodeId_node[nodeId];
+                var node = nodeId_node[nodeId];
                 node.Vertices.Add(vertex);
                 vertex.SetNode(node);
                 if (node.Vertices.Count > largestNode.Vertices.Count)
@@ -57,11 +57,11 @@ namespace BCCCompact.Models
 
         private void NodeLabelTagging()
         {
-            BccAlgrtm mmd = new BccAlgrtm();
-            Vertex ARandomVertex = component.Vertices.ToList().First();
+            var mmd = new BccAlgrtm();
+            var ARandomVertex = component.Vertices.ToList().First();
             VertexNodeId = mmd.NodingComponentFromThisVertex(component,ARandomVertex);
             ConstructNodes();
-            Vertex ARandomVertexFromLargestNode = largestNode.Vertices.ToList().First();
+            var ARandomVertexFromLargestNode = largestNode.Vertices.ToList().First();
             VertexNodeId = mmd.NodingComponentFromThisVertex(component, ARandomVertexFromLargestNode);
         }
     }

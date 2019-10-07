@@ -24,7 +24,7 @@ namespace BCCCompact.Models
             disc = new Dictionary<Vertex, int>();
             low = new Dictionary<Vertex, int>();
             parent = new Dictionary<Vertex, Vertex>();
-            foreach(Vertex vertex in component.Vertices)
+            foreach(var vertex in component.Vertices)
             {
                 disc[vertex] = -1;
                 low[vertex] = -1;
@@ -49,7 +49,7 @@ namespace BCCCompact.Models
 
             while (st.Count > 0)
             {
-                Edge edge = st.Last();
+                var edge = st.Last();
                 NodeIdOfVertex[edge.A] = count;
                 NodeIdOfVertex[edge.B] = count;
                 st.RemoveLast();
@@ -58,7 +58,7 @@ namespace BCCCompact.Models
 
         private Dictionary<Vertex,int> GetresultOfNoding(Component component)
         {
-            Dictionary<Vertex, int> result = new Dictionary<Vertex, int>();
+            var result = new Dictionary<Vertex, int>();
             int i = 0;
             foreach (Vertex vertex in component.Vertices)
             {
@@ -78,8 +78,8 @@ namespace BCCCompact.Models
 
         private void IterateOnGraph()
         {
-            Vertex u = path.Peek();
-            foreach(Vertex v in u.adjacents)
+            var u = path.Peek();
+            foreach(var v in u.adjacents)
             {
                 if(disc[v] == -1)
                 {
@@ -99,7 +99,7 @@ namespace BCCCompact.Models
                 }
             }
 
-            Vertex adjacent = path.Pop();
+            var adjacent = path.Pop();
             if (path.Count() > 0)
             {
                 u = path.Peek();
@@ -111,12 +111,12 @@ namespace BCCCompact.Models
                 {
                     while (st.Last().A != u.Id || st.Last().B != adjacent.Id)
                     {
-                        Edge e = st.Last();
+                        var e = st.Last();
                         NodeIdOfVertex[e.A] = count;
                         NodeIdOfVertex[e.B] = count;
                         st.RemoveLast();
                     }
-                    Edge edge = st.Last();
+                    var edge = st.Last();
                     NodeIdOfVertex[edge.A] = count;
                     NodeIdOfVertex[edge.B] = count;
                     st.RemoveLast();

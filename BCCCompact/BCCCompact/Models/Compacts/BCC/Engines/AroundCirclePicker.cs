@@ -27,8 +27,8 @@ namespace BCCCompact.Models
 
         private LinkedList<Vertex> GetAdjacentyVerticesList(Node currentNode)
         {
-            Dictionary<Vertex, HashSet<Node>> adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
-            LinkedList<Vertex> VerticesList = new LinkedList<Vertex>(adjacenty.Keys);
+            var adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
+            var VerticesList = new LinkedList<Vertex>(adjacenty.Keys);
 
             if (currentNode.Parent != null)
             {
@@ -41,14 +41,14 @@ namespace BCCCompact.Models
 
         public void PickVerticesAroundCircle(Node currentNode)
         {
-            HashSet<Vertex> otherVertices = new HashSet<Vertex>(currentNode.Vertices);
-            Dictionary<Vertex, HashSet<Node>> adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
-            LinkedList<Vertex> VerticesList = GetAdjacentyVerticesList(currentNode);
+            var otherVertices = new HashSet<Vertex>(currentNode.Vertices);
+            var adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
+            var VerticesList = GetAdjacentyVerticesList(currentNode);
 
             double angleCounter = 0;
             foreach (Vertex vertex in VerticesList)
             {
-                HashSet<Node> nodes = adjacenty[vertex];
+                var nodes = adjacenty[vertex];
                 double firstAngle = angleCounter;
                 foreach (Node child in nodes.Where(x => x!=currentNode.Parent))
                 {
@@ -66,7 +66,7 @@ namespace BCCCompact.Models
 
         private void Arrange(Node currentNode)
         {
-            List<Vertex> verticesList = new List<Vertex>(currentNode.AnglesOfInnerVertices.Keys);
+            var verticesList = new List<Vertex>(currentNode.AnglesOfInnerVertices.Keys);
             verticesList.Sort();
             
             SetSomeVerticesAroundANode(currentNode, verticesList);
@@ -74,8 +74,8 @@ namespace BCCCompact.Models
 
         private void SetSomeVerticesAroundANode(Node node, List<Vertex> vertices)
         {
-            int count = vertices.Count;
-            int i = 0;
+            var count = vertices.Count;
+            var i = 0;
             foreach (Vertex vertex in vertices)
             {
                 node.PickVertexByAngle(vertex, Math.PI * 2 * i / count);

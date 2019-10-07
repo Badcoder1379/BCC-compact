@@ -31,21 +31,21 @@ namespace BCCCompact.Models
                 node.externallRadius = node.internallRadius;
                 return;
             }
-            Dictionary<Vertex, double> angleShareOfEachVertex = new Dictionary<Vertex, double>();
+            var angleShareOfEachVertex = new Dictionary<Vertex, double>();
             double maxExternallRadius = node.internallRadius;
-            foreach (Vertex vertex in node.AdjacentNodesWithConnectiongThisVertex.Keys)
+            foreach (var vertex in node.AdjacentNodesWithConnectiongThisVertex.Keys)
             {
                 angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex,node);
             }
 
-            foreach (Vertex vertex in angleShareOfEachVertex.Keys)
+            foreach (var vertex in angleShareOfEachVertex.Keys)
             {
                 double allVertexAngel = (angleShareOfEachVertex[vertex] / sumOfAllChildsSizes) * Math.PI * 2;
                 if (allVertexAngel > Math.PI * 2 / 3)
                 {
                     allVertexAngel = Math.PI * 2 / 3;
                 }
-                foreach (Node child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
+                foreach (var child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
                 {
                     if (child == node.Parent)
                     {
@@ -77,7 +77,7 @@ namespace BCCCompact.Models
         { 
             double sumOfSize = 0;
 
-            foreach (Node child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
+            foreach (var child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
             {
                 if (child == node.Parent)
                 {
@@ -92,7 +92,7 @@ namespace BCCCompact.Models
         private void SetSizes(Node node)
         {
             SetInternallRadius(node);
-            foreach (Node child in node.Children)
+            foreach (var child in node.Children)
             {
                 Calcute(child);
             }
@@ -102,7 +102,7 @@ namespace BCCCompact.Models
         {
             double sum = 0;
 
-            foreach (Node child in node.Children)
+            foreach (var child in node.Children)
             {
                 if (child.externallRadius == 0)
                 {

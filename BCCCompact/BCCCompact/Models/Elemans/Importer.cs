@@ -18,9 +18,9 @@ namespace BCCCompact.Models
         public Graph Import()
         {
             StrToId = new Dictionary<string, int>();
-            int lastNumberUsed = 0;
-            string[] lines = File.ReadAllLines(@"MmdData/" + FileName);
-            HashSet<Edge> edges = new HashSet<Edge>();
+            var lastNumberUsed = 0;
+            var lines = File.ReadAllLines(@"MmdData/" + FileName);
+            var edges = new HashSet<Edge>();
 
             foreach (string line in lines)
             {
@@ -37,13 +37,13 @@ namespace BCCCompact.Models
                     StrToId[parts[1]] = lastNumberUsed++;
                 }
 
-                int u = StrToId[parts[0]];
-                int v = StrToId[parts[1]];
+                var u = StrToId[parts[0]];
+                var v = StrToId[parts[1]];
 
                 edges.Add(new Edge(u, v));
             }
-            int V = StrToId.Count();
-            Graph graph = new Graph(V, edges);
+            var V = StrToId.Count();
+            var graph = new Graph(V, edges);
             return graph;
         }
     }

@@ -31,7 +31,7 @@ namespace BCCCompact.Models.BccAlgorithm
 
         public Vertex Pop()
         {
-            Vertex vertex = list.Pop();
+            var vertex = list.Pop();
             vertices.Remove(vertex);
             return vertex;
         }
