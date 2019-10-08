@@ -1,4 +1,6 @@
 ﻿using BCCCompact.Models;
+using BCCCompact.Models.Compacts;
+using BCCCompact.Models.Compacts.Squarillity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +15,12 @@ namespace BCCCompact.Controllers
         [HttpPost]
         public JsonResult compact(string query)
         {
-            Importer importer = new Importer(query);
+            var importer = new Importer(query);
             Graph graph = importer.Import();
 
-            BCC bcc = new BCC();
-            bcc.Process(graph);
-            CompactResult result = graph.getResult();
+            var result = CompactGraph(graph, new SQR());
 
-            return Json(result);
+            return result;
         }
 
         [HttpPost]
@@ -30,12 +30,18 @@ namespace BCCCompact.Controllers
             int V = int.Parse(str[0]);
             int E = int.Parse(str[1]);
 
-            Graph graph = Graph.getRandomGraph(V, E);
-            BCC bcc = new BCC();
-            bcc.Process(graph);
-            CompactResult result = graph.getResult();
+            var graph = Graph.getRandomGraph(V, E);
+            var result = CompactGraph(graph, new SQR());
+            return result;
+        }
 
+        private JsonResult CompactGraph(Graph graph, Compact compact)
+        {
+
+            compact.Process(graph);
+            var result = graph.getResult();
             return Json(result);
         }
+
     }
 }

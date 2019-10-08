@@ -20,6 +20,7 @@ namespace BCCCompact.Models
         public double AngleShareFromParentCenter;
         public Vertex VertexConnectorToParent;
         public double AngleToConnectToParent;
+        public double FreeAngleAround;
 
 
         public void AddAdjacenty(Vertex vertex, Node node)

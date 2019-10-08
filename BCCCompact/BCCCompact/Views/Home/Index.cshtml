@@ -66,7 +66,7 @@
             border: 1px solid darkslateblue;
             border-radius: 5px;
             height: 700px;
-            width: 1200px;
+            width: 100%;
         }
 
         .textStyle {
@@ -114,14 +114,90 @@
         </form>
     </div>
     <div id="graph-container" class="containerStyle">
-        <br />
-        <br />
     </div>
+
+    <div id="table-container" width="100%" style="background-color:antiquewhite; margin-top :10px; ">
+        <link rel="stylesheet" href="~/Styels/table.css">
+        <table border="1" id="fileTable" cellpadding="10">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Instrument</th>
+                </tr>
+            </thead>
+            <tbody style="font-size:20px;">
+                <tr>
+                    <td>John Lennon</td>
+                    <td>Rhythm Guitar</td>
+                </tr>
+                <tr>
+                    <td>Paul McCartney</td>
+                    <td>Bass</td>
+                </tr>
+                <tr>
+                    <td>George Harrison</td>
+                    <td>Lead Guitar</td>
+                </tr>
+                <tr>
+                    <td>Ringo Starr</td>
+                    <td>Drums</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    
+
 </BODY>
 </html>
 
-<script src="~/Scripts/ogma.min.js"></script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="~/Scripts/ogma.min.js"></script>
 
 @section scripts{
     <script>
@@ -135,6 +211,7 @@
                 drawGraph(result);
             });
         }
+
         function randomGraphCompact() {
 
             const v = $('#V').val();
@@ -176,11 +253,9 @@
                 container: 'graph-container'
             });
         }
+
     </script>
 }
-
-
-
 
 
 

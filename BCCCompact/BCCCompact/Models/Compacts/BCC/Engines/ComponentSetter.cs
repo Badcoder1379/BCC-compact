@@ -19,14 +19,14 @@ namespace BCCCompact.Models
             {
                 if (child == largest) continue;
                 double angle = Math.PI * 2 * (child.LasrgestNode.externallRadius / sumOfSizes);
-                angle = Math.Max(angle, Math.PI);
+                angle = Math.Min(angle, Math.PI/2);
                 angle /= 2;
                 angleCounter += angle;
                 double lenght = child.LasrgestNode.externallRadius / Math.Sin(angle / 2);
                 lenght = Math.Max(lenght, largest.LasrgestNode.externallRadius + child.LasrgestNode.externallRadius);
                 child.LasrgestNode.XCenter = lenght * Math.Sin(angleCounter);
                 child.LasrgestNode.YCenter = lenght * Math.Cos(angleCounter);
-                angleCounter += angle / 2;
+                angleCounter += angle;
             }
         }
 

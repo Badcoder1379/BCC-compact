@@ -19,7 +19,7 @@ namespace BCCCompact.Models
         {
             StrToId = new Dictionary<string, int>();
             var lastNumberUsed = 0;
-            var lines = File.ReadAllLines(@"MmdData/" + FileName);
+            var lines = File.ReadAllLines(FileName);
             var edges = new HashSet<Edge>();
 
             foreach (string line in lines)

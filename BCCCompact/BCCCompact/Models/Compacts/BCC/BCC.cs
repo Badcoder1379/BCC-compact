@@ -1,13 +1,15 @@
-﻿using System;
+﻿using BCCCompact.Models.Compacts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BCCCompact.Models
 {
-    public class BCC
+    public class BCC : Compact
     {
-        public void Process(Graph graph)
+        
+        public override void Process(Graph graph)
         {
             var componentMaker = new ComponentMaker();
             componentMaker.Process(graph);

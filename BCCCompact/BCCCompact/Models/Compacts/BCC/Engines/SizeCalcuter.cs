@@ -8,7 +8,6 @@ namespace BCCCompact.Models
     class SizeCalcuter
     {
         Node largestNode;
-        private readonly double bounderMLT = 0.7;
         private readonly double firstInternallRadius = 30;
 
         public void Process(Component component)
@@ -37,14 +36,12 @@ namespace BCCCompact.Models
             {
                 angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex,node);
             }
-
+            double allUsedAngle = 0;
             foreach (var vertex in angleShareOfEachVertex.Keys)
             {
                 double allVertexAngel = (angleShareOfEachVertex[vertex] / sumOfAllChildsSizes) * Math.PI * 2;
-                if (allVertexAngel > Math.PI * 2 / 3)
-                {
-                    allVertexAngel = Math.PI * 2 / 3;
-                }
+                allVertexAngel = Math.Min(Math.PI, allVertexAngel);
+                allUsedAngle += allVertexAngel;
                 foreach (var child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
                 {
                     if (child == node.Parent)
@@ -69,7 +66,12 @@ namespace BCCCompact.Models
                     }
                 }
             }
+            node.FreeAngleAround = (Math.PI * 2) - allUsedAngle;
             node.externallRadius = maxExternallRadius;
+            if(node.Vertices.Count == 1 && node.Children.Count == 1)
+            {
+                node.externallRadius /= 2;
+            }
         }
 
 
@@ -123,6 +125,7 @@ namespace BCCCompact.Models
             {
                 node.internallRadius = node.Vertices.Count * firstInternallRadius;
             }
+            node.externallRadius = node.internallRadius;
         }
 
     }

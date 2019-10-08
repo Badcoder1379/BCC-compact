@@ -49,6 +49,7 @@ namespace BCCCompact.Models
             foreach (Vertex vertex in VerticesList)
             {
                 var nodes = adjacenty[vertex];
+                angleCounter += currentNode.FreeAngleAround / (VerticesList.Count+1);
                 double firstAngle = angleCounter;
                 foreach (Node child in nodes.Where(x => x!=currentNode.Parent))
                 {
