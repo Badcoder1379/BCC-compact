@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -17,11 +18,23 @@ namespace BCCCompact.Models
         {
             StrToId = new Dictionary<string, int>();
             var lastNumberUsed = 0;
-            var lines = File.ReadAllLines(@"D:\Files\" + FileName);
+            string path = @"D:\Files\" + FileName;
+
+            var lines = File.ReadAllLines(path);
+
+            if (lines.Length == 1)
+            {
+                lines = lines[0].Split(' ');
+            }
+
             var edges = new HashSet<Edge>();
 
             foreach (string line in lines)
             {
+                if (line.Equals(""))
+                {
+                    continue;
+                }
 
                 string[] parts = line.Split(new char[] { ',' });
 

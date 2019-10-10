@@ -15,13 +15,10 @@ namespace BCCCompact.Models
         {
             PickVerticesAroundCircle(currentNode);
 
-
             foreach (Node child in currentNode.Children)
             {
                 Pick(child);
             }
-
-
         }
 
         private LinkedList<Vertex> GetAdjacentyVerticesList(Node currentNode)
@@ -44,22 +41,32 @@ namespace BCCCompact.Models
             var adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
             var VerticesList = GetAdjacentyVerticesList(currentNode);
 
-            double angleCounter = 0;
-            foreach (Vertex vertex in VerticesList)
+            if(currentNode.Children.Count == 1 && currentNode.Vertices.Count == 1)
             {
-                var nodes = adjacenty[vertex];
-                angleCounter += currentNode.FreeAngleAround / (VerticesList.Count + 1);
-                double firstAngle = angleCounter;
-                foreach (Node child in nodes.Where(x => x != currentNode.Parent))
-                {
-                    double shareAngle = child.AngleShareFromParentCenter;
-                    angleCounter += shareAngle / 2;
-                    child.AngleToConnectToParent = angleCounter;
-                    angleCounter += shareAngle / 2;
-                }
-                currentNode.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
-                otherVertices.Remove(vertex);
+                var child = currentNode.Children.ToList().First();
+                child.AngleToConnectToParent = currentNode.AngleToConnectToParent;
             }
+            else
+            {
+                double angleCounter = 0;
+                foreach (Vertex vertex in VerticesList)
+                {
+                    var nodes = adjacenty[vertex];
+                    angleCounter += currentNode.FreeAngleAround / (VerticesList.Count + 1);
+                    double firstAngle = angleCounter;
+                    foreach (Node child in nodes.Where(x => x != currentNode.Parent))
+                    {
+                        double shareAngle = child.AngleShareFromParentCenter;
+                        angleCounter += shareAngle / 2;
+                        child.AngleToConnectToParent = angleCounter;
+                        angleCounter += shareAngle / 2;
+                    }
+                    currentNode.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
+                    otherVertices.Remove(vertex);
+                }
+            }
+
+            
             SetSomeVerticesAroundANode(currentNode, otherVertices.ToList());
             Arrange(currentNode);
         }

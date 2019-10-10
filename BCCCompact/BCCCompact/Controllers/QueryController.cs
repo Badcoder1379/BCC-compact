@@ -12,8 +12,15 @@ namespace BCCCompact.Controllers
         public JsonResult compact(string query)
         {
             var importer = new Importer(query);
-            Graph graph = importer.Import();
-
+            Graph graph;
+            
+            try
+            {
+                graph = importer.Import();
+            }
+            catch {
+                return null;
+            }
             var result = CompactGraph(graph, new BCC());
 
             return Json(result);
@@ -46,6 +53,22 @@ namespace BCCCompact.Controllers
         {
             string[] files = Directory.GetFiles(@"D:\Files\");
             return Json(files);
+        }
+
+
+        [HttpPost]
+        public JsonResult deleteFile(string fileName)
+        {
+            string path = @"D:\Files\" + fileName;
+            try
+            {
+                Directory.Delete(path);
+            }
+            catch 
+            { 
+                return Json("error"); 
+            }
+            return null;
         }
 
     }
