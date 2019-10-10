@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
@@ -34,7 +32,7 @@ namespace BCCCompact.Models
             double maxExternallRadius = node.internallRadius;
             foreach (var vertex in node.AdjacentNodesWithConnectiongThisVertex.Keys)
             {
-                angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex,node);
+                angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex, node);
             }
             double allUsedAngle = 0;
             foreach (var vertex in angleShareOfEachVertex.Keys)
@@ -68,15 +66,15 @@ namespace BCCCompact.Models
             }
             node.FreeAngleAround = (Math.PI * 2) - allUsedAngle;
             node.externallRadius = maxExternallRadius;
-            if(node.Vertices.Count == 1 && node.Children.Count == 1)
+            if (node.Vertices.Count == 1 && node.Children.Count == 1)
             {
                 node.externallRadius /= 2;
             }
         }
 
 
-        public double GetSumOfChildrenSizes(Vertex vertex,Node node)
-        { 
+        public double GetSumOfChildrenSizes(Vertex vertex, Node node)
+        {
             double sumOfSize = 0;
 
             foreach (var child in node.AdjacentNodesWithConnectiongThisVertex[vertex])

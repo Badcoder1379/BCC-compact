@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
@@ -59,7 +57,7 @@ namespace BCCCompact.Models
         {
             var mmd = new BccAlgrtm();
             var ARandomVertex = component.Vertices.ToList().First();
-            VertexNodeId = mmd.NodingComponentFromThisVertex(component,ARandomVertex);
+            VertexNodeId = mmd.NodingComponentFromThisVertex(component, ARandomVertex);
             ConstructNodes();
             var ARandomVertexFromLargestNode = largestNode.Vertices.ToList().First();
             VertexNodeId = mmd.NodingComponentFromThisVertex(component, ARandomVertexFromLargestNode);

@@ -17,7 +17,7 @@
             min-height: 100%;
             min-width: 100%;
             padding: 10px;
-            border: 4px solid green;
+            border: 2px solid green;
             background-color: aquamarine;
             margin-top: 10px;
             border-radius: 10px;
@@ -46,17 +46,7 @@
             border-radius: 7px;
         }
 
-        .randomButtonStyle {
-            background-color: darkslateblue;
-            color: aquamarine;
-            text-align: center;
-            font-family: 'Comic Sans MS';
-            font-size: 15px;
-            padding-right: 20px;
-            padding-left: 20px;
-            border: 3px solid darkblue;
-            border-radius: 7px;
-        }
+
 
         .containerStyle {
             margin-top: 20px;
@@ -82,6 +72,20 @@
             margin-right: 50px;
             background-color: azure;
         }
+
+        .randomButtonStyle {
+            margin-top: 10px;
+            background-color: darkslateblue;
+            color: aquamarine;
+            text-align: center;
+            font-family: 'Comic Sans MS';
+            font-size: 15px;
+            padding-right: 20px;
+            padding-left: 20px;
+            border: 3px solid darkblue;
+            border-radius: 7px;
+            margin-left: 50px;
+        }
     </style>
 
 </head>
@@ -99,13 +103,21 @@
             <strong style="color : darkslateblue; font-size : 15px; font-family :  'Comic Sans MS';"> input your graph file name : </strong>
             <input type="text" class="textInputStyle" value="test1.txt" id="text" />
             <input type="button" class="buttonStyle" value="compact" onclick="compact()" />
+            <input type="button" class="buttonStyle" value="update list" onclick="updateList()" />
             <br />
-
-
+            <ul id='files-list' >
+            </ul>
+        </form>
+    </div>
+    <div class="fullScreenStyle">
+        <form>
             <strong class="textStyle"> number of vertices : </strong>
             <input type="text" class="randomTextStyle" value="10" id="V" />
             <strong class="textStyle"> number of edges : </strong>
             <input type="text" class="randomTextStyle" value="20" id="E" />
+            <strong class="textStyle"> fileName : </strong>
+            <input type="text" class="randomTextStyle" value="random.txt" id="randomGraph-fileName" />
+            <br />
             <input type="button" class="randomButtonStyle" value="random graph compact" onclick="randomGraphCompact()" />
             <input type="button" class="randomButtonStyle" value="random graph" onclick="drawRandomGraph()" />
 
@@ -136,8 +148,23 @@
 
 
 
-
-
+<script>
+    function updateList() {
+        var text = "";
+        $.ajax({
+            url: '/query/getFiles',
+            method: 'post',
+            data: null
+        }).done((result) => {
+            $.each(result, (index, value) => {
+                text += "<li>" + value + "</li>";
+            });
+        });
+        $('#files-list').html(text);
+        getElementsByTagName("ul")[0].innerHTML = text;
+    }
+    updateList();
+</script>
 
 
 
@@ -161,7 +188,9 @@
 
             const v = $('#V').val();
             const e = $('#E').val();
-            var queryText = v + "-" + e;
+            const fileName = $('#randomGraph-fileName').val();
+
+            var queryText = v + "-" + e + "-" + fileName;
             $.ajax({
                 url: '/query/randomGraph',
                 method: 'post',

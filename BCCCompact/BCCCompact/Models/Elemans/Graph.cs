@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.IO;
 
 namespace BCCCompact.Models
 {
@@ -9,7 +8,7 @@ namespace BCCCompact.Models
     {
         public int V;
         public Vertex[] Vertices;
-        
+
         public Graph(int v, HashSet<Edge> edges)
         {
             V = v;
@@ -57,8 +56,21 @@ namespace BCCCompact.Models
             return new CompactResult(edges, locations);
         }
 
-        public static Graph getRandomGraph(int V, int E)
+        public static Graph getRandomGraph(int V, int E, string fileName)
         {
+            string path = @"D:\Files\" + fileName;
+            StreamWriter sw;
+            if (!File.Exists(path))
+            {
+                sw = new StreamWriter(File.Create(path));
+            }
+            else
+            {
+                sw = new StreamWriter(path);
+               
+            }
+
+
             var edges = new HashSet<Edge>();
             var random = new Random();
             while (E > 0)
@@ -70,8 +82,11 @@ namespace BCCCompact.Models
                     var edge = new Edge(n1, n2);
                     edges.Add(edge);
                     E--;
+                    sw.WriteLine(n1 + "," + n2);
                 }
             }
+            sw.Flush();
+            sw.Close();
             return new Graph(V, edges);
         }
 

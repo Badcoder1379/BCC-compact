@@ -1,9 +1,7 @@
 ﻿using BCCCompact.Models.BccAlgorithm;
-using System;
 using System.Collections.Generic;
 
 using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
@@ -18,13 +16,13 @@ namespace BCCCompact.Models
         Path path;
         int time;
 
-        public Dictionary<Vertex , int> NodingComponentFromThisVertex(Component component, Vertex startingVertex)
+        public Dictionary<Vertex, int> NodingComponentFromThisVertex(Component component, Vertex startingVertex)
         {
             time = 0;
             disc = new Dictionary<Vertex, int>();
             low = new Dictionary<Vertex, int>();
             parent = new Dictionary<Vertex, Vertex>();
-            foreach(var vertex in component.Vertices)
+            foreach (var vertex in component.Vertices)
             {
                 disc[vertex] = -1;
                 low[vertex] = -1;
@@ -56,7 +54,7 @@ namespace BCCCompact.Models
             }
         }
 
-        private Dictionary<Vertex,int> GetresultOfNoding(Component component)
+        private Dictionary<Vertex, int> GetresultOfNoding(Component component)
         {
             var result = new Dictionary<Vertex, int>();
             int i = 0;
@@ -79,9 +77,9 @@ namespace BCCCompact.Models
         private void IterateOnGraph()
         {
             var u = path.Peek();
-            foreach(var v in u.adjacents)
+            foreach (var v in u.adjacents)
             {
-                if(disc[v] == -1)
+                if (disc[v] == -1)
                 {
                     path.ChildrenUp();
                     parent[v] = u;
@@ -124,9 +122,9 @@ namespace BCCCompact.Models
                     count++;
                 }
             }
-            
+
         }
-        
-       
+
+
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace BCCCompact.Models.BccAlgorithm
 {
@@ -10,7 +7,7 @@ namespace BCCCompact.Models.BccAlgorithm
         HashSet<Vertex> vertices = new HashSet<Vertex>();
         Stack<Vertex> list = new Stack<Vertex>();
         Dictionary<Vertex, int> children = new Dictionary<Vertex, int>();
-        
+
 
         public void Push(Vertex vertex)
         {

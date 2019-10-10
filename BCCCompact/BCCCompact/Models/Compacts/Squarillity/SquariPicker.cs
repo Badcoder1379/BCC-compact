@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models.Compacts.Squarillity
 {
@@ -39,7 +36,7 @@ namespace BCCCompact.Models.Compacts.Squarillity
                 x++;
                 y = 0;
             }
-            Pointer = new Tuple<int, int>(x,y);
+            Pointer = new Tuple<int, int>(x, y);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
@@ -15,7 +14,7 @@ namespace BCCCompact.Models
         private void Pick(Node currentNode)
         {
             PickVerticesAroundCircle(currentNode);
-            
+
 
             foreach (Node child in currentNode.Children)
             {
@@ -49,9 +48,9 @@ namespace BCCCompact.Models
             foreach (Vertex vertex in VerticesList)
             {
                 var nodes = adjacenty[vertex];
-                angleCounter += currentNode.FreeAngleAround / (VerticesList.Count+1);
+                angleCounter += currentNode.FreeAngleAround / (VerticesList.Count + 1);
                 double firstAngle = angleCounter;
-                foreach (Node child in nodes.Where(x => x!=currentNode.Parent))
+                foreach (Node child in nodes.Where(x => x != currentNode.Parent))
                 {
                     double shareAngle = child.AngleShareFromParentCenter;
                     angleCounter += shareAngle / 2;
@@ -69,7 +68,7 @@ namespace BCCCompact.Models
         {
             var verticesList = new List<Vertex>(currentNode.AnglesOfInnerVertices.Keys);
             verticesList.Sort();
-            
+
             SetSomeVerticesAroundANode(currentNode, verticesList);
         }
 

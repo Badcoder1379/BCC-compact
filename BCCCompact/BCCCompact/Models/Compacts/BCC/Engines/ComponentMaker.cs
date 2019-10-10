@@ -5,7 +5,7 @@ namespace BCCCompact.Models
 {
     public class ComponentMaker
     {
-        readonly Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>> VerticesToUtil = new Stack<Tuple<Vertex, Dictionary<Vertex, bool>,Component>>();
+        readonly Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>> VerticesToUtil = new Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>>();
         HashSet<Component> Components = new HashSet<Component>();
         Dictionary<Vertex, bool> VisitedVertices;
 
@@ -38,7 +38,7 @@ namespace BCCCompact.Models
             }
         }
 
-        
+
 
         public HashSet<Component> MakeComponents()
         {

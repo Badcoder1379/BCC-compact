@@ -1,14 +1,10 @@
 ﻿using BCCCompact.Models.Compacts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
     public class BCC : Compact
     {
-        
+
         public override void Process(Graph graph)
         {
             var componentMaker = new ComponentMaker();
@@ -33,11 +29,13 @@ namespace BCCCompact.Models
 
             var locationCalcuter = new LocationCalcuter();
 
-            foreach(var component in components)
+            foreach (var component in components)
             {
                 locationCalcuter.CalcuteNodeLocations(component);
                 locationCalcuter.CalcuteVerticseLocation(component);
             }
         }
+
+
     }
 }

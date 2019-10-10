@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
@@ -19,7 +17,7 @@ namespace BCCCompact.Models
             {
                 if (child == largest) continue;
                 double angle = Math.PI * 2 * (child.LasrgestNode.externallRadius / sumOfSizes);
-                angle = Math.Min(angle, Math.PI/2);
+                angle = Math.Min(angle, Math.PI / 2);
                 angle /= 2;
                 angleCounter += angle;
                 double lenght = child.LasrgestNode.externallRadius / Math.Sin(angle / 2);

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
@@ -12,7 +10,7 @@ namespace BCCCompact.Models
         private HashSet<Vertex> VisitedVertices = new HashSet<Vertex>();
         private HashSet<Node> VisitedNodes = new HashSet<Node>();
 
-      
+
         public void Process(Component component)
         {
             var father = component.LasrgestNode;

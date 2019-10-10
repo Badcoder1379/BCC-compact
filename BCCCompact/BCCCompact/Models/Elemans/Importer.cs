@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models
 {
@@ -19,7 +17,7 @@ namespace BCCCompact.Models
         {
             StrToId = new Dictionary<string, int>();
             var lastNumberUsed = 0;
-            var lines = File.ReadAllLines(FileName);
+            var lines = File.ReadAllLines(@"D:\Files\" + FileName);
             var edges = new HashSet<Edge>();
 
             foreach (string line in lines)
