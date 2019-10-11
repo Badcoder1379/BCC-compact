@@ -130,6 +130,13 @@
     <Compile Include="Models\Compacts\BCC\PreProcess\Noding\Path.cs" />
     <Compile Include="Models\Compacts\BCC\BCC.cs" />
     <Compile Include="Models\Compacts\Compact.cs" />
+    <Compile Include="Models\Compacts\MMD\Engines\LocationCalculater.cs" />
+    <Compile Include="Models\Compacts\MMD\Engines\VerticesPicker.cs" />
+    <Compile Include="Models\Compacts\MMD\Engines\TriangleMaker.cs" />
+    <Compile Include="Models\Compacts\MMD\Engines\TrianglePicker.cs" />
+    <Compile Include="Models\Compacts\MMD\MMD.cs" />
+    <Compile Include="Models\Compacts\MMD\Engines\SizeCalculater.cs" />
+    <Compile Include="Models\Elemans\Triangle.cs" />
     <Compile Include="Models\Compacts\Squarillity\SQR.cs" />
     <Compile Include="Models\Compacts\Squarillity\SquariPicker.cs" />
     <Compile Include="Models\Elemans\CompactResult.cs" />
@@ -140,12 +147,12 @@
     <Compile Include="Models\Elemans\Graph.cs" />
     <Compile Include="Models\Elemans\Importer.cs" />
     <Compile Include="Models\Elemans\Location.cs" />
-    <Compile Include="Models\Compacts\BCC\Engines\LocationCalcuter.cs" />
+    <Compile Include="Models\Compacts\BCC\Engines\LocationCalculater.cs" />
     <Compile Include="Models\Compacts\BCC\PreProcess\Noding\BccAlgrtm.cs" />
     <Compile Include="Models\Elemans\Node.cs" />
     <Compile Include="Models\Compacts\BCC\PreProcess\Noding\NodeMaker.cs" />
     <Compile Include="Models\Compacts\BCC\PreProcess\NodeTreeMaker.cs" />
-    <Compile Include="Models\Compacts\BCC\Engines\SizeCalcuter.cs" />
+    <Compile Include="Models\Compacts\BCC\Engines\SizeCalculater.cs" />
     <Compile Include="Models\Elemans\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

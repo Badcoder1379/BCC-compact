@@ -51,24 +51,26 @@ namespace BCCCompact.Controllers
         [HttpPost]
         public JsonResult getFiles(string query)
         {
-            string[] files = Directory.GetFiles(@"D:\Files\");
+            string[] files = Directory.GetFiles(Importer.SRCAddress);
             return Json(files);
         }
 
 
         [HttpPost]
-        public JsonResult deleteFile(string fileName)
+        public JsonResult deleteFile(string query)
         {
-            string path = @"D:\Files\" + fileName;
+            string alertTxt;
+            string path = Importer.SRCAddress + query;
             try
             {
-                Directory.Delete(path);
+                System.IO.File.Delete(path);
+                alertTxt = query + "deleted successfully!";
             }
             catch 
-            { 
-                return Json("error"); 
+            {
+                alertTxt = "there isn't any file by this name!";
             }
-            return null;
+            return Json(alertTxt);
         }
 
     }

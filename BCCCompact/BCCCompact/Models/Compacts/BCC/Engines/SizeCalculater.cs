@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
-    class SizeCalcuter
+    class SizeCalculater
     {
         Node largestNode;
         private readonly double firstInternallRadius = 30;
 
         public void Process(Component component)
         {
-            SetLargestNode(component.LasrgestNode);
+            SetLargestNode(component.LargestNode);
             Calcute(largestNode);
         }
 

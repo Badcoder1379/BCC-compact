@@ -48,7 +48,7 @@ namespace BCCCompact.Models
             }
             else
             {
-                double angleCounter = 0;
+                double angleCounter = Math.PI + currentNode.AngleToConnectToParent;
                 foreach (Vertex vertex in VerticesList)
                 {
                     var nodes = adjacenty[vertex];

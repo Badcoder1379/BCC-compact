@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
@@ -32,6 +33,10 @@ namespace BCCCompact.Models
 
         public void PickVertexByAngle(Vertex vertex, double angle)
         {
+            if (angle > 2 * Math.PI)
+            {
+                angle -= 2 * Math.PI;
+            }
             AnglesOfInnerVertices[vertex] = angle;
             vertex.angleInNode = angle;
         }

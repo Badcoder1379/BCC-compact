@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace BCCCompact.Models
 {
-    class LocationCalcuter
+    class LocationCalculater
     {
         private readonly double bounderMLT = 0.7;
 
         public void CalcuteNodeLocations(Component component)
         {
-            var fatherNode = component.LasrgestNode;
+            var fatherNode = component.LargestNode;
             CalcuteNodes(fatherNode);
         }
 
@@ -25,7 +25,7 @@ namespace BCCCompact.Models
 
         public void CalcuteVerticseLocation(Component component)
         {
-            CalcuteVertices(component.LasrgestNode);
+            CalcuteVertices(component.LargestNode);
         }
         private void CalcuteVertices(Node currentNode)
         {

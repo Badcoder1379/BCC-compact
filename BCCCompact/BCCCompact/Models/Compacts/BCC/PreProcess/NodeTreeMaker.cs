@@ -13,7 +13,7 @@ namespace BCCCompact.Models
 
         public void Process(Component component)
         {
-            var father = component.LasrgestNode;
+            var father = component.LargestNode;
             this.FatherNode = father;
             var randomVertex = FatherNode.Vertices.ToList().First();
             VisitedNodes.Add(randomVertex.node);

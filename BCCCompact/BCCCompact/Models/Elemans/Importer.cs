@@ -7,6 +7,7 @@ namespace BCCCompact.Models
 {
     class Importer
     {
+        public static string SRCAddress = @"D:\Projects\Compact\Files\";
         private string FileName { get; set; }
         private Dictionary<string, int> StrToId;
         public Importer(string fileName)
@@ -18,7 +19,7 @@ namespace BCCCompact.Models
         {
             StrToId = new Dictionary<string, int>();
             var lastNumberUsed = 0;
-            string path = @"D:\Files\" + FileName;
+            string path = SRCAddress + FileName;
 
             var lines = File.ReadAllLines(path);
 
@@ -37,6 +38,11 @@ namespace BCCCompact.Models
                 }
 
                 string[] parts = line.Split(new char[] { ',' });
+
+                if (parts.Length < 2)
+                {
+                    continue;
+                }
 
                 if (!StrToId.ContainsKey(parts[0]))
                 {

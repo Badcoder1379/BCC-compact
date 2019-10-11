@@ -5,16 +5,16 @@ namespace BCCCompact.Models
 {
     class NodeMaker
     {
-        Component component { get; set; }
-        HashSet<Node> nodes { get; set; }
-        Node largestNode { get; set; }
-        Dictionary<Vertex, int> VertexNodeId;
+        public Component component { get; set; }
+        public HashSet<Node> Nodes { get; set; }
+        public Node largestNode { get; set; }
+        private Dictionary<Vertex, int> VertexNodeId;
 
 
         private void SetComponent(Component component)
         {
             this.component = component;
-            nodes = new HashSet<Node>();
+            Nodes = new HashSet<Node>();
             VertexNodeId = new Dictionary<Vertex, int>();
         }
 
@@ -28,7 +28,7 @@ namespace BCCCompact.Models
             SetComponent(component);
             NodeLabelTagging();
             ConstructNodes();
-            component.LasrgestNode = largestNode;
+            component.LargestNode = largestNode;
         }
 
         private void ConstructNodes()
@@ -41,7 +41,7 @@ namespace BCCCompact.Models
                 if (!nodeId_node.ContainsKey(nodeId))
                 {
                     nodeId_node[nodeId] = new Node();
-                    nodes.Add(nodeId_node[nodeId]);
+                    Nodes.Add(nodeId_node[nodeId]);
                 }
                 var node = nodeId_node[nodeId];
                 node.Vertices.Add(vertex);

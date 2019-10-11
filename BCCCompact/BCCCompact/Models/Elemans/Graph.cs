@@ -58,7 +58,7 @@ namespace BCCCompact.Models
 
         public static Graph getRandomGraph(int V, int E, string fileName)
         {
-            string path = @"D:\Files\" + fileName;
+            string path = Importer.SRCAddress + fileName;
             StreamWriter sw;
             if (!File.Exists(path))
             {
