@@ -11,8 +11,8 @@ namespace BCCCompact.Models
         private Dictionary<Vertex, int> low;
         private Dictionary<Vertex, Vertex> parent;
         static int count = 0;
-        Dictionary<int, int> NodeIdOfVertex = new Dictionary<int, int>();
-        LinkedList<Edge> st;
+        private readonly Dictionary<int, int> NodeIdOfVertex = new Dictionary<int, int>();
+        private LinkedList<Edge> st;
         Path path;
         int time;
 

@@ -55,12 +55,12 @@ namespace BCCCompact.Models
 
         private void NodeLabelTagging()
         {
-            var mmd = new BccAlgrtm();
+            var bbc = new BccAlgrtm();
             var ARandomVertex = component.Vertices.ToList().First();
-            VertexNodeId = mmd.NodingComponentFromThisVertex(component, ARandomVertex);
+            VertexNodeId = bbc.NodingComponentFromThisVertex(component, ARandomVertex);
             ConstructNodes();
             var ARandomVertexFromLargestNode = largestNode.Vertices.ToList().First();
-            VertexNodeId = mmd.NodingComponentFromThisVertex(component, ARandomVertexFromLargestNode);
+            VertexNodeId = bbc.NodingComponentFromThisVertex(component, ARandomVertexFromLargestNode);
         }
     }
 }

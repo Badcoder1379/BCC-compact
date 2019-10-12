@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace BCCCompact.Models.Compacts.MMD.Engines
 {
@@ -33,19 +31,19 @@ namespace BCCCompact.Models.Compacts.MMD.Engines
             double edgeLenghtToChild = orbitals.Count * 2;
 
             double angleCounter = 0;
-            foreach(var vertex in boundryVertices)
+            foreach (var vertex in boundryVertices)
             {
-                foreach(var child in adjacenty[vertex])
+                foreach (var child in adjacenty[vertex])
                 {
-                    if(child != currentTriangle.Parent)
+                    if (child != currentTriangle.Parent)
                     {
-                        child.AngleToConnectToParent = angleCounter+child.CenteralAngle/2;
+                        child.AngleToConnectToParent = angleCounter + child.CenteralAngle / 2;
                         child.EdgeToParentLenght = edgeLenghtToChild;
                         angleCounter += child.CenteralAngle;
                     }
                 }
             }
-            foreach(Triangle child in currentTriangle.Children)
+            foreach (Triangle child in currentTriangle.Children)
             {
                 PickVertices(child);
             }
@@ -63,11 +61,11 @@ namespace BCCCompact.Models.Compacts.MMD.Engines
             return orbitals;
         }
 
-        private void PushWithVertices(LinkedList<LinkedList<Vertex>> orbitals,HashSet<Vertex> vertices) 
+        private void PushWithVertices(LinkedList<LinkedList<Vertex>> orbitals, HashSet<Vertex> vertices)
         {
             int lastOrbitalLength = orbitals.Count;
             int lastOrbitalPointer = 0;
-            foreach(Vertex vertex in vertices)
+            foreach (Vertex vertex in vertices)
             {
                 if (lastOrbitalPointer == 0)
                 {
@@ -83,7 +81,7 @@ namespace BCCCompact.Models.Compacts.MMD.Engines
             }
         }
 
-        private void MergeLastOrbitalWithBoundryVertices(LinkedList<Vertex> lastOrbitalvertices, LinkedList<Vertex> vertices) 
+        private void MergeLastOrbitalWithBoundryVertices(LinkedList<Vertex> lastOrbitalvertices, LinkedList<Vertex> vertices)
         {
             var newLinkedList = new LinkedList<Vertex>();
             Dictionary<Vertex, double> angleOfVertices = new Dictionary<Vertex, double>();
@@ -98,13 +96,14 @@ namespace BCCCompact.Models.Compacts.MMD.Engines
                 angleOfVertices[vertex] = i / vertices.Count;
                 i++;
             }
-            while(angleOfVertices.Count>0 || vertices.Count > 0)
+            while (angleOfVertices.Count > 0 || vertices.Count > 0)
             {
-                if(angleOfVertices[vertices.First()] > angleOfVertices[lastOrbitalvertices.First()])
+                if (angleOfVertices[vertices.First()] > angleOfVertices[lastOrbitalvertices.First()])
                 {
                     newLinkedList.AddFirst(lastOrbitalvertices.First());
                     lastOrbitalvertices.RemoveFirst();
-                }else
+                }
+                else
                 {
                     newLinkedList.AddFirst(vertices.First());
                     vertices.RemoveFirst();
@@ -112,9 +111,5 @@ namespace BCCCompact.Models.Compacts.MMD.Engines
             }
 
         }
-
-
-
-
     }
 }

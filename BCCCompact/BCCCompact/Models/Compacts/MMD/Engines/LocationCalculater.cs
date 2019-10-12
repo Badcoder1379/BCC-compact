@@ -13,6 +13,7 @@ namespace BCCCompact.Models.Compacts.MMD.Engines
             Calcute(component.LargestTriangle);
         }
 
+
         private void Calcute(Triangle currentTriangle)
         {
             foreach(var vertex in currentTriangle.VertexToLocation.Keys)

@@ -5,19 +5,15 @@ namespace BCCCompact.Models
 {
     class SizeCalculater
     {
-        Node largestNode;
+        private Node largestNode;
         private readonly double firstInternallRadius = 30;
 
         public void Process(Component component)
         {
-            SetLargestNode(component.LargestNode);
+            largestNode = component.LargestNode;
             Calcute(largestNode);
         }
 
-        private void SetLargestNode(Node largestNode)
-        {
-            this.largestNode = largestNode;
-        }
 
         private void Calcute(Node node)
         {
