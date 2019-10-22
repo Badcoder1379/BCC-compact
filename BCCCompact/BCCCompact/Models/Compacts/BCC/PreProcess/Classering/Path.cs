@@ -4,9 +4,9 @@ namespace BCCCompact.Models.BccAlgorithm
 {
     public class Path
     {
-        HashSet<Vertex> vertices = new HashSet<Vertex>();
-        Stack<Vertex> list = new Stack<Vertex>();
-        Dictionary<Vertex, int> children = new Dictionary<Vertex, int>();
+        private readonly HashSet<Vertex> vertices = new HashSet<Vertex>();
+        private readonly Stack<Vertex> list = new Stack<Vertex>();
+        private readonly Dictionary<Vertex, int> children = new Dictionary<Vertex, int>();
 
 
         public void Push(Vertex vertex)

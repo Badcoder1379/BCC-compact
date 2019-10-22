@@ -5,30 +5,30 @@ namespace BCCCompact.Models
 {
     class SizeCalculater
     {
-        private Node largestNode;
+        private Classer largestClasser;
         private readonly double firstInternallRadius = 30;
 
         public void Process(Component component)
         {
-            largestNode = component.LargestNode;
-            Calcute(largestNode);
+            largestClasser = component.LargestClasser;
+            Calcute(largestClasser);
         }
 
 
-        private void Calcute(Node node)
+        private void Calcute(Classer classer)
         {
-            SetSizes(node);
-            double sumOfAllChildsSizes = SumOfChildrenSizes(node);
+            SetSizes(classer);
+            double sumOfAllChildsSizes = SumOfChildrenSizes(classer);
             if (sumOfAllChildsSizes == 0)
             {
-                node.externallRadius = node.internallRadius;
+                classer.ExternallRadius = classer.InternallRadius;
                 return;
             }
             var angleShareOfEachVertex = new Dictionary<Vertex, double>();
-            double maxExternallRadius = node.internallRadius;
-            foreach (var vertex in node.AdjacentNodesWithConnectiongThisVertex.Keys)
+            double maxExternallRadius = classer.InternallRadius;
+            foreach (var vertex in classer.AdjacentClassersWithConnectiongThisVertex.Keys)
             {
-                angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex, node);
+                angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex, classer);
             }
             double allUsedAngle = 0;
             foreach (var vertex in angleShareOfEachVertex.Keys)
@@ -36,90 +36,90 @@ namespace BCCCompact.Models
                 double allVertexAngel = (angleShareOfEachVertex[vertex] / sumOfAllChildsSizes) * Math.PI * 2;
                 allVertexAngel = Math.Min(Math.PI, allVertexAngel);
                 allUsedAngle += allVertexAngel;
-                foreach (var child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
+                foreach (var child in classer.AdjacentClassersWithConnectiongThisVertex[vertex])
                 {
-                    if (child == node.Parent)
+                    if (child == classer.Parent)
                     {
                         continue;
                     }
-                    double angel = (child.externallRadius / angleShareOfEachVertex[vertex]) * allVertexAngel;
+                    double angel = (child.ExternallRadius / angleShareOfEachVertex[vertex]) * allVertexAngel;
                     if (angel != 0)
                     {
                         child.AngleShareFromParentCenter = angel;
                         angel /= 2;
-                        double minDistanceToCenter = Math.Abs(child.externallRadius / Math.Sin(angel));
-                        if (minDistanceToCenter < child.externallRadius + node.internallRadius)
+                        double minDistanceToCenter = Math.Abs(child.ExternallRadius / Math.Sin(angel));
+                        if (minDistanceToCenter < child.ExternallRadius + classer.InternallRadius)
                         {
-                            minDistanceToCenter = child.externallRadius + node.internallRadius;
+                            minDistanceToCenter = child.ExternallRadius + classer.InternallRadius;
                         }
-                        if (maxExternallRadius < minDistanceToCenter + child.externallRadius)
+                        if (maxExternallRadius < minDistanceToCenter + child.ExternallRadius)
                         {
-                            maxExternallRadius = minDistanceToCenter + child.externallRadius;
+                            maxExternallRadius = minDistanceToCenter + child.ExternallRadius;
                         }
                         child.EdgeToParentLenght = minDistanceToCenter;
                     }
                 }
             }
-            node.FreeAngleAround = (Math.PI * 2) - allUsedAngle;
-            node.externallRadius = maxExternallRadius;
-            if (node.Vertices.Count == 1 && node.Children.Count == 1)
+            classer.FreeAngleAround = (Math.PI * 2) - allUsedAngle;
+            classer.ExternallRadius = maxExternallRadius;
+            if (classer.Vertices.Count == 1 && classer.Children.Count == 1)
             {
-                node.externallRadius /= 2;
+                classer.ExternallRadius /= 2;
             }
         }
 
 
-        public double GetSumOfChildrenSizes(Vertex vertex, Node node)
+        public double GetSumOfChildrenSizes(Vertex vertex, Classer classer)
         {
             double sumOfSize = 0;
 
-            foreach (var child in node.AdjacentNodesWithConnectiongThisVertex[vertex])
+            foreach (var child in classer.AdjacentClassersWithConnectiongThisVertex[vertex])
             {
-                if (child == node.Parent)
+                if (child == classer.Parent)
                 {
                     continue;
                 }
-                sumOfSize += child.externallRadius;
+                sumOfSize += child.ExternallRadius;
             }
             return sumOfSize;
         }
 
 
-        private void SetSizes(Node node)
+        private void SetSizes(Classer classer)
         {
-            SetInternallRadius(node);
-            foreach (var child in node.Children)
+            SetInternallRadius(classer);
+            foreach (var child in classer.Children)
             {
                 Calcute(child);
             }
         }
 
-        public double SumOfChildrenSizes(Node node)
+        public double SumOfChildrenSizes(Classer classer)
         {
             double sum = 0;
 
-            foreach (var child in node.Children)
+            foreach (var child in classer.Children)
             {
-                if (child.externallRadius == 0)
+                if (child.ExternallRadius == 0)
                 {
                     Calcute(child);
                 }
-                sum += child.externallRadius;
+                sum += child.ExternallRadius;
             }
             return sum;
         }
 
-        private void SetInternallRadius(Node node)
+        private void SetInternallRadius(Classer classer)
         {
-            if (node.Vertices.Count == 1)
+            if (classer.Vertices.Count == 1)
             {
-                node.internallRadius = firstInternallRadius;
+                classer.InternallRadius = firstInternallRadius;
             }
             else
             {
-                node.internallRadius = node.Vertices.Count * firstInternallRadius;
+                classer.InternallRadius = classer.Vertices.Count * firstInternallRadius;
             }
-            node.externallRadius = node.internallRadius;
+            classer.ExternallRadius = classer.InternallRadius;
         }
 
     }

@@ -7,55 +7,55 @@ namespace BCCCompact.Models
     {
         private readonly double bounderMLT = 0.7;
 
-        public void CalcuteNodeLocations(Component component)
+        public void CalcuteClasserLocations(Component component)
         {
-            var fatherNode = component.LargestNode;
-            CalcuteNodes(fatherNode);
+            var fatherClasser = component.LargestClasser;
+            CalcuteClassers(fatherClasser);
         }
 
-        private void CalcuteNodes(Node currentNode)
+        private void CalcuteClassers(Classer currentClasser)
         {
-            foreach (var child in currentNode.Children)
+            foreach (var child in currentClasser.Children)
             {
-                child.XCenter = currentNode.XCenter + child.EdgeToParentLenght * Math.Sin(child.AngleToConnectToParent);
-                child.YCenter = currentNode.YCenter + child.EdgeToParentLenght * Math.Cos(child.AngleToConnectToParent);
-                CalcuteNodes(child);
+                child.XCenter = currentClasser.XCenter + child.EdgeToParentLenght * Math.Sin(child.AngleToConnectToParent);
+                child.YCenter = currentClasser.YCenter + child.EdgeToParentLenght * Math.Cos(child.AngleToConnectToParent);
+                CalcuteClassers(child);
             }
         }
 
         public void CalcuteVerticseLocation(Component component)
         {
-            CalcuteVertices(component.LargestNode);
+            CalcuteVertices(component.LargestClasser);
         }
-        private void CalcuteVertices(Node currentNode)
+        private void CalcuteVertices(Classer currentClasser)
         {
-            var vertex_angle = currentNode.AnglesOfInnerVertices;
+            var vertex_angle = currentClasser.AnglesOfInnerVertices;
 
             if (vertex_angle.Count == 1)
             {
-                SetOwnVertexLocation(currentNode);
+                SetOwnVertexLocation(currentClasser);
             }
             else
             {
                 foreach (var vertex in vertex_angle.Keys)
                 {
                     double angle = vertex_angle[vertex];
-                    double x = currentNode.XCenter + currentNode.internallRadius * Math.Sin(angle) * bounderMLT;
-                    double y = currentNode.YCenter + currentNode.internallRadius * Math.Cos(angle) * bounderMLT;
+                    double x = currentClasser.XCenter + currentClasser.InternallRadius * Math.Sin(angle) * bounderMLT;
+                    double y = currentClasser.YCenter + currentClasser.InternallRadius * Math.Cos(angle) * bounderMLT;
                     vertex.SetLocation(x, y);
                 }
             }
-            foreach (var child in currentNode.Children)
+            foreach (var child in currentClasser.Children)
             {
                 CalcuteVertices(child);
             }
         }
 
-        private void SetOwnVertexLocation(Node currentNode)
+        private void SetOwnVertexLocation(Classer currentClasser)
         {
-            var vertex = currentNode.AnglesOfInnerVertices.Keys.ToList().First();
-            double x = currentNode.XCenter;
-            double y = currentNode.YCenter;
+            var vertex = currentClasser.AnglesOfInnerVertices.Keys.ToList().First();
+            double x = currentClasser.XCenter;
+            double y = currentClasser.YCenter;
             vertex.SetLocation(x, y);
         }
     }

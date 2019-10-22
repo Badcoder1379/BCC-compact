@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
-    public class Node
+    public class Classer
     {
         public HashSet<Vertex> Vertices = new HashSet<Vertex>();
-        public Dictionary<Vertex, HashSet<Node>> AdjacentNodesWithConnectiongThisVertex = new Dictionary<Vertex, HashSet<Node>>();
+        public Dictionary<Vertex, HashSet<Classer>> AdjacentClassersWithConnectiongThisVertex = new Dictionary<Vertex, HashSet<Classer>>();
         public Dictionary<Vertex, double> AnglesOfInnerVertices = new Dictionary<Vertex, double>();
-        public HashSet<Node> Children = new HashSet<Node>();
-        public Node Parent;
+        public HashSet<Classer> Children = new HashSet<Classer>();
+        public Classer Parent;
         public double XCenter;
         public double YCenter;
-        public double internallRadius;
-        public double externallRadius;
+        public double InternallRadius;
+        public double ExternallRadius;
         public double EdgeToParentLenght;
         public double AngleShareFromParentCenter;
         public Vertex VertexConnectorToParent;
@@ -21,14 +21,14 @@ namespace BCCCompact.Models
         public double FreeAngleAround;
 
 
-        public void AddAdjacenty(Vertex vertex, Node node)
+        public void AddAdjacenty(Vertex vertex, Classer classer)
         {
-            if (!AdjacentNodesWithConnectiongThisVertex.ContainsKey(vertex))
+            if (!AdjacentClassersWithConnectiongThisVertex.ContainsKey(vertex))
             {
-                AdjacentNodesWithConnectiongThisVertex[vertex] = new HashSet<Node>();
+                AdjacentClassersWithConnectiongThisVertex[vertex] = new HashSet<Classer>();
             }
 
-            AdjacentNodesWithConnectiongThisVertex[vertex].Add(node);
+            AdjacentClassersWithConnectiongThisVertex[vertex].Add(classer);
         }
 
         public void PickVertexByAngle(Vertex vertex, double angle)
@@ -38,7 +38,7 @@ namespace BCCCompact.Models
                 angle -= 2 * Math.PI;
             }
             AnglesOfInnerVertices[vertex] = angle;
-            vertex.angleInNode = angle;
+            vertex.angleInClasser = angle;
         }
     }
 }

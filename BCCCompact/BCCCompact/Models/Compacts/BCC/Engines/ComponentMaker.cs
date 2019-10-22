@@ -5,17 +5,15 @@ namespace BCCCompact.Models
 {
     public class ComponentMaker
     {
-        readonly Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>> VerticesToUtil = new Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>>();
-        HashSet<Component> Components = new HashSet<Component>();
-        Dictionary<Vertex, bool> VisitedVertices;
-
-
+        private readonly Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>> verticesToUtil = new Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>>();
+        private Dictionary<Vertex, bool> visitedVertices;
+        public readonly HashSet<Component> Components = new HashSet<Component>();
         private void SetGraph(Graph graph)
         {
-            VisitedVertices = new Dictionary<Vertex, bool>();
+            visitedVertices = new Dictionary<Vertex, bool>();
             foreach (Vertex vertex in graph.Vertices)
             {
-                VisitedVertices[vertex] = false;
+                visitedVertices[vertex] = false;
             }
         }
 
@@ -24,26 +22,20 @@ namespace BCCCompact.Models
             SetGraph(graph);
             foreach (Vertex vertex in graph.Vertices)
             {
-                if (!VisitedVertices[vertex])
+                if (!visitedVertices[vertex])
                 {
                     var component = new Component();
                     Components.Add(component);
-                    var firstData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(vertex, VisitedVertices, component);
-                    VerticesToUtil.Push(firstData);
-                    while (VerticesToUtil.Count > 0)
+                    var firstData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(vertex, visitedVertices, component);
+                    verticesToUtil.Push(firstData);
+                    while (verticesToUtil.Count > 0)
                     {
-                        IterateOnVertices(VerticesToUtil.Pop());
+                        IterateOnVertices(verticesToUtil.Pop());
                     }
                 }
             }
         }
 
-
-
-        public HashSet<Component> MakeComponents()
-        {
-            return Components;
-        }
 
         private void IterateOnVertices(Tuple<Vertex, Dictionary<Vertex, bool>, Component> functionData)
         {
@@ -58,7 +50,7 @@ namespace BCCCompact.Models
                 if (!visited[adjacent])
                 {
                     var newData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(adjacent, visited, component);
-                    VerticesToUtil.Push(newData);
+                    verticesToUtil.Push(newData);
                 }
             }
         }

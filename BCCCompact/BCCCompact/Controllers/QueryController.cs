@@ -1,5 +1,6 @@
 ﻿using BCCCompact.Models;
 using BCCCompact.Models.Compacts;
+using BCCCompact.Models.Compacts.MMD;
 using System.IO;
 using System.Web.Mvc;
 

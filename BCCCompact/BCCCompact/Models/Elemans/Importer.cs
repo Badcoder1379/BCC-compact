@@ -9,7 +9,7 @@ namespace BCCCompact.Models
     {
         public static string SRCAddress = @"D:\Projects\Compact\Files\";
         private string FileName { get; set; }
-        private Dictionary<string, int> StrToId;
+        private Dictionary<string, int> VerticesNameToID;
         public Importer(string fileName)
         {
             this.FileName = fileName;
@@ -17,7 +17,7 @@ namespace BCCCompact.Models
 
         public Graph Import()
         {
-            StrToId = new Dictionary<string, int>();
+            VerticesNameToID = new Dictionary<string, int>();
             var lastNumberUsed = 0;
             string path = SRCAddress + FileName;
 
@@ -44,22 +44,22 @@ namespace BCCCompact.Models
                     continue;
                 }
 
-                if (!StrToId.ContainsKey(parts[0]))
+                if (!VerticesNameToID.ContainsKey(parts[0]))
                 {
-                    StrToId[parts[0]] = lastNumberUsed++;
+                    VerticesNameToID[parts[0]] = lastNumberUsed++;
                 }
 
-                if (!StrToId.ContainsKey(parts[1]))
+                if (!VerticesNameToID.ContainsKey(parts[1]))
                 {
-                    StrToId[parts[1]] = lastNumberUsed++;
+                    VerticesNameToID[parts[1]] = lastNumberUsed++;
                 }
 
-                var u = StrToId[parts[0]];
-                var v = StrToId[parts[1]];
+                var u = VerticesNameToID[parts[0]];
+                var v = VerticesNameToID[parts[1]];
 
                 edges.Add(new Edge(u, v));
             }
-            var V = StrToId.Count();
+            var V = VerticesNameToID.Count();
             var graph = new Graph(V, edges);
             return graph;
         }

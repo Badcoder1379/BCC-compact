@@ -10,9 +10,9 @@ namespace BCCCompact.Models
         private Dictionary<Vertex, int> disc;
         private Dictionary<Vertex, int> low;
         private Dictionary<Vertex, Vertex> parent;
-        static int count = 0;
-        private readonly Dictionary<int, int> NodeIdOfVertex = new Dictionary<int, int>();
-        private LinkedList<Edge> st;
+        private static int count = 0;
+        private readonly Dictionary<int, int> classerIdOfVertex = new Dictionary<int, int>();
+        private LinkedList<Edge> stackOfEdges;
         Path path;
         int time;
 
@@ -35,7 +35,7 @@ namespace BCCCompact.Models
         private void NodingFromThisVertex(Vertex startingVertex)
         {
             count = 0;
-            st = new LinkedList<Edge>();
+            stackOfEdges = new LinkedList<Edge>();
             path = new Path();
             disc[startingVertex] = low[startingVertex] = ++time;
             path.Push(startingVertex);
@@ -45,12 +45,12 @@ namespace BCCCompact.Models
                 IterateOnGraph();
             }
 
-            while (st.Count > 0)
+            while (stackOfEdges.Count > 0)
             {
-                var edge = st.Last();
-                NodeIdOfVertex[edge.A] = count;
-                NodeIdOfVertex[edge.B] = count;
-                st.RemoveLast();
+                var edge = stackOfEdges.Last();
+                classerIdOfVertex[edge.A] = count;
+                classerIdOfVertex[edge.B] = count;
+                stackOfEdges.RemoveLast();
             }
         }
 
@@ -60,9 +60,9 @@ namespace BCCCompact.Models
             int i = 0;
             foreach (Vertex vertex in component.Vertices)
             {
-                if (NodeIdOfVertex.ContainsKey(vertex.Id))
+                if (classerIdOfVertex.ContainsKey(vertex.Id))
                 {
-                    result[vertex] = NodeIdOfVertex[vertex.Id];
+                    result[vertex] = classerIdOfVertex[vertex.Id];
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace BCCCompact.Models
                 {
                     path.ChildrenUp();
                     parent[v] = u;
-                    st.AddLast(new Edge(u.Id, v.Id));
+                    stackOfEdges.AddLast(new Edge(u.Id, v.Id));
                     disc[v] = low[v] = ++time;
                     path.Push(v);
                     return;
@@ -93,7 +93,7 @@ namespace BCCCompact.Models
                     if (low[u] > disc[v])
                         low[u] = disc[v];
 
-                    st.AddLast(new Edge(u.Id, v.Id));
+                    stackOfEdges.AddLast(new Edge(u.Id, v.Id));
                 }
             }
 
@@ -107,17 +107,17 @@ namespace BCCCompact.Models
 
                 if ((disc[u] == 1 && path.Children() > 1) || (disc[u] > 1 && low[adjacent] >= disc[u]))
                 {
-                    while (st.Last().A != u.Id || st.Last().B != adjacent.Id)
+                    while (stackOfEdges.Last().A != u.Id || stackOfEdges.Last().B != adjacent.Id)
                     {
-                        var e = st.Last();
-                        NodeIdOfVertex[e.A] = count;
-                        NodeIdOfVertex[e.B] = count;
-                        st.RemoveLast();
+                        var e = stackOfEdges.Last();
+                        classerIdOfVertex[e.A] = count;
+                        classerIdOfVertex[e.B] = count;
+                        stackOfEdges.RemoveLast();
                     }
-                    var edge = st.Last();
-                    NodeIdOfVertex[edge.A] = count;
-                    NodeIdOfVertex[edge.B] = count;
-                    st.RemoveLast();
+                    var edge = stackOfEdges.Last();
+                    classerIdOfVertex[edge.A] = count;
+                    classerIdOfVertex[edge.B] = count;
+                    stackOfEdges.RemoveLast();
 
                     count++;
                 }

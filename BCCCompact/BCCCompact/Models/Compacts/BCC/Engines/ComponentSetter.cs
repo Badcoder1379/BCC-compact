@@ -10,20 +10,20 @@ namespace BCCCompact.Models
         {
             var largest = GetLargestComponent(components);
             double sumOfSizes = GetSumOfSizes(components);
-            sumOfSizes -= largest.LargestNode.externallRadius;
+            sumOfSizes -= largest.LargestClasser.ExternallRadius;
 
             double angleCounter = 0;
             foreach (var child in components)
             {
                 if (child == largest) continue;
-                double angle = Math.PI * 2 * (child.LargestNode.externallRadius / sumOfSizes);
+                double angle = Math.PI * 2 * (child.LargestClasser.ExternallRadius / sumOfSizes);
                 angle = Math.Min(angle, Math.PI / 2);
                 angle /= 2;
                 angleCounter += angle;
-                double lenght = child.LargestNode.externallRadius / Math.Sin(angle / 2);
-                lenght = Math.Max(lenght, largest.LargestNode.externallRadius + child.LargestNode.externallRadius);
-                child.LargestNode.XCenter = lenght * Math.Sin(angleCounter);
-                child.LargestNode.YCenter = lenght * Math.Cos(angleCounter);
+                double lenght = child.LargestClasser.ExternallRadius / Math.Sin(angle / 2);
+                lenght = Math.Max(lenght, largest.LargestClasser.ExternallRadius + child.LargestClasser.ExternallRadius);
+                child.LargestClasser.XCenter = lenght * Math.Sin(angleCounter);
+                child.LargestClasser.YCenter = lenght * Math.Cos(angleCounter);
                 angleCounter += angle;
             }
         }
@@ -33,7 +33,7 @@ namespace BCCCompact.Models
             double sumOfSizes = 0;
             foreach (var component in components)
             {
-                sumOfSizes += component.LargestNode.externallRadius;
+                sumOfSizes += component.LargestClasser.ExternallRadius;
             }
             return sumOfSizes;
         }
@@ -41,10 +41,10 @@ namespace BCCCompact.Models
         private Component GetLargestComponent(HashSet<Component> components)
         {
             var largest = new Component();
-            largest.LargestNode = new Node();
+            largest.LargestClasser = new Classer();
             foreach (var component in components)
             {
-                if (component.LargestNode.externallRadius > largest.LargestNode.externallRadius)
+                if (component.LargestClasser.ExternallRadius > largest.LargestClasser.ExternallRadius)
                 {
                     largest = component;
                 }

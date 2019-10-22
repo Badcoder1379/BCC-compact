@@ -11,8 +11,8 @@ namespace BCCCompact.Models
         public double Y;
         public string Name;
         public int Type;
-        public double angleInNode;
-        public Node node;
+        public double angleInClasser;
+        public Classer Classer;
 
         public Vertex(int Id)
         {
@@ -37,13 +37,13 @@ namespace BCCCompact.Models
 
         public int CompareTo(Vertex other)
         {
-            double dif = angleInNode - other.angleInNode;
+            double dif = angleInClasser - other.angleInClasser;
             return (int)(100000 * dif);
         }
 
-        public void SetNode(Node node)
+        public void SetClasser(Classer classer)
         {
-            this.node = node;
+            this.Classer = classer;
         }
     }
 }

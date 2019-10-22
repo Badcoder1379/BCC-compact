@@ -6,86 +6,86 @@ namespace BCCCompact.Models
 {
     public class AroundCirclePicker
     {
-        public void PickNodes(Node fatherNode)
+        public void PickClassers(Classer fatherClasser)
         {
-            Pick(fatherNode);
+            Pick(fatherClasser);
         }
 
-        private void Pick(Node currentNode)
+        private void Pick(Classer currentClasser)
         {
-            PickVerticesAroundCircle(currentNode);
+            PickVerticesAroundCircle(currentClasser);
 
-            foreach (Node child in currentNode.Children)
+            foreach (Classer child in currentClasser.Children)
             {
                 Pick(child);
             }
         }
 
-        private LinkedList<Vertex> GetAdjacentyVerticesList(Node currentNode)
+        private LinkedList<Vertex> GetAdjacentyVerticesList(Classer currentClasser)
         {
-            var adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
+            var adjacenty = currentClasser.AdjacentClassersWithConnectiongThisVertex;
             var VerticesList = new LinkedList<Vertex>(adjacenty.Keys);
 
-            if (currentNode.Parent != null)
+            if (currentClasser.Parent != null)
             {
-                VerticesList.Remove(currentNode.VertexConnectorToParent);
-                VerticesList.AddFirst(currentNode.VertexConnectorToParent);
+                VerticesList.Remove(currentClasser.VertexConnectorToParent);
+                VerticesList.AddFirst(currentClasser.VertexConnectorToParent);
             }
 
             return VerticesList;
         }
 
-        public void PickVerticesAroundCircle(Node currentNode)
+        public void PickVerticesAroundCircle(Classer currentClasser)
         {
-            var otherVertices = new HashSet<Vertex>(currentNode.Vertices);
-            var adjacenty = currentNode.AdjacentNodesWithConnectiongThisVertex;
-            var VerticesList = GetAdjacentyVerticesList(currentNode);
+            var otherVertices = new HashSet<Vertex>(currentClasser.Vertices);
+            var adjacenty = currentClasser.AdjacentClassersWithConnectiongThisVertex;
+            var VerticesList = GetAdjacentyVerticesList(currentClasser);
 
-            if(currentNode.Children.Count == 1 && currentNode.Vertices.Count == 1)
+            if(currentClasser.Children.Count == 1 && currentClasser.Vertices.Count == 1)
             {
-                var child = currentNode.Children.ToList().First();
-                child.AngleToConnectToParent = currentNode.AngleToConnectToParent;
+                var child = currentClasser.Children.ToList().First();
+                child.AngleToConnectToParent = currentClasser.AngleToConnectToParent;
             }
             else
             {
-                double angleCounter = Math.PI + currentNode.AngleToConnectToParent;
+                double angleCounter = Math.PI + currentClasser.AngleToConnectToParent;
                 foreach (Vertex vertex in VerticesList)
                 {
-                    var nodes = adjacenty[vertex];
-                    angleCounter += currentNode.FreeAngleAround / (VerticesList.Count + 1);
+                    var classers = adjacenty[vertex];
+                    angleCounter += currentClasser.FreeAngleAround / (VerticesList.Count + 1);
                     double firstAngle = angleCounter;
-                    foreach (Node child in nodes.Where(x => x != currentNode.Parent))
+                    foreach (Classer child in classers.Where(x => x != currentClasser.Parent))
                     {
                         double shareAngle = child.AngleShareFromParentCenter;
                         angleCounter += shareAngle / 2;
                         child.AngleToConnectToParent = angleCounter;
                         angleCounter += shareAngle / 2;
                     }
-                    currentNode.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
+                    currentClasser.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
                     otherVertices.Remove(vertex);
                 }
             }
 
             
-            SetSomeVerticesAroundANode(currentNode, otherVertices.ToList());
-            Arrange(currentNode);
+            SetSomeVerticesAroundAClasser(currentClasser, otherVertices.ToList());
+            Arrange(currentClasser);
         }
 
-        private void Arrange(Node currentNode)
+        private void Arrange(Classer currentClasser)
         {
-            var verticesList = new List<Vertex>(currentNode.AnglesOfInnerVertices.Keys);
+            var verticesList = new List<Vertex>(currentClasser.AnglesOfInnerVertices.Keys);
             verticesList.Sort();
 
-            SetSomeVerticesAroundANode(currentNode, verticesList);
+            SetSomeVerticesAroundAClasser(currentClasser, verticesList);
         }
 
-        private void SetSomeVerticesAroundANode(Node node, List<Vertex> vertices)
+        private void SetSomeVerticesAroundAClasser(Classer classer, List<Vertex> vertices)
         {
             var count = vertices.Count;
             var i = 0;
             foreach (Vertex vertex in vertices)
             {
-                node.PickVertexByAngle(vertex, Math.PI * 2 * i / count);
+                classer.PickVertexByAngle(vertex, Math.PI * 2 * i / count);
                 i++;
             }
         }

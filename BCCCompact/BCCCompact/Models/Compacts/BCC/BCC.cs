@@ -9,19 +9,19 @@ namespace BCCCompact.Models
         {
             var componentMaker = new ComponentMaker();
             componentMaker.Process(graph);
-            var components = componentMaker.MakeComponents();
-            var nodeMaker = new NodeMaker();
+            var components = componentMaker.Components;
+            var classerMaker = new ClasserMaker();
             var sizeCalcuter = new SizeCalculater();
-            var nodeTreeMaker = new NodeTreeMaker();
+            var classerTreeMaker = new ClasserTreeMaker();
             var picker = new AroundCirclePicker();
 
             foreach (var component in components)
             {
-                nodeMaker.Process(component);
-                nodeTreeMaker.Process(component);
+                classerMaker.Process(component);
+                classerTreeMaker.Process(component);
                 sizeCalcuter.Process(component);
-                picker.PickNodes(component.LargestNode);
-                picker.PickVerticesAroundCircle(component.LargestNode);
+                picker.PickClassers(component.LargestClasser);
+                picker.PickVerticesAroundCircle(component.LargestClasser);
             }
 
             var componentSetter = new ComponentSetter();
@@ -31,7 +31,7 @@ namespace BCCCompact.Models
 
             foreach (var component in components)
             {
-                locationCalcuter.CalcuteNodeLocations(component);
+                locationCalcuter.CalcuteClasserLocations(component);
                 locationCalcuter.CalcuteVerticseLocation(component);
             }
         }
