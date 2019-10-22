@@ -11,7 +11,7 @@ namespace BCCCompact.Models
         private Dictionary<Vertex, int> low;
         private Dictionary<Vertex, Vertex> parent;
         private static int count = 0;
-        private readonly Dictionary<int, int> classerIdOfVertex = new Dictionary<int, int>();
+        private Dictionary<int, int> classerIdOfVertex;
         private LinkedList<Edge> stackOfEdges;
         private Path path;
         private int time;
@@ -22,6 +22,7 @@ namespace BCCCompact.Models
             disc = new Dictionary<Vertex, int>();
             low = new Dictionary<Vertex, int>();
             parent = new Dictionary<Vertex, Vertex>();
+            classerIdOfVertex = new Dictionary<int, int>();
             foreach (var vertex in component.Vertices)
             {
                 disc[vertex] = -1;
