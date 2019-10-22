@@ -1,14 +1,30 @@
 ﻿using BCCCompact.Models.Compacts;
+using BCCCompact.Models.Elemans.Star;
 
 namespace BCCCompact.Models
 {
-    public class BCC : Compact
+    public class BCC
     {
+
+        private readonly Graph graph;
+
+        public BCC(Graph graph)
+        {
+            this.graph = graph;
+        }
+
+        public BCC(StarGraph starGraph)
+        {
+            graph = new Graph(starGraph.Edges, starGraph.Nodes);
+        }
+
+
+
         /// <summary>
         /// this method give the gragh and set the vertices locations
         /// </summary>
         /// <param name="graph"></param>
-        public override void Process(Graph graph)
+        public  void Process()
         {
             var componentMaker = new ComponentMaker(graph);
             componentMaker.Process();
@@ -28,8 +44,7 @@ namespace BCCCompact.Models
             {
                 new LocationCalculater(component).Calcute();
             }
+            graph.ConstructResults();
         }
-
-
     }
 }

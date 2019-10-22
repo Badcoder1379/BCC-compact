@@ -147,6 +147,7 @@
     <Compile Include="Models\Compacts\BCC\PreProcess\Classering\ClasserMaker.cs" />
     <Compile Include="Models\Compacts\BCC\PreProcess\ClasserTreeMaker.cs" />
     <Compile Include="Models\Compacts\BCC\Engines\SizeCalculater.cs" />
+    <Compile Include="Models\Elemans\StarGraph.cs" />
     <Compile Include="Models\Elemans\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

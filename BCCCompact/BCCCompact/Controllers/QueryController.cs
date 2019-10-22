@@ -21,7 +21,7 @@ namespace BCCCompact.Controllers
             catch {
                 return null;
             }
-            var result = CompactGraph(graph, new BCC());
+            var result = CompactGraph(graph);
 
             return Json(result);
         }
@@ -35,13 +35,13 @@ namespace BCCCompact.Controllers
             string fileName = str[2];
 
             var graph = Graph.GetRandomGraph(V, E, fileName);
-            var result = CompactGraph(graph, new BCC());
+            var result = CompactGraph(graph);
             return Json(result);
         }
 
-        private CompactResult CompactGraph(Graph graph, Compact compact)
+        private CompactResult CompactGraph(Graph graph)
         {
-            compact.Process(graph);
+            new BCC(graph).Process();
             var result = graph.GetResult();
             return result;
         }

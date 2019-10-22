@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCCCompact.Models.Elemans.Star;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -7,15 +8,15 @@ namespace BCCCompact.Models
     public class Graph
     {
         public int V;
-        public Vertex[] Vertices;
-
+        public List<Vertex> Vertices = new List<Vertex>();
+        private readonly Dictionary<Guid, Vertex> guidToVertex = new Dictionary<Guid, Vertex>();
+        private readonly List<StarNode> nodes;
         public Graph(int v, HashSet<Edge> edges)
         {
             V = v;
-            Vertices = new Vertex[V];
             for (int i = 0; i < V; i++)
             {
-                Vertices[i] = new Vertex(i);
+                Vertices.Add(new Vertex(i));
             }
             foreach (Edge edge in edges)
             {
@@ -24,10 +25,56 @@ namespace BCCCompact.Models
             }
         }
 
+        public Graph(List<StarEdge> edges,List<StarNode> nodes)
+        {
+            this.nodes = nodes;
+            foreach(var node in nodes)
+            {
+                AddVertex(node.NodeId);
+            }
+            foreach (var edge in edges)
+            {
+                var guid1 = edge.FromNode;
+                var guid2 = edge.ToNode;
+                guidToVertex[guid2].AddAdjacent(guidToVertex[guid1]);
+                guidToVertex[guid1].AddAdjacent(guidToVertex[guid2]);
+            }
+        }
+
+        public void AddVertex(Guid guid)
+        {
+            if (!guidToVertex.ContainsKey(guid))
+            {
+                int lastID = Vertices.Count;
+                var vertex = new Vertex(lastID);
+                Vertices.Add(vertex);
+                guidToVertex[guid] = vertex;
+            }
+        }
+
+        public void ConstructResults()
+        {
+            //removable
+            if (nodes == null) return;
+            //removable
+
+
+            foreach(var node in nodes)
+            {
+                var guid = node.NodeId;
+                Vertex vertex = guidToVertex[guid];
+                node.X = vertex.X;
+                node.Y = vertex.Y;
+            }
+        }
+        
+
+
         public void AddEdge(int v, int w)
         {
             Vertices[v].AddAdjacent(Vertices[w]);
         }
+
 
         public CompactResult GetResult()
         {

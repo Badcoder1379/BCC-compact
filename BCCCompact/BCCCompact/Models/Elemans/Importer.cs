@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCCCompact.Models.Elemans.Star;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -63,5 +64,7 @@ namespace BCCCompact.Models
             var graph = new Graph(V, edges);
             return graph;
         }
+
+        
     }
 }
