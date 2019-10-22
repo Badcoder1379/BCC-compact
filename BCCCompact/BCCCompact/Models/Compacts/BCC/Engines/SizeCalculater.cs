@@ -5,8 +5,15 @@ namespace BCCCompact.Models
 {
     class SizeCalculater
     {
-        private Classer largestClasser;
+        private readonly Classer largestClasser;
         private readonly double firstInternallRadius = 30;
+
+        public SizeCalculater(Component component)
+        {
+            this.largestClasser = component.LargestClasser;
+        }
+
+
 
         /// <summary>
         /// calcutes internul and externul radius of each classer and will be approves speciallAngle of each classer(angle that each classer will used from his parent)
@@ -14,9 +21,8 @@ namespace BCCCompact.Models
         /// now classers are ready to sort and pick around circle
         /// </summary>
         /// <param name="component"></param>
-        public void Process(Component component)
+        public void Process()
         {
-            largestClasser = component.LargestClasser;
             Calcute(largestClasser);
         }
 

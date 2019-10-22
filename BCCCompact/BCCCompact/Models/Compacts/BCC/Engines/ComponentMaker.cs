@@ -6,11 +6,13 @@ namespace BCCCompact.Models
     public class ComponentMaker
     {
         private readonly Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>> verticesToUtil = new Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>>();
-        private Dictionary<Vertex, bool> visitedVertices;
+        private readonly Dictionary<Vertex, bool> visitedVertices = new Dictionary<Vertex, bool>();
         public readonly HashSet<Component> Components = new HashSet<Component>();
-        private void SetGraph(Graph graph)
+        private readonly Graph graph;
+
+        public ComponentMaker(Graph graph)
         {
-            visitedVertices = new Dictionary<Vertex, bool>();
+            this.graph = graph;
             foreach (Vertex vertex in graph.Vertices)
             {
                 visitedVertices[vertex] = false;
@@ -21,9 +23,8 @@ namespace BCCCompact.Models
         /// constructs components from the graph
         /// </summary>
         /// <param name="graph"></param>
-        public void Process(Graph graph)
+        public void Process()
         {
-            SetGraph(graph);
             foreach (Vertex vertex in graph.Vertices)
             {
                 if (!visitedVertices[vertex])

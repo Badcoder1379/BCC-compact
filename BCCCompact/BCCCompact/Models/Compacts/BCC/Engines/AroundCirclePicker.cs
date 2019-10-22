@@ -6,16 +6,19 @@ namespace BCCCompact.Models
 {
     public class AroundCirclePicker
     {
+        private readonly Classer largestClasser;
+
+
+        public AroundCirclePicker(Component component) => this.largestClasser = component.LargestClasser;
+
         /// <summary>
         /// now for each classer we know size and radius and used angle and length and ... 
         /// this method will pick children of each parent classer around his and vertices of each classer too
         /// </summary>
-        /// <param name="fatherClasser"></param>
-        public void PickClassers(Classer fatherClasser)
-        {
-            Pick(fatherClasser);
-        }
+        /// <param name="component"></param>
+        public void PickClassers() => Pick(largestClasser);
 
+        
         private void Pick(Classer currentClasser)
         {
             PickVerticesAroundCircle(currentClasser);
@@ -46,7 +49,7 @@ namespace BCCCompact.Models
             var adjacenty = currentClasser.AdjacentClassersWithConnectiongThisVertex;
             var VerticesList = GetAdjacentyVerticesList(currentClasser);
 
-            if(currentClasser.Children.Count == 1 && currentClasser.Vertices.Count == 1)
+            if (currentClasser.Children.Count == 1 && currentClasser.Vertices.Count == 1)
             {
                 var child = currentClasser.Children.ToList().First();
                 child.AngleToConnectToParent = currentClasser.AngleToConnectToParent;
@@ -71,7 +74,7 @@ namespace BCCCompact.Models
                 }
             }
 
-            
+
             SetSomeVerticesAroundAClasser(currentClasser, otherVertices.ToList());
             Arrange(currentClasser);
         }

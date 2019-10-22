@@ -7,17 +7,18 @@ namespace BCCCompact.Models
 {
     public class BccAlgrtm
     {
-        private Dictionary<Vertex, int> disc;
-        private Dictionary<Vertex, int> low;
-        private Dictionary<Vertex, Vertex> parent;
-        private static int count = 0;
-        private Dictionary<int, int> classerIdOfVertex;
-        private LinkedList<Edge> stackOfEdges;
-        private Path path;
-        private int time;
+        private Dictionary<Vertex, int> disc = new Dictionary<Vertex, int>();
+        private Dictionary<Vertex, int> low = new Dictionary<Vertex, int>();
+        private Dictionary<Vertex, Vertex> parent = new Dictionary<Vertex, Vertex>();
+        private int count = 0;
+        private Dictionary<int, int> classerIdOfVertex = new Dictionary<int, int>();
+        private LinkedList<Edge> stackOfEdges = new LinkedList<Edge>();
+        private Path path = new Path();
+        private int time = 0;
 
         public Dictionary<Vertex, int> NodingComponentFromThisVertex(Component component, Vertex startingVertex)
         {
+            count = 0;
             time = 0;
             disc = new Dictionary<Vertex, int>();
             low = new Dictionary<Vertex, int>();

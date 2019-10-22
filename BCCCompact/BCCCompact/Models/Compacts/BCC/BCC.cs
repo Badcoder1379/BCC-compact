@@ -10,31 +10,23 @@ namespace BCCCompact.Models
         /// <param name="graph"></param>
         public override void Process(Graph graph)
         {
-            var componentMaker = new ComponentMaker();
-            componentMaker.Process(graph);
+            var componentMaker = new ComponentMaker(graph);
+            componentMaker.Process();
             var components = componentMaker.Components;
-            var classerMaker = new ClasserMaker();
-            var sizeCalcuter = new SizeCalculater();
-            var classerTreeMaker = new ClasserTreeMaker();
-            var picker = new AroundCirclePicker();
 
             foreach (var component in components)
             {
-                classerMaker.Process(component);
-                classerTreeMaker.Process(component);
-                sizeCalcuter.Process(component);
-                picker.PickClassers(component.LargestClasser);
+                new ClasserMaker(component).Process();
+                new ClasserTreeMaker(component).Process();
+                new SizeCalculater(component).Process();
+                new AroundCirclePicker(component).PickClassers();
             }
 
-            var componentSetter = new ComponentSetter();
-            componentSetter.Set(components);
-
-            var locationCalcuter = new LocationCalculater();
+            new ComponentSetter(components).SetComponents();
 
             foreach (var component in components)
             {
-                locationCalcuter.CalcuteClasserLocations(component);
-                locationCalcuter.CalcuteVerticseLocation(component);
+                new LocationCalculater(component).Calcute();
             }
         }
 

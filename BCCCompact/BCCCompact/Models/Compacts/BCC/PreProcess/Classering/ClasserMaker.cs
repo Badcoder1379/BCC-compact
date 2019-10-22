@@ -5,29 +5,26 @@ namespace BCCCompact.Models
 {
     class ClasserMaker
     {
-        public Component Component { get; set; }
-        public HashSet<Classer> Classers { get; set; }
-        public Classer LargestClasser { get; set; }
-        private Dictionary<Vertex, int> vertexToClasserId;
+        private Component component;
+        private HashSet<Classer> classers = new HashSet<Classer>();
+        private Classer largestClasser;
+        private Dictionary<Vertex, int> vertexToClasserId = new Dictionary<Vertex, int>();
 
-
-        private void SetComponent(Component component)
+        public ClasserMaker(Component component)
         {
-            this.Component = component;
-            Classers = new HashSet<Classer>();
-            vertexToClasserId = new Dictionary<Vertex, int>();
+            this.component = component;
         }
+
 
         /// <summary>
         /// this method gets a component and returns all classers and finds largest classer 
         /// </summary>
         /// <param name="component"></param>
-        public void Process(Component component)
+        public void Process()
         {
-            SetComponent(component);
             ClasserLabelTagging();
             ConstructClassers();
-            component.LargestClasser = LargestClasser;
+            component.LargestClasser = largestClasser;
         }
 
         /// <summary>
@@ -35,22 +32,22 @@ namespace BCCCompact.Models
         /// </summary>
         private void ConstructClassers()
         {
-            LargestClasser = new Classer();
+            largestClasser = new Classer();
             var classerIdToClasser = new Dictionary<int, Classer>();
-            foreach (var vertex in Component.Vertices)
+            foreach (var vertex in component.Vertices)
             {
                 int classerId = vertexToClasserId[vertex];
                 if (!classerIdToClasser.ContainsKey(classerId))
                 {
                     classerIdToClasser[classerId] = new Classer();
-                    Classers.Add(classerIdToClasser[classerId]);
+                    classers.Add(classerIdToClasser[classerId]);
                 }
                 var classer = classerIdToClasser[classerId];
                 classer.Vertices.Add(vertex);
                 vertex.SetClasser(classer);
-                if (classer.Vertices.Count > LargestClasser.Vertices.Count)
+                if (classer.Vertices.Count > largestClasser.Vertices.Count)
                 {
-                    LargestClasser = classer;
+                    largestClasser = classer;
                 }
             }
         }
@@ -60,12 +57,11 @@ namespace BCCCompact.Models
         /// </summary>
         private void ClasserLabelTagging()
         {
-            var bbc = new BccAlgrtm();
-            var ARandomVertex = Component.Vertices.ToList().First();
-            vertexToClasserId = bbc.NodingComponentFromThisVertex(Component, ARandomVertex);
+            var ARandomVertex = component.Vertices.ToList().First();
+            vertexToClasserId = new BccAlgrtm().NodingComponentFromThisVertex(component, ARandomVertex);
             ConstructClassers();
-            var ARandomVertexFromLargestClasser = LargestClasser.Vertices.ToList().First();
-            vertexToClasserId = bbc.NodingComponentFromThisVertex(Component, ARandomVertexFromLargestClasser);
+            var ARandomVertexFromLargestClasser = largestClasser.Vertices.ToList().First();
+            vertexToClasserId = new BccAlgrtm().NodingComponentFromThisVertex(component, ARandomVertexFromLargestClasser);
         }
     }
 }

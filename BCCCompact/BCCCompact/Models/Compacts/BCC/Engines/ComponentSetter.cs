@@ -5,11 +5,17 @@ namespace BCCCompact.Models
 {
     public class ComponentSetter
     {
+        private readonly HashSet<Component> components;
+        public ComponentSetter(HashSet<Component> components)
+        {
+            this.components = components;
+        }
+
         /// <summary>
         /// picks all component around of a circle
         /// </summary>
         /// <param name="components"></param>
-        public void Set(HashSet<Component> components)
+        public void SetComponents()
         {
             var largest = GetLargestComponent(components);
             double sumOfSizes = GetSumOfSizes(components);

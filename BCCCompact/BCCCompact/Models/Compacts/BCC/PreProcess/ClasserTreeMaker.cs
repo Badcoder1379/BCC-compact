@@ -5,22 +5,24 @@ namespace BCCCompact.Models
 {
     class ClasserTreeMaker
     {
-        private Classer FatherClasser;
-        private Stack<Vertex> stackOfVertices;
-        private HashSet<Vertex> visitedVertices;
-        private HashSet<Classer> visitedClassers;
+        private readonly Classer FatherClasser;
+        private readonly Stack<Vertex> stackOfVertices = new Stack<Vertex>();
+        private readonly HashSet<Vertex> visitedVertices = new HashSet<Vertex>();
+        private readonly HashSet<Classer> visitedClassers = new HashSet<Classer>();
+
+        public ClasserTreeMaker(Component component)
+        {
+            FatherClasser = component.LargestClasser;
+        }
+
+
 
         /// <summary>
         /// this method gets a component and returns a tree of classers that each classer has a lot of vertices
         /// </summary>
         /// <param name="component"></param>
-        public void Process(Component component)
+        public void Process()
         {
-            stackOfVertices = new Stack<Vertex>();
-            visitedVertices = new HashSet<Vertex>();
-            visitedClassers = new HashSet<Classer>();
-            var father = component.LargestClasser;
-            this.FatherClasser = father;
             var randomVertex = FatherClasser.Vertices.ToList().First();
             visitedClassers.Add(randomVertex.Classer);
             visitedVertices.Add(randomVertex);
