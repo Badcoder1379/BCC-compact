@@ -17,6 +17,10 @@ namespace BCCCompact.Models
             }
         }
 
+        /// <summary>
+        /// constructs components from the graph
+        /// </summary>
+        /// <param name="graph"></param>
         public void Process(Graph graph)
         {
             SetGraph(graph);

@@ -1,6 +1,5 @@
 ﻿using BCCCompact.Models;
 using BCCCompact.Models.Compacts;
-using BCCCompact.Models.Compacts.MMD;
 using System.IO;
 using System.Web.Mvc;
 
@@ -35,7 +34,7 @@ namespace BCCCompact.Controllers
             int E = int.Parse(str[1]);
             string fileName = str[2];
 
-            var graph = Graph.getRandomGraph(V, E, fileName);
+            var graph = Graph.GetRandomGraph(V, E, fileName);
             var result = CompactGraph(graph, new BCC());
             return Json(result);
         }
@@ -43,7 +42,7 @@ namespace BCCCompact.Controllers
         private CompactResult CompactGraph(Graph graph, Compact compact)
         {
             compact.Process(graph);
-            var result = graph.getResult();
+            var result = graph.GetResult();
             return result;
         }
 

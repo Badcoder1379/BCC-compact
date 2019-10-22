@@ -19,17 +19,17 @@ namespace BCCCompact.Models
             }
             foreach (Edge edge in edges)
             {
-                this.addEdge(edge.A, edge.B);
-                this.addEdge(edge.B, edge.A);
+                this.AddEdge(edge.A, edge.B);
+                this.AddEdge(edge.B, edge.A);
             }
         }
 
-        public void addEdge(int v, int w)
+        public void AddEdge(int v, int w)
         {
             Vertices[v].AddAdjacent(Vertices[w]);
         }
 
-        public CompactResult getResult()
+        public CompactResult GetResult()
         {
             var edges = new HashSet<Edge>();
 
@@ -56,7 +56,7 @@ namespace BCCCompact.Models
             return new CompactResult(edges, locations);
         }
 
-        public static Graph getRandomGraph(int V, int E, string fileName)
+        public static Graph GetRandomGraph(int V, int E, string fileName)
         {
             string path = Importer.SRCAddress + fileName;
             StreamWriter sw;

@@ -7,6 +7,10 @@ namespace BCCCompact.Models
     {
         private readonly double bounderMLT = 0.7;
 
+        /// <summary>
+        /// now we have angles and lengths and its easy to calcute all locations with sin and cos
+        /// </summary>
+        /// <param name="component"></param>
         public void CalcuteClasserLocations(Component component)
         {
             var fatherClasser = component.LargestClasser;
@@ -23,6 +27,10 @@ namespace BCCCompact.Models
             }
         }
 
+        /// <summary>
+        /// now we have angles and lengths and its easy to calcute location with sin and cos
+        /// </summary>
+        /// <param name="component"></param>
         public void CalcuteVerticseLocation(Component component)
         {
             CalcuteVertices(component.LargestClasser);

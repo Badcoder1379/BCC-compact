@@ -6,6 +6,11 @@ namespace BCCCompact.Models
 {
     public class AroundCirclePicker
     {
+        /// <summary>
+        /// now for each classer we know size and radius and used angle and length and ... 
+        /// this method will pick children of each parent classer around his and vertices of each classer too
+        /// </summary>
+        /// <param name="fatherClasser"></param>
         public void PickClassers(Classer fatherClasser)
         {
             Pick(fatherClasser);
@@ -35,7 +40,7 @@ namespace BCCCompact.Models
             return VerticesList;
         }
 
-        public void PickVerticesAroundCircle(Classer currentClasser)
+        private void PickVerticesAroundCircle(Classer currentClasser)
         {
             var otherVertices = new HashSet<Vertex>(currentClasser.Vertices);
             var adjacenty = currentClasser.AdjacentClassersWithConnectiongThisVertex;

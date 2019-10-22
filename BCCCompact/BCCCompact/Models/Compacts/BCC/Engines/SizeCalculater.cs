@@ -8,6 +8,12 @@ namespace BCCCompact.Models
         private Classer largestClasser;
         private readonly double firstInternallRadius = 30;
 
+        /// <summary>
+        /// calcutes internul and externul radius of each classer and will be approves speciallAngle of each classer(angle that each classer will used from his parent)
+        /// and calcute lenght of edge between classers and their parent center
+        /// now classers are ready to sort and pick around circle
+        /// </summary>
+        /// <param name="component"></param>
         public void Process(Component component)
         {
             largestClasser = component.LargestClasser;
@@ -68,7 +74,12 @@ namespace BCCCompact.Models
             }
         }
 
-
+        /// <summary>
+        /// returns sum of size of all children of classer that connect to this classer with this vertex
+        /// </summary>
+        /// <param name="vertex"></param>
+        /// <param name="classer"></param>
+        /// <returns></returns>
         public double GetSumOfChildrenSizes(Vertex vertex, Classer classer)
         {
             double sumOfSize = 0;

@@ -13,8 +13,8 @@ namespace BCCCompact.Models
         private static int count = 0;
         private readonly Dictionary<int, int> classerIdOfVertex = new Dictionary<int, int>();
         private LinkedList<Edge> stackOfEdges;
-        Path path;
-        int time;
+        private Path path;
+        private int time;
 
         public Dictionary<Vertex, int> NodingComponentFromThisVertex(Component component, Vertex startingVertex)
         {
@@ -29,9 +29,12 @@ namespace BCCCompact.Models
                 parent[vertex] = null;
             }
             NodingFromThisVertex(startingVertex);
-            return GetresultOfNoding(component);
+            return GetResultOfNoding(component);
         }
-
+        /// <summary>
+        /// start from selected vertex and try to discover the classers with looking up from this vertex
+        /// </summary>
+        /// <param name="startingVertex"></param>
         private void NodingFromThisVertex(Vertex startingVertex)
         {
             count = 0;
@@ -54,7 +57,12 @@ namespace BCCCompact.Models
             }
         }
 
-        private Dictionary<Vertex, int> GetresultOfNoding(Component component)
+        /// <summary>
+        /// return a dictionary that map each vertex to id number of his classer
+        /// </summary>
+        /// <param name="component"></param>
+        /// <returns></returns>
+        private Dictionary<Vertex, int> GetResultOfNoding(Component component)
         {
             var result = new Dictionary<Vertex, int>();
             int i = 0;
@@ -74,6 +82,9 @@ namespace BCCCompact.Models
             return result;
         }
 
+        /// <summary>
+        /// this method will be call to move on graph and discover
+        /// </summary>
         private void IterateOnGraph()
         {
             var u = path.Peek();

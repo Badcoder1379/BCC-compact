@@ -4,7 +4,10 @@ namespace BCCCompact.Models
 {
     public class BCC : Compact
     {
-
+        /// <summary>
+        /// this method give the gragh and set the vertices locations
+        /// </summary>
+        /// <param name="graph"></param>
         public override void Process(Graph graph)
         {
             var componentMaker = new ComponentMaker();
@@ -21,7 +24,6 @@ namespace BCCCompact.Models
                 classerTreeMaker.Process(component);
                 sizeCalcuter.Process(component);
                 picker.PickClassers(component.LargestClasser);
-                picker.PickVerticesAroundCircle(component.LargestClasser);
             }
 
             var componentSetter = new ComponentSetter();

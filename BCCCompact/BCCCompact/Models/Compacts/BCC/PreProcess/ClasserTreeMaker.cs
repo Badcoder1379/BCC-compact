@@ -10,7 +10,10 @@ namespace BCCCompact.Models
         private HashSet<Vertex> visitedVertices;
         private HashSet<Classer> visitedClassers;
 
-
+        /// <summary>
+        /// this method gets a component and returns a tree of classers that each classer has a lot of vertices
+        /// </summary>
+        /// <param name="component"></param>
         public void Process(Component component)
         {
             stackOfVertices = new Stack<Vertex>();
@@ -28,6 +31,9 @@ namespace BCCCompact.Models
             }
         }
 
+        /// <summary>
+        /// this method move on graph vertices and called a lot
+        /// </summary>
         public void IterateOnVertices()
         {
             var current = stackOfVertices.Pop();

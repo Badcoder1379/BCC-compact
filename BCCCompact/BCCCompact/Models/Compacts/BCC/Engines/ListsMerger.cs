@@ -7,6 +7,12 @@ namespace BCCCompact.Models.Compacts.BCC.Engines
 {
     public class ListsMerger
     {
+        /// <summary>
+        /// merge to soted list
+        /// </summary>
+        /// <param name="lastOrbitalvertices"></param>
+        /// <param name="vertices"></param>
+        /// <returns></returns>
         public static LinkedList<Vertex> MergeLastOrbitalWithBoundryVertices(LinkedList<Vertex> lastOrbitalvertices, LinkedList<Vertex> vertices)
         {
             var newLinkedList = new LinkedList<Vertex>();

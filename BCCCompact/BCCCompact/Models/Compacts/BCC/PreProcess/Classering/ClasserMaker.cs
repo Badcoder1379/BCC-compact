@@ -18,6 +18,10 @@ namespace BCCCompact.Models
             vertexToClasserId = new Dictionary<Vertex, int>();
         }
 
+        /// <summary>
+        /// this method gets a component and returns all classers and finds largest classer 
+        /// </summary>
+        /// <param name="component"></param>
         public void Process(Component component)
         {
             SetComponent(component);
@@ -26,19 +30,22 @@ namespace BCCCompact.Models
             component.LargestClasser = LargestClasser;
         }
 
+        /// <summary>
+        /// this method will make classers from the data that has classer id of each vertex 
+        /// </summary>
         private void ConstructClassers()
         {
             LargestClasser = new Classer();
-            var classerId_classer = new Dictionary<int, Classer>();
+            var classerIdToClasser = new Dictionary<int, Classer>();
             foreach (var vertex in Component.Vertices)
             {
                 int classerId = vertexToClasserId[vertex];
-                if (!classerId_classer.ContainsKey(classerId))
+                if (!classerIdToClasser.ContainsKey(classerId))
                 {
-                    classerId_classer[classerId] = new Classer();
-                    Classers.Add(classerId_classer[classerId]);
+                    classerIdToClasser[classerId] = new Classer();
+                    Classers.Add(classerIdToClasser[classerId]);
                 }
-                var classer = classerId_classer[classerId];
+                var classer = classerIdToClasser[classerId];
                 classer.Vertices.Add(vertex);
                 vertex.SetClasser(classer);
                 if (classer.Vertices.Count > LargestClasser.Vertices.Count)
@@ -48,6 +55,9 @@ namespace BCCCompact.Models
             }
         }
 
+        /// <summary>
+        /// this method will tag a id number on each vertex
+        /// </summary>
         private void ClasserLabelTagging()
         {
             var bbc = new BccAlgrtm();

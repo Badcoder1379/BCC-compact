@@ -5,7 +5,10 @@ namespace BCCCompact.Models
 {
     public class ComponentSetter
     {
-
+        /// <summary>
+        /// picks all component around of a circle
+        /// </summary>
+        /// <param name="components"></param>
         public void Set(HashSet<Component> components)
         {
             var largest = GetLargestComponent(components);
