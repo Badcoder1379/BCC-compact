@@ -120,83 +120,32 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="BCC\Engines\AroundCirclePicker.cs" />
-    <Compile Include="BCC\Engines\ComponentMaker\IteratorPack.cs" />
-    <Compile Include="BCC\Engines\ListsMerger.cs" />
-    <Compile Include="BCC\Engines\PreProcess\Classering\Path.cs" />
-    <Compile Include="BCC\BCC.cs" />
-    <Compile Include="Models\Component.cs" />
-    <Compile Include="BCC\Engines\ComponentMaker\ComponentMaker.cs" />
-    <Compile Include="BCC\Engines\ComponentSetter.cs" />
-    <Compile Include="Models\BCCEdge.cs" />
-    <Compile Include="Models\BCCGraph.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="BCC\Engines\LocationCalculater.cs" />
-    <Compile Include="BCC\Engines\PreProcess\Classering\BccAlgrtm.cs" />
-    <Compile Include="Models\Classer.cs" />
-    <Compile Include="BCC\Engines\PreProcess\Classering\ClasserMaker.cs" />
-    <Compile Include="BCC\Engines\PreProcess\ClasserTreeMaker.cs" />
-    <Compile Include="BCC\Engines\SizeCalculater.cs" />
-    <Compile Include="Models\Graph.cs" />
-    <Compile Include="Models\Vertex.cs" />
+    <Compile Include="AAA.cs" />
+    <Compile Include="BCC Compact\DataConverter.cs" />
+    <Compile Include="BCC Compact\logic\Business.cs" />
+    <Compile Include="BCC Compact\logic\Engines\AroundCirclePicker.cs" />
+    <Compile Include="BCC Compact\logic\Engines\ComponentMaker\IteratorPack.cs" />
+    <Compile Include="BCC Compact\logic\Engines\ListsMerger.cs" />
+    <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\Path.cs" />
+    <Compile Include="BCC Compact\PackageBCC.cs" />
+    <Compile Include="BCC Compact\Models\Component.cs" />
+    <Compile Include="BCC Compact\logic\Engines\ComponentMaker\ComponentMaker.cs" />
+    <Compile Include="BCC Compact\logic\Engines\ComponentSetter.cs" />
+    <Compile Include="BCC Compact\Models\BCCEdge.cs" />
+    <Compile Include="BCC Compact\Models\BCCGraph.cs" />
+    <Compile Include="BCC Compact\Models\Location.cs" />
+    <Compile Include="BCC Compact\logic\Engines\LocationCalculater.cs" />
+    <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\BccAlgrtm.cs" />
+    <Compile Include="BCC Compact\Models\Classer.cs" />
+    <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\ClasserMaker.cs" />
+    <Compile Include="BCC Compact\logic\Engines\PreProcess\ClasserTreeMaker.cs" />
+    <Compile Include="BCC Compact\logic\Engines\SizeCalculater.cs" />
+    <Compile Include="BCC Compact\Models\Graph.cs" />
+    <Compile Include="BCC Compact\Models\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\drawingGraph.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\ogma.min.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Styels\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

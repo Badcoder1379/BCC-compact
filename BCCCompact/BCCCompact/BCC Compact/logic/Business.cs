@@ -1,23 +1,19 @@
-﻿using BCCCompact.Models.Compacts;
-using BCCCompact.Models.Elemans.Star;
+﻿using BCCCompact.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace BCCCompact.Models
+namespace BCCCompact.BCC_Compact.logic
 {
-    public class BCC
+    public class Business
     {
 
         private readonly BCCGraph graph;
-
-        public BCC(BCCGraph graph)
+        public Business(BCCGraph graph)
         {
             this.graph = graph;
         }
-
-        public BCC(Graph starGraph)
-        {
-            graph = new BCCGraph(starGraph.Edges, starGraph.Nodes);
-        }
-
 
 
         /// <summary>
