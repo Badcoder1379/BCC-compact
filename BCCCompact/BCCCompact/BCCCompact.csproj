@@ -120,30 +120,27 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="BCC\Engines\AroundCirclePicker.cs" />
     <Compile Include="BCC\Engines\ComponentMaker\IteratorPack.cs" />
     <Compile Include="BCC\Engines\ListsMerger.cs" />
-    <Compile Include="BCC\PreProcess\Classering\Path.cs" />
+    <Compile Include="BCC\Engines\PreProcess\Classering\Path.cs" />
     <Compile Include="BCC\BCC.cs" />
-    <Compile Include="Models\CompactResult.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="BCC\Engines\ComponentMaker\ComponentMaker.cs" />
     <Compile Include="BCC\Engines\ComponentSetter.cs" />
-    <Compile Include="Models\Edge.cs" />
-    <Compile Include="Models\Graph.cs" />
-    <Compile Include="Models\Importer.cs" />
+    <Compile Include="Models\BCCEdge.cs" />
+    <Compile Include="Models\BCCGraph.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="BCC\Engines\LocationCalculater.cs" />
-    <Compile Include="BCC\PreProcess\Classering\BccAlgrtm.cs" />
+    <Compile Include="BCC\Engines\PreProcess\Classering\BccAlgrtm.cs" />
     <Compile Include="Models\Classer.cs" />
-    <Compile Include="BCC\PreProcess\Classering\ClasserMaker.cs" />
-    <Compile Include="BCC\PreProcess\ClasserTreeMaker.cs" />
+    <Compile Include="BCC\Engines\PreProcess\Classering\ClasserMaker.cs" />
+    <Compile Include="BCC\Engines\PreProcess\ClasserTreeMaker.cs" />
     <Compile Include="BCC\Engines\SizeCalculater.cs" />
-    <Compile Include="Models\StarGraph.cs" />
+    <Compile Include="Models\Graph.cs" />
     <Compile Include="Models\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

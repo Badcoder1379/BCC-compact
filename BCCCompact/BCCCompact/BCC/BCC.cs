@@ -6,16 +6,16 @@ namespace BCCCompact.Models
     public class BCC
     {
 
-        private readonly Graph graph;
+        private readonly BCCGraph graph;
 
-        public BCC(Graph graph)
+        public BCC(BCCGraph graph)
         {
             this.graph = graph;
         }
 
-        public BCC(StarGraph starGraph)
+        public BCC(Graph starGraph)
         {
-            graph = new Graph(starGraph.Edges, starGraph.Nodes);
+            graph = new BCCGraph(starGraph.Edges, starGraph.Nodes);
         }
 
 

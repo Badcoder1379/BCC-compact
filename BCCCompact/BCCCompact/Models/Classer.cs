@@ -6,6 +6,10 @@ namespace BCCCompact.Models
     public class Classer
     {
         public HashSet<Vertex> Vertices = new HashSet<Vertex>();
+        /// <summary>
+        /// in each classer some vertices are boundry and connect his classer to some other classers
+        /// "adjacenty" is a dictionary that show adjacents of each boundry vertex
+        /// </summary>
         public Dictionary<Vertex, HashSet<Classer>> Adjacenty = new Dictionary<Vertex, HashSet<Classer>>();
         public Dictionary<Vertex, double> AnglesOfInnerVertices = new Dictionary<Vertex, double>();
         public HashSet<Classer> Children = new HashSet<Classer>();

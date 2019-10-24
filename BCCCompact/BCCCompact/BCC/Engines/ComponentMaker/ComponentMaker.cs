@@ -9,9 +9,9 @@ namespace BCCCompact.Models
         private readonly Stack<IteratorPack> verticesToUtil = new Stack<IteratorPack>();
         private readonly Dictionary<Vertex, bool> visitedVertices = new Dictionary<Vertex, bool>();
         public readonly HashSet<Component> Components = new HashSet<Component>();
-        private readonly Graph graph;
+        private readonly BCCGraph graph;
 
-        public ComponentMaker(Graph graph)
+        public ComponentMaker(BCCGraph graph)
         {
             this.graph = graph;
             foreach (Vertex vertex in graph.Vertices)

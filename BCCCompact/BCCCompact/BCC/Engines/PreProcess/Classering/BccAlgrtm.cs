@@ -12,7 +12,7 @@ namespace BCCCompact.Models
         private Dictionary<Vertex, Vertex> parent = new Dictionary<Vertex, Vertex>();
         private int count = 0;
         private Dictionary<int, int> classerIdOfVertex = new Dictionary<int, int>();
-        private LinkedList<Edge> stackOfEdges = new LinkedList<Edge>();
+        private LinkedList<BCCEdge> stackOfEdges = new LinkedList<BCCEdge>();
         private Path path = new Path();
         private int time = 0;
 
@@ -40,7 +40,7 @@ namespace BCCCompact.Models
         private void NodingFromThisVertex(Vertex startingVertex)
         {
             count = 0;
-            stackOfEdges = new LinkedList<Edge>();
+            stackOfEdges = new LinkedList<BCCEdge>();
             path = new Path();
             disc[startingVertex] = low[startingVertex] = ++time;
             path.Push(startingVertex);
@@ -96,7 +96,7 @@ namespace BCCCompact.Models
                 {
                     path.ChildrenUp();
                     parent[v] = u;
-                    stackOfEdges.AddLast(new Edge(u.Id, v.Id));
+                    stackOfEdges.AddLast(new BCCEdge(u.Id, v.Id));
                     disc[v] = low[v] = ++time;
                     path.Push(v);
                     return;
@@ -106,7 +106,7 @@ namespace BCCCompact.Models
                     if (low[u] > disc[v])
                         low[u] = disc[v];
 
-                    stackOfEdges.AddLast(new Edge(u.Id, v.Id));
+                    stackOfEdges.AddLast(new BCCEdge(u.Id, v.Id));
                 }
             }
 
