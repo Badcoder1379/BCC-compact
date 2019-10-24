@@ -35,6 +35,7 @@ namespace BCCCompact.Controllers
             string fileName = str[2];
 
             var graph = Graph.GetRandomGraph(V, E, fileName);
+            //var graph = Graph.GetRandomTree(V,fileName);
             var result = CompactGraph(graph);
             return Json(result);
         }

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BCCCompact.Models.Compacts.BCC.Engines.ComponentMaker;
+using System;
 using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
     public class ComponentMaker
     {
-        private readonly Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>> verticesToUtil = new Stack<Tuple<Vertex, Dictionary<Vertex, bool>, Component>>();
+        private readonly Stack<IteratorPack> verticesToUtil = new Stack<IteratorPack>();
         private readonly Dictionary<Vertex, bool> visitedVertices = new Dictionary<Vertex, bool>();
         public readonly HashSet<Component> Components = new HashSet<Component>();
         private readonly Graph graph;
@@ -31,8 +32,8 @@ namespace BCCCompact.Models
                 {
                     var component = new Component();
                     Components.Add(component);
-                    var firstData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(vertex, visitedVertices, component);
-                    verticesToUtil.Push(firstData);
+                    var firstPack = new IteratorPack(vertex, component);
+                    verticesToUtil.Push(firstPack);
                     while (verticesToUtil.Count > 0)
                     {
                         IterateOnVertices(verticesToUtil.Pop());
@@ -42,20 +43,19 @@ namespace BCCCompact.Models
         }
 
 
-        private void IterateOnVertices(Tuple<Vertex, Dictionary<Vertex, bool>, Component> functionData)
+        private void IterateOnVertices(IteratorPack currentPack)
         {
-            var currentVertex = functionData.Item1;
-            var visited = functionData.Item2;
-            var component = functionData.Item3;
-            visited[currentVertex] = true;
+            var currentVertex = currentPack.vertex;
+            var component = currentPack.component;
+            visitedVertices[currentVertex] = true;
             component.Vertices.Add(currentVertex);
 
             foreach (Vertex adjacent in currentVertex.adjacents)
             {
-                if (!visited[adjacent])
+                if (!visitedVertices[adjacent])
                 {
-                    var newData = new Tuple<Vertex, Dictionary<Vertex, bool>, Component>(adjacent, visited, component);
-                    verticesToUtil.Push(newData);
+                    var newPack = new IteratorPack(adjacent, component);
+                    verticesToUtil.Push(newPack);
                 }
             }
         }

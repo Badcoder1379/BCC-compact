@@ -137,5 +137,36 @@ namespace BCCCompact.Models
             return new Graph(V, edges);
         }
 
+        public static Graph GetRandomTree(int v, string fileName)
+        {
+            string path = Importer.SRCAddress + fileName;
+            StreamWriter sw;
+            if (!File.Exists(path))
+            {
+                sw = new StreamWriter(File.Create(path));
+            }
+            else
+            {
+                sw = new StreamWriter(path);
+
+            }
+
+
+            var edges = new HashSet<Edge>();
+            var random = new Random();
+            int i = 1;
+            while (i < v)
+            {
+                int rnd = random.Next() % i;
+                var edge = new Edge(rnd, i);
+                edges.Add(edge);
+                sw.WriteLine(i + "," + rnd);
+                i++;
+            }
+            sw.Flush();
+            sw.Close();
+            return new Graph(v, edges);
+        }
+
     }
 }
