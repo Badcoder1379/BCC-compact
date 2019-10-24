@@ -6,7 +6,7 @@ namespace BCCCompact.Models
     public class Classer
     {
         public HashSet<Vertex> Vertices = new HashSet<Vertex>();
-        public Dictionary<Vertex, HashSet<Classer>> AdjacentClassersWithConnectiongThisVertex = new Dictionary<Vertex, HashSet<Classer>>();
+        public Dictionary<Vertex, HashSet<Classer>> Adjacenty = new Dictionary<Vertex, HashSet<Classer>>();
         public Dictionary<Vertex, double> AnglesOfInnerVertices = new Dictionary<Vertex, double>();
         public HashSet<Classer> Children = new HashSet<Classer>();
         public Classer Parent;
@@ -23,12 +23,12 @@ namespace BCCCompact.Models
 
         public void AddAdjacenty(Vertex vertex, Classer classer)
         {
-            if (!AdjacentClassersWithConnectiongThisVertex.ContainsKey(vertex))
+            if (!Adjacenty.ContainsKey(vertex))
             {
-                AdjacentClassersWithConnectiongThisVertex[vertex] = new HashSet<Classer>();
+                Adjacenty[vertex] = new HashSet<Classer>();
             }
 
-            AdjacentClassersWithConnectiongThisVertex[vertex].Add(classer);
+            Adjacenty[vertex].Add(classer);
         }
 
         public void PickVertexByAngle(Vertex vertex, double angle)

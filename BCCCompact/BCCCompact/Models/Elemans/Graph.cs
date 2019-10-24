@@ -25,31 +25,29 @@ namespace BCCCompact.Models
             }
         }
 
-        public Graph(List<StarEdge> edges,List<StarNode> nodes)
+        public Graph(List<StarEdge> edges, List<StarNode> nodes)
         {
             this.nodes = nodes;
-            foreach(var node in nodes)
+            foreach (var node in nodes)
             {
                 AddVertex(node.NodeId);
             }
             foreach (var edge in edges)
             {
-                var guid1 = edge.FromNode;
-                var guid2 = edge.ToNode;
-                guidToVertex[guid2].AddAdjacent(guidToVertex[guid1]);
-                guidToVertex[guid1].AddAdjacent(guidToVertex[guid2]);
+                var source = edge.FromNode;
+                var target = edge.ToNode;
+                guidToVertex[target].AddAdjacent(guidToVertex[source]);
+                guidToVertex[source].AddAdjacent(guidToVertex[target]);
             }
         }
 
         public void AddVertex(Guid guid)
         {
-            if (!guidToVertex.ContainsKey(guid))
-            {
-                int lastID = Vertices.Count;
-                var vertex = new Vertex(lastID);
-                Vertices.Add(vertex);
-                guidToVertex[guid] = vertex;
-            }
+            int lastID = Vertices.Count;
+            var vertex = new Vertex(lastID);
+            Vertices.Add(vertex);
+            guidToVertex[guid] = vertex;
+
         }
 
         public void ConstructResults()
@@ -59,7 +57,7 @@ namespace BCCCompact.Models
             //removable
 
 
-            foreach(var node in nodes)
+            foreach (var node in nodes)
             {
                 var guid = node.NodeId;
                 Vertex vertex = guidToVertex[guid];
@@ -67,7 +65,7 @@ namespace BCCCompact.Models
                 node.Y = vertex.Y;
             }
         }
-        
+
 
 
         public void AddEdge(int v, int w)
@@ -82,7 +80,7 @@ namespace BCCCompact.Models
 
             foreach (Vertex vertex in Vertices)
             {
-                foreach (Vertex adjacent in vertex.adjacents)
+                foreach (Vertex adjacent in vertex.Adjacents)
                 {
                     if (vertex.Id > adjacent.Id)
                     {
@@ -114,7 +112,7 @@ namespace BCCCompact.Models
             else
             {
                 sw = new StreamWriter(path);
-               
+
             }
 
 

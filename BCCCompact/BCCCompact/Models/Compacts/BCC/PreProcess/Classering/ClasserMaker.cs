@@ -44,7 +44,7 @@ namespace BCCCompact.Models
                 }
                 var classer = classerIdToClasser[classerId];
                 classer.Vertices.Add(vertex);
-                vertex.SetClasser(classer);
+                vertex.Classer = classer;
                 if (classer.Vertices.Count > largestClasser.Vertices.Count)
                 {
                     largestClasser = classer;

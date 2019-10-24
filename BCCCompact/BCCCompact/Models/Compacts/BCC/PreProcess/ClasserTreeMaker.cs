@@ -39,7 +39,7 @@ namespace BCCCompact.Models
         public void IterateOnVertices()
         {
             var current = stackOfVertices.Pop();
-            foreach (var adjacent in current.adjacents)
+            foreach (var adjacent in current.Adjacents)
             {
                 if (!visitedVertices.Contains(adjacent))
                 {

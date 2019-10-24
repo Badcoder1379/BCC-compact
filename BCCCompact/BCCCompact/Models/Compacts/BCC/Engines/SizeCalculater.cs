@@ -38,7 +38,7 @@ namespace BCCCompact.Models
             }
             var angleShareOfEachVertex = new Dictionary<Vertex, double>();
             double maxExternallRadius = classer.InternallRadius;
-            foreach (var vertex in classer.AdjacentClassersWithConnectiongThisVertex.Keys)
+            foreach (var vertex in classer.Adjacenty.Keys)
             {
                 angleShareOfEachVertex[vertex] = GetSumOfChildrenSizes(vertex, classer);
             }
@@ -48,7 +48,7 @@ namespace BCCCompact.Models
                 double allVertexAngel = (angleShareOfEachVertex[vertex] / sumOfAllChildsSizes) * Math.PI * 2;
                 allVertexAngel = Math.Min(Math.PI, allVertexAngel);
                 allUsedAngle += allVertexAngel;
-                foreach (var child in classer.AdjacentClassersWithConnectiongThisVertex[vertex])
+                foreach (var child in classer.Adjacenty[vertex])
                 {
                     if (child == classer.Parent)
                     {
@@ -90,7 +90,7 @@ namespace BCCCompact.Models
         {
             double sumOfSize = 0;
 
-            foreach (var child in classer.AdjacentClassersWithConnectiongThisVertex[vertex])
+            foreach (var child in classer.Adjacenty[vertex])
             {
                 if (child == classer.Parent)
                 {

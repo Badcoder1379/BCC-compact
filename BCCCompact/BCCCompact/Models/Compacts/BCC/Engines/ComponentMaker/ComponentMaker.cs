@@ -51,7 +51,7 @@ namespace BCCCompact.Models
             visitedVertices[currentVertex] = true;
             component.Vertices.Add(currentVertex);
 
-            foreach (Vertex adjacent in currentVertex.adjacents)
+            foreach (Vertex adjacent in currentVertex.Adjacents)
             {
                 if (!visitedVertices[adjacent])
                 {

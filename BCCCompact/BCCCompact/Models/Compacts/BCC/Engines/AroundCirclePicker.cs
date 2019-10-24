@@ -31,7 +31,7 @@ namespace BCCCompact.Models
 
         private LinkedList<Vertex> GetAdjacentyVerticesList(Classer currentClasser)
         {
-            var adjacenty = currentClasser.AdjacentClassersWithConnectiongThisVertex;
+            var adjacenty = currentClasser.Adjacenty;
             var VerticesList = new LinkedList<Vertex>(adjacenty.Keys);
 
             if (currentClasser.Parent != null)
@@ -46,7 +46,7 @@ namespace BCCCompact.Models
         private void PickVerticesAroundCircle(Classer currentClasser)
         {
             var otherVertices = new HashSet<Vertex>(currentClasser.Vertices);
-            var adjacenty = currentClasser.AdjacentClassersWithConnectiongThisVertex;
+            var adjacenty = currentClasser.Adjacenty;
             var VerticesList = GetAdjacentyVerticesList(currentClasser);
 
             if (currentClasser.Children.Count == 1 && currentClasser.Vertices.Count == 1)

@@ -90,7 +90,7 @@ namespace BCCCompact.Models
         private void IterateOnGraph()
         {
             var u = path.Peek();
-            foreach (var v in u.adjacents)
+            foreach (var v in u.Adjacents)
             {
                 if (disc[v] == -1)
                 {

@@ -6,11 +6,9 @@ namespace BCCCompact.Models
     public class Vertex : IEquatable<Vertex>, IComparable<Vertex>
     {
         public int Id;
-        public HashSet<Vertex> adjacents = new HashSet<Vertex>();
+        public HashSet<Vertex> Adjacents = new HashSet<Vertex>();
         public double X;
         public double Y;
-        public string Name;
-        public int Type;
         public double angleInClasser;
         public Classer Classer;
 
@@ -21,7 +19,7 @@ namespace BCCCompact.Models
 
         public void AddAdjacent(Vertex vertex)
         {
-            adjacents.Add(vertex);
+            Adjacents.Add(vertex);
         }
 
         public void SetLocation(double X, double Y)
@@ -41,9 +39,5 @@ namespace BCCCompact.Models
             return (int)(100000 * dif);
         }
 
-        public void SetClasser(Classer classer)
-        {
-            this.Classer = classer;
-        }
     }
 }
