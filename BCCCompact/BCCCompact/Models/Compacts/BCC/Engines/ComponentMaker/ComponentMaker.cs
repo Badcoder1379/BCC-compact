@@ -17,6 +17,7 @@ namespace BCCCompact.Models
             foreach (Vertex vertex in graph.Vertices)
             {
                 visitedVertices[vertex] = false;
+
             }
         }
 
