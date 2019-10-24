@@ -24,7 +24,7 @@ namespace BCCCompact.Models
         /// this method give the gragh and set the vertices locations
         /// </summary>
         /// <param name="graph"></param>
-        public  void Process()
+        public void Process()
         {
             var componentMaker = new ComponentMaker(graph);
             componentMaker.Process();
