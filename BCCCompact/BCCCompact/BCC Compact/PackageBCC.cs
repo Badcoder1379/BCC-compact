@@ -2,6 +2,8 @@
 using BCCCompact.BCC_Compact.logic;
 using BCCCompact.Models.Compacts;
 using BCCCompact.Models.Elemans.Star;
+using System;
+using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
@@ -9,6 +11,9 @@ namespace BCCCompact.Models
     {
 
         private readonly Graph graph;
+        private BCCGraph bccGraph;
+        private readonly Dictionary<Guid, int> guidToInt = new Dictionary<Guid, int>();
+
         public PackageBCC(Graph graph)
         {
             this.graph = graph;
@@ -22,11 +27,38 @@ namespace BCCCompact.Models
         /// <param name="graph"></param>
         public void Process()
         {
-            var converter = new DataConverter(graph);
-            var g = converter.GetBCCGraph();
-            var business = new Business(g);
+            ConvertData();
+            var business = new Business(bccGraph);
             business.Process();
-            converter.GetResultGraph();
         }
+
+        public void ConvertData()
+        {
+            int v = graph.Nodes.Count;
+            var edges = new List<BCCEdge>();
+            foreach (var node in graph.Nodes)
+            {
+                AddVertex(node.NodeId);
+            }
+            foreach (var edge in graph.Edges)
+            {
+                var source = edge.FromNode;
+                var target = edge.ToNode;
+                edges.Add(new BCCEdge(guidToInt[source], guidToInt[target]));
+            }
+            bccGraph = new BCCGraph(v, edges);
+        }
+
+        private void AddVertex(Guid guid)
+        {
+            int newId = guidToInt.Count;
+            guidToInt[guid] = newId;
+        }
+
+        public void ConstrucResult()
+        {
+
+        }
+
     }
 }

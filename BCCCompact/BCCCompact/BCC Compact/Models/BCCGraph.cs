@@ -29,6 +29,15 @@ namespace BCCCompact.Models
             }
         }
 
+        public BCCGraph(int v)
+        {
+            this.V = v;
+            for (int i = 0; i < V; i++)
+            {
+                Vertices.Add(new Vertex(i));
+            }
+        }
+
         public void AddVertex(Guid guid)
         {
             int lastID = Vertices.Count;
@@ -51,6 +60,21 @@ namespace BCCCompact.Models
         public void AddEdge(int v, int w)
         {
             Vertices[v].AddAdjacent(Vertices[w]);
+        }
+
+
+        public BCCGraph(int v, List<BCCEdge> edges)
+        {
+            V = v;
+            for (int i = 0; i < V; i++)
+            {
+                Vertices.Add(new Vertex(i));
+            }
+            foreach (var edge in edges)
+            {
+                this.AddEdge(edge.A, edge.B);
+                this.AddEdge(edge.B, edge.A);
+            }
         }
     }
 }
