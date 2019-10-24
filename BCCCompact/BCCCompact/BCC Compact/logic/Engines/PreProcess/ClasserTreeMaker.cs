@@ -6,16 +6,14 @@ namespace BCCCompact.Models
     class ClasserTreeMaker
     {
         private readonly Classer FatherClasser;
-        private readonly Stack<Vertex> stackOfVertices = new Stack<Vertex>();
-        private readonly HashSet<Vertex> visitedVertices = new HashSet<Vertex>();
+        private readonly Stack<BCCVertex> stackOfVertices = new Stack<BCCVertex>();
+        private readonly HashSet<BCCVertex> visitedVertices = new HashSet<BCCVertex>();
         private readonly HashSet<Classer> visitedClassers = new HashSet<Classer>();
 
         public ClasserTreeMaker(Component component)
         {
             FatherClasser = component.LargestClasser;
         }
-
-
 
         /// <summary>
         /// this method gets a component and returns a tree of classers that each classer has a lot of vertices
@@ -39,24 +37,24 @@ namespace BCCCompact.Models
         public void IterateOnVertices()
         {
             var current = stackOfVertices.Pop();
-            foreach (var adjacent in current.Adjacents)
+
+            foreach (var adjacent in current.Adjacents.Where(x => !visitedVertices.Contains(x)))
             {
-                if (!visitedVertices.Contains(adjacent))
+                visitedVertices.Add(adjacent);
+                var classer1 = current.Classer;
+                var classer2 = adjacent.Classer;
+
+                if (classer1 != classer2 && !visitedClassers.Contains(classer2))
                 {
-                    visitedVertices.Add(adjacent);
-                    var classer1 = current.Classer;
-                    var classer2 = adjacent.Classer;
-                    if (classer1 != classer2 && !visitedClassers.Contains(classer2))
-                    {
-                        classer1.AddAdjacenty(current, classer2);
-                        classer2.AddAdjacenty(adjacent, classer1);
-                        classer1.Children.Add(classer2);
-                        classer2.Parent = classer1;
-                        classer2.VertexConnectorToParent = adjacent;
-                        visitedClassers.Add(classer2);
-                    }
-                    stackOfVertices.Push(adjacent);
+                    classer1.AddAdjacenty(current, classer2);
+                    classer2.AddAdjacenty(adjacent, classer1);
+                    classer1.Children.Add(classer2);
+                    classer2.Parent = classer1;
+                    classer2.VertexConnectorToParent = adjacent;
+                    visitedClassers.Add(classer2);
                 }
+
+                stackOfVertices.Push(adjacent);
             }
         }
     }

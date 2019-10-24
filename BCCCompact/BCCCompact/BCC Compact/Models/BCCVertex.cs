@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
-    public class Vertex : IEquatable<Vertex>, IComparable<Vertex>
+    public class BCCVertex : IEquatable<BCCVertex>, IComparable<BCCVertex>
     {
         public int Id;
-        public HashSet<Vertex> Adjacents = new HashSet<Vertex>();
+        public HashSet<BCCVertex> Adjacents = new HashSet<BCCVertex>();
         public double X;
         public double Y;
         public double angleInClasser;
         public Classer Classer;
 
-        public Vertex(int Id)
+        public BCCVertex(int Id)
         {
             this.Id = Id;
         }
 
-        public void AddAdjacent(Vertex vertex)
+        public void AddAdjacent(BCCVertex vertex)
         {
             Adjacents.Add(vertex);
         }
@@ -28,12 +28,12 @@ namespace BCCCompact.Models
             this.Y = Y;
         }
 
-        public bool Equals(Vertex other)
+        public bool Equals(BCCVertex other)
         {
             return other.Id == Id;
         }
 
-        public int CompareTo(Vertex other)
+        public int CompareTo(BCCVertex other)
         {
             double dif = angleInClasser - other.angleInClasser;
             return (int)(100000 * dif);

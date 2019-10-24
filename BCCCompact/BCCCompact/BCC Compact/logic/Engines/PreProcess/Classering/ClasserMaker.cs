@@ -5,16 +5,15 @@ namespace BCCCompact.Models
 {
     class ClasserMaker
     {
-        private Component component;
-        private HashSet<Classer> classers = new HashSet<Classer>();
+        private readonly Component component;
+        private readonly HashSet<Classer> classers = new HashSet<Classer>();
         private Classer largestClasser;
-        private Dictionary<Vertex, int> vertexToClasserId = new Dictionary<Vertex, int>();
+        private Dictionary<BCCVertex, int> vertexToClasserId = new Dictionary<BCCVertex, int>();
 
         public ClasserMaker(Component component)
         {
             this.component = component;
         }
-
 
         /// <summary>
         /// this method gets a component and returns all classers and finds largest classer 
@@ -37,14 +36,17 @@ namespace BCCCompact.Models
             foreach (var vertex in component.Vertices)
             {
                 int classerId = vertexToClasserId[vertex];
+
                 if (!classerIdToClasser.ContainsKey(classerId))
                 {
                     classerIdToClasser[classerId] = new Classer();
                     classers.Add(classerIdToClasser[classerId]);
                 }
+
                 var classer = classerIdToClasser[classerId];
                 classer.Vertices.Add(vertex);
                 vertex.Classer = classer;
+
                 if (classer.Vertices.Count > largestClasser.Vertices.Count)
                 {
                     largestClasser = classer;
@@ -58,10 +60,10 @@ namespace BCCCompact.Models
         private void ClasserLabelTagging()
         {
             var ARandomVertex = component.Vertices.ToList().First();
-            vertexToClasserId = new BccAlgrtm().NodingComponentFromThisVertex(component, ARandomVertex);
+            vertexToClasserId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertex);
             ConstructClassers();
             var ARandomVertexFromLargestClasser = largestClasser.Vertices.ToList().First();
-            vertexToClasserId = new BccAlgrtm().NodingComponentFromThisVertex(component, ARandomVertexFromLargestClasser);
+            vertexToClasserId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertexFromLargestClasser);
         }
     }
 }

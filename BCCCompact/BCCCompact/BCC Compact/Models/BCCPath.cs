@@ -2,17 +2,17 @@
 
 namespace BCCCompact.Models.BccAlgorithm
 {
-    public class Path
+    public class BCCPath
     {
-        private readonly HashSet<Vertex> vertices = new HashSet<Vertex>();
-        private readonly Stack<Vertex> list = new Stack<Vertex>();
-        private readonly Dictionary<Vertex, int> children = new Dictionary<Vertex, int>();
+        private readonly HashSet<BCCVertex> vertices = new HashSet<BCCVertex>();
+        private readonly Stack<BCCVertex> list = new Stack<BCCVertex>();
+        private readonly Dictionary<BCCVertex, int> children = new Dictionary<BCCVertex, int>();
 
         /// <summary>
         /// push a vertex on your path
         /// </summary>
         /// <param name="vertex"></param>
-        public void Push(Vertex vertex)
+        public void Push(BCCVertex vertex)
         {
             vertices.Add(vertex);
             list.Push(vertex);
@@ -24,7 +24,7 @@ namespace BCCCompact.Models.BccAlgorithm
         /// </summary>
         /// <param name="vertex"></param>
         /// <returns></returns>
-        public bool Contains(Vertex vertex)
+        public bool Contains(BCCVertex vertex)
         {
             return vertices.Contains(vertex);
         }
@@ -33,7 +33,7 @@ namespace BCCCompact.Models.BccAlgorithm
         /// returns last vertex of your path
         /// </summary>
         /// <returns></returns>
-        public Vertex Peek()
+        public BCCVertex Peek()
         {
             return list.Peek();
         }
@@ -42,7 +42,7 @@ namespace BCCCompact.Models.BccAlgorithm
         /// remove last vertex of your path
         /// </summary>
         /// <returns></returns>
-        public Vertex Pop()
+        public BCCVertex Pop()
         {
             var vertex = list.Pop();
             vertices.Remove(vertex);
@@ -74,6 +74,5 @@ namespace BCCCompact.Models.BccAlgorithm
         {
             children[list.Peek()] = children[list.Peek()] + 1;
         }
-
     }
 }

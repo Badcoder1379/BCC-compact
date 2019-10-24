@@ -1,20 +1,15 @@
 ﻿using BCCCompact.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BCCCompact.BCC_Compact.logic
 {
-    public class Business
+    public class BCCBusiness
     {
-
         private readonly BCCGraph graph;
-        public Business(BCCGraph graph)
+
+        public BCCBusiness(BCCGraph graph)
         {
             this.graph = graph;
         }
-
 
         /// <summary>
         /// this method give the gragh and set the vertices locations

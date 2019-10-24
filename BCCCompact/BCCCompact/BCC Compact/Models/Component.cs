@@ -4,7 +4,7 @@ namespace BCCCompact.Models
 {
     public class Component
     {
-        public HashSet<Vertex> Vertices = new HashSet<Vertex>();
+        public HashSet<BCCVertex> Vertices = new HashSet<BCCVertex>();
         public Classer LargestClasser;
     }
 }

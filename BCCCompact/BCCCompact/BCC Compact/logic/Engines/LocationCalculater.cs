@@ -19,13 +19,10 @@ namespace BCCCompact.Models
             CalcuteVertices(component.LargestClasser);
         }
 
-
         /// <summary>
         /// now we have angles and lengths and its easy to calcute all locations with sin and cos
         /// </summary>
         /// <param name="component"></param>
-
-
         private void CalcuteClassers(Classer currentClasser)
         {
             foreach (var child in currentClasser.Children)
@@ -58,6 +55,7 @@ namespace BCCCompact.Models
                     vertex.SetLocation(x, y);
                 }
             }
+
             foreach (var child in currentClasser.Children)
             {
                 CalcuteVertices(child);

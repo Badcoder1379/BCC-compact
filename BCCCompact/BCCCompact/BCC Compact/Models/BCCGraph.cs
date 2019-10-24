@@ -1,36 +1,32 @@
-﻿using BCCCompact.Models.Elemans.Star;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
     public class BCCGraph
     {
         public int V;
-        public List<Vertex> Vertices = new List<Vertex>();
+        public List<BCCVertex> Vertices = new List<BCCVertex>();
 
         private void AddEdge(int v, int w)
         {
             Vertices[v].AddAdjacent(Vertices[w]);
         }
 
-
         public BCCGraph(int v, List<BCCEdge> edges)
         {
             V = v;
             for (int i = 0; i < V; i++)
             {
-                Vertices.Add(new Vertex(i));
+                Vertices.Add(new BCCVertex(i));
             }
             foreach (var edge in edges)
             {
-                this.AddEdge(edge.A, edge.B);
-                this.AddEdge(edge.B, edge.A);
+                this.AddEdge(edge.Source, edge.Target);
+                this.AddEdge(edge.Target, edge.Source);
             }
         }
 
-        public Vertex GetVertexById(int ID)
+        public BCCVertex GetVertexById(int ID)
         {
             return Vertices[ID];
         }

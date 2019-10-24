@@ -2,12 +2,12 @@
 {
     public class BCCEdge
     {
-        public int A { get; set; }
-        public int B { get; set; }
-        public BCCEdge(int a, int b)
+        public int Source { get; set; }
+        public int Target { get; set; }
+        public BCCEdge(int source, int target)
         {
-            this.A = a;
-            this.B = b;
+            this.Source = source;
+            this.Target = target;
         }
     }
 }

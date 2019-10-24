@@ -120,13 +120,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="AAA.cs" />
-    <Compile Include="BCC Compact\logic\Business.cs" />
+    <Compile Include="BCC Compact\logic\BCCBusiness.cs" />
     <Compile Include="BCC Compact\logic\Engines\AroundCirclePicker.cs" />
     <Compile Include="BCC Compact\logic\Engines\ComponentMaker\IteratorPack.cs" />
-    <Compile Include="BCC Compact\logic\Engines\ListsMerger.cs" />
-    <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\Path.cs" />
-    <Compile Include="BCC Compact\PackageBCC.cs" />
+    <Compile Include="BCC Compact\Models\BCCPath.cs" />
+    <Compile Include="BCC Compact\BCCPackage.cs" />
     <Compile Include="BCC Compact\Models\Component.cs" />
     <Compile Include="BCC Compact\logic\Engines\ComponentMaker\ComponentMaker.cs" />
     <Compile Include="BCC Compact\logic\Engines\ComponentSetter.cs" />
@@ -134,13 +132,13 @@
     <Compile Include="BCC Compact\Models\BCCGraph.cs" />
     <Compile Include="BCC Compact\Models\Location.cs" />
     <Compile Include="BCC Compact\logic\Engines\LocationCalculater.cs" />
-    <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\BccAlgrtm.cs" />
+    <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\BCCAlgorithm.cs" />
     <Compile Include="BCC Compact\Models\Classer.cs" />
     <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\ClasserMaker.cs" />
     <Compile Include="BCC Compact\logic\Engines\PreProcess\ClasserTreeMaker.cs" />
     <Compile Include="BCC Compact\logic\Engines\SizeCalculater.cs" />
     <Compile Include="BCC Compact\Models\Graph.cs" />
-    <Compile Include="BCC Compact\Models\Vertex.cs" />
+    <Compile Include="BCC Compact\Models\BCCVertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

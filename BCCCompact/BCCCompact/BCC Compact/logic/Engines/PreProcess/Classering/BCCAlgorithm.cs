@@ -5,31 +5,33 @@ using System.Linq;
 
 namespace BCCCompact.Models
 {
-    public class BccAlgrtm
+    public class BCCAlgorithm
     {
-        private Dictionary<Vertex, int> disc = new Dictionary<Vertex, int>();
-        private Dictionary<Vertex, int> low = new Dictionary<Vertex, int>();
-        private Dictionary<Vertex, Vertex> parent = new Dictionary<Vertex, Vertex>();
+        private Dictionary<BCCVertex, int> disc = new Dictionary<BCCVertex, int>();
+        private Dictionary<BCCVertex, int> low = new Dictionary<BCCVertex, int>();
+        private Dictionary<BCCVertex, BCCVertex> parent = new Dictionary<BCCVertex, BCCVertex>();
         private int count = 0;
         private Dictionary<int, int> classerIdOfVertex = new Dictionary<int, int>();
         private LinkedList<BCCEdge> stackOfEdges = new LinkedList<BCCEdge>();
-        private Path path = new Path();
+        private BCCPath path = new BCCPath();
         private int time = 0;
 
-        public Dictionary<Vertex, int> NodingComponentFromThisVertex(Component component, Vertex startingVertex)
+        public Dictionary<BCCVertex, int> NodingComponentFromThisVertex(Component component, BCCVertex startingVertex)
         {
             count = 0;
             time = 0;
-            disc = new Dictionary<Vertex, int>();
-            low = new Dictionary<Vertex, int>();
-            parent = new Dictionary<Vertex, Vertex>();
+            disc = new Dictionary<BCCVertex, int>();
+            low = new Dictionary<BCCVertex, int>();
+            parent = new Dictionary<BCCVertex, BCCVertex>();
             classerIdOfVertex = new Dictionary<int, int>();
+            
             foreach (var vertex in component.Vertices)
             {
                 disc[vertex] = -1;
                 low[vertex] = -1;
                 parent[vertex] = null;
             }
+            
             NodingFromThisVertex(startingVertex);
             return GetResultOfNoding(component);
         }
@@ -37,11 +39,11 @@ namespace BCCCompact.Models
         /// start from selected vertex and try to discover the classers with looking up from this vertex
         /// </summary>
         /// <param name="startingVertex"></param>
-        private void NodingFromThisVertex(Vertex startingVertex)
+        private void NodingFromThisVertex(BCCVertex startingVertex)
         {
             count = 0;
             stackOfEdges = new LinkedList<BCCEdge>();
-            path = new Path();
+            path = new BCCPath();
             disc[startingVertex] = low[startingVertex] = ++time;
             path.Push(startingVertex);
 
@@ -53,8 +55,8 @@ namespace BCCCompact.Models
             while (stackOfEdges.Count > 0)
             {
                 var edge = stackOfEdges.Last();
-                classerIdOfVertex[edge.A] = count;
-                classerIdOfVertex[edge.B] = count;
+                classerIdOfVertex[edge.Source] = count;
+                classerIdOfVertex[edge.Target] = count;
                 stackOfEdges.RemoveLast();
             }
         }
@@ -64,11 +66,12 @@ namespace BCCCompact.Models
         /// </summary>
         /// <param name="component"></param>
         /// <returns></returns>
-        private Dictionary<Vertex, int> GetResultOfNoding(Component component)
+        private Dictionary<BCCVertex, int> GetResultOfNoding(Component component)
         {
-            var result = new Dictionary<Vertex, int>();
+            var result = new Dictionary<BCCVertex, int>();
             int i = 0;
-            foreach (Vertex vertex in component.Vertices)
+            
+            foreach (var vertex in component.Vertices)
             {
                 if (classerIdOfVertex.ContainsKey(vertex.Id))
                 {
@@ -81,6 +84,7 @@ namespace BCCCompact.Models
                 }
 
             }
+
             return result;
         }
 
@@ -90,6 +94,7 @@ namespace BCCCompact.Models
         private void IterateOnGraph()
         {
             var u = path.Peek();
+            
             foreach (var v in u.Adjacents)
             {
                 if (disc[v] == -1)
@@ -111,33 +116,33 @@ namespace BCCCompact.Models
             }
 
             var adjacent = path.Pop();
+            
             if (path.Count() > 0)
             {
                 u = path.Peek();
 
                 if (low[u] > low[adjacent])
+                {
                     low[u] = low[adjacent];
+                }
 
                 if ((disc[u] == 1 && path.Children() > 1) || (disc[u] > 1 && low[adjacent] >= disc[u]))
                 {
-                    while (stackOfEdges.Last().A != u.Id || stackOfEdges.Last().B != adjacent.Id)
+                    while (stackOfEdges.Last().Source != u.Id || stackOfEdges.Last().Target != adjacent.Id)
                     {
                         var e = stackOfEdges.Last();
-                        classerIdOfVertex[e.A] = count;
-                        classerIdOfVertex[e.B] = count;
+                        classerIdOfVertex[e.Source] = count;
+                        classerIdOfVertex[e.Target] = count;
                         stackOfEdges.RemoveLast();
                     }
                     var edge = stackOfEdges.Last();
-                    classerIdOfVertex[edge.A] = count;
-                    classerIdOfVertex[edge.B] = count;
+                    classerIdOfVertex[edge.Source] = count;
+                    classerIdOfVertex[edge.Target] = count;
                     stackOfEdges.RemoveLast();
 
                     count++;
                 }
             }
-
         }
-
-
     }
 }

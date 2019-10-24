@@ -5,13 +5,13 @@ namespace BCCCompact.Models
 {
     public class Classer
     {
-        public HashSet<Vertex> Vertices = new HashSet<Vertex>();
+        public HashSet<BCCVertex> Vertices = new HashSet<BCCVertex>();
         /// <summary>
         /// in each classer some vertices are boundry and connect his classer to some other classers
         /// "adjacenty" is a dictionary that show adjacents of each boundry vertex
         /// </summary>
-        public Dictionary<Vertex, HashSet<Classer>> Adjacenty = new Dictionary<Vertex, HashSet<Classer>>();
-        public Dictionary<Vertex, double> AnglesOfInnerVertices = new Dictionary<Vertex, double>();
+        public Dictionary<BCCVertex, HashSet<Classer>> Adjacenty = new Dictionary<BCCVertex, HashSet<Classer>>();
+        public Dictionary<BCCVertex, double> AnglesOfInnerVertices = new Dictionary<BCCVertex, double>();
         public HashSet<Classer> Children = new HashSet<Classer>();
         public Classer Parent;
         public double XCenter;
@@ -20,12 +20,12 @@ namespace BCCCompact.Models
         public double ExternallRadius;
         public double EdgeToParentLenght;
         public double AngleShareFromParentCenter;
-        public Vertex VertexConnectorToParent;
+        public BCCVertex VertexConnectorToParent;
         public double AngleToConnectToParent;
         public double FreeAngleAround;
 
 
-        public void AddAdjacenty(Vertex vertex, Classer classer)
+        public void AddAdjacenty(BCCVertex vertex, Classer classer)
         {
             if (!Adjacenty.ContainsKey(vertex))
             {
@@ -35,7 +35,7 @@ namespace BCCCompact.Models
             Adjacenty[vertex].Add(classer);
         }
 
-        public void PickVertexByAngle(Vertex vertex, double angle)
+        public void PickVertexByAngle(BCCVertex vertex, double angle)
         {
             if (angle > 2 * Math.PI)
             {

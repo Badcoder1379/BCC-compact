@@ -8,7 +8,6 @@ namespace BCCCompact.Models
     {
         private readonly Classer largestClasser;
 
-
         public AroundCirclePicker(Component component) => this.largestClasser = component.LargestClasser;
 
         /// <summary>
@@ -29,10 +28,10 @@ namespace BCCCompact.Models
             }
         }
 
-        private LinkedList<Vertex> GetAdjacentyVerticesList(Classer currentClasser)
+        private LinkedList<BCCVertex> GetAdjacentyVerticesList(Classer currentClasser)
         {
             var adjacenty = currentClasser.Adjacenty;
-            var VerticesList = new LinkedList<Vertex>(adjacenty.Keys);
+            var VerticesList = new LinkedList<BCCVertex>(adjacenty.Keys);
 
             if (currentClasser.Parent != null)
             {
@@ -45,7 +44,7 @@ namespace BCCCompact.Models
 
         private void PickVerticesAroundCircle(Classer currentClasser)
         {
-            var otherVertices = new HashSet<Vertex>(currentClasser.Vertices);
+            var otherVertices = new HashSet<BCCVertex>(currentClasser.Vertices);
             var adjacenty = currentClasser.Adjacenty;
             var VerticesList = GetAdjacentyVerticesList(currentClasser);
 
@@ -57,23 +56,25 @@ namespace BCCCompact.Models
             else
             {
                 double angleCounter = Math.PI + currentClasser.AngleToConnectToParent;
-                foreach (Vertex vertex in VerticesList)
+
+                foreach (var vertex in VerticesList)
                 {
                     var classers = adjacenty[vertex];
                     angleCounter += currentClasser.FreeAngleAround / (VerticesList.Count + 1);
                     double firstAngle = angleCounter;
-                    foreach (Classer child in classers.Where(x => x != currentClasser.Parent))
+
+                    foreach (var child in classers.Where(x => x != currentClasser.Parent))
                     {
                         double shareAngle = child.AngleShareFromParentCenter;
                         angleCounter += shareAngle / 2;
                         child.AngleToConnectToParent = angleCounter;
                         angleCounter += shareAngle / 2;
                     }
+
                     currentClasser.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
                     otherVertices.Remove(vertex);
                 }
             }
-
 
             SetSomeVerticesAroundAClasser(currentClasser, otherVertices.ToList());
             Arrange(currentClasser);
@@ -81,17 +82,18 @@ namespace BCCCompact.Models
 
         private void Arrange(Classer currentClasser)
         {
-            var verticesList = new List<Vertex>(currentClasser.AnglesOfInnerVertices.Keys);
+            var verticesList = new List<BCCVertex>(currentClasser.AnglesOfInnerVertices.Keys);
             verticesList.Sort();
 
             SetSomeVerticesAroundAClasser(currentClasser, verticesList);
         }
 
-        private void SetSomeVerticesAroundAClasser(Classer classer, List<Vertex> vertices)
+        private void SetSomeVerticesAroundAClasser(Classer classer, List<BCCVertex> vertices)
         {
             var count = vertices.Count;
             var i = 0;
-            foreach (Vertex vertex in vertices)
+
+            foreach (var vertex in vertices)
             {
                 classer.PickVertexByAngle(vertex, Math.PI * 2 * i / count);
                 i++;
