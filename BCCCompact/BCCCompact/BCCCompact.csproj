@@ -129,25 +129,22 @@
     <Compile Include="BCC\Engines\ListsMerger.cs" />
     <Compile Include="BCC\PreProcess\Classering\Path.cs" />
     <Compile Include="BCC\BCC.cs" />
-    <Compile Include="Models\Compacts\Compact.cs" />
-    <Compile Include="Models\Compacts\Squarillity\SQR.cs" />
-    <Compile Include="Models\Compacts\Squarillity\SquariPicker.cs" />
-    <Compile Include="Models\Elemans\CompactResult.cs" />
-    <Compile Include="Models\Elemans\Component.cs" />
+    <Compile Include="Models\CompactResult.cs" />
+    <Compile Include="Models\Component.cs" />
     <Compile Include="BCC\Engines\ComponentMaker\ComponentMaker.cs" />
     <Compile Include="BCC\Engines\ComponentSetter.cs" />
-    <Compile Include="Models\Elemans\Edge.cs" />
-    <Compile Include="Models\Elemans\Graph.cs" />
-    <Compile Include="Models\Elemans\Importer.cs" />
-    <Compile Include="Models\Elemans\Location.cs" />
+    <Compile Include="Models\Edge.cs" />
+    <Compile Include="Models\Graph.cs" />
+    <Compile Include="Models\Importer.cs" />
+    <Compile Include="Models\Location.cs" />
     <Compile Include="BCC\Engines\LocationCalculater.cs" />
     <Compile Include="BCC\PreProcess\Classering\BccAlgrtm.cs" />
-    <Compile Include="Models\Elemans\Classer.cs" />
+    <Compile Include="Models\Classer.cs" />
     <Compile Include="BCC\PreProcess\Classering\ClasserMaker.cs" />
     <Compile Include="BCC\PreProcess\ClasserTreeMaker.cs" />
     <Compile Include="BCC\Engines\SizeCalculater.cs" />
-    <Compile Include="Models\Elemans\StarGraph.cs" />
-    <Compile Include="Models\Elemans\Vertex.cs" />
+    <Compile Include="Models\StarGraph.cs" />
+    <Compile Include="Models\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
