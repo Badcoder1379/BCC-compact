@@ -3,53 +3,54 @@ using System.Linq;
 
 namespace BCCCompact.Models
 {
-    class ClasserMaker
+    class ClusterMaker
     {
         private readonly Component component;
-        private readonly HashSet<Classer> classers = new HashSet<Classer>();
-        private Classer largestClasser;
-        private Dictionary<BCCVertex, int> vertexToClasserId = new Dictionary<BCCVertex, int>();
+        private readonly HashSet<Cluster> clusters = new HashSet<Cluster>();
+        private Cluster largestCluster;
+        private Dictionary<BCCVertex, int> vertexToClusterId = new Dictionary<BCCVertex, int>();
 
-        public ClasserMaker(Component component)
+        public ClusterMaker(Component component)
         {
             this.component = component;
         }
 
         /// <summary>
-        /// this method gets a component and returns all classers and finds largest classer 
+        /// this method gets a component and returns all clusters and finds largest cluster 
         /// </summary>
         /// <param name="component"></param>
         public void Process()
         {
-            ClasserLabelTagging();
-            ConstructClassers();
-            component.LargestClasser = largestClasser;
+            ClusterLabelTagging();
+            ConstructClusters();
+            component.LargestCluster = largestCluster;
         }
 
         /// <summary>
-        /// this method will make classers from the data that has classer id of each vertex 
+        /// this method will make clusters from the data that has cluster id of each vertex 
         /// </summary>
-        private void ConstructClassers()
+        private void ConstructClusters()
         {
-            largestClasser = new Classer();
-            var classerIdToClasser = new Dictionary<int, Classer>();
+            largestCluster = new Cluster();
+            var clusterIdToCluster = new Dictionary<int, Cluster>();
+
             foreach (var vertex in component.Vertices)
             {
-                int classerId = vertexToClasserId[vertex];
+                int clusterId = vertexToClusterId[vertex];
 
-                if (!classerIdToClasser.ContainsKey(classerId))
+                if (!clusterIdToCluster.ContainsKey(clusterId))
                 {
-                    classerIdToClasser[classerId] = new Classer();
-                    classers.Add(classerIdToClasser[classerId]);
+                    clusterIdToCluster[clusterId] = new Cluster();
+                    clusters.Add(clusterIdToCluster[clusterId]);
                 }
 
-                var classer = classerIdToClasser[classerId];
-                classer.Vertices.Add(vertex);
-                vertex.Classer = classer;
+                var cluster = clusterIdToCluster[clusterId];
+                cluster.Vertices.Add(vertex);
+                vertex.Cluster = cluster;
 
-                if (classer.Vertices.Count > largestClasser.Vertices.Count)
+                if (cluster.Vertices.Count > largestCluster.Vertices.Count)
                 {
-                    largestClasser = classer;
+                    largestCluster = cluster;
                 }
             }
         }
@@ -57,13 +58,13 @@ namespace BCCCompact.Models
         /// <summary>
         /// this method will tag a id number on each vertex
         /// </summary>
-        private void ClasserLabelTagging()
+        private void ClusterLabelTagging()
         {
             var ARandomVertex = component.Vertices.ToList().First();
-            vertexToClasserId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertex);
-            ConstructClassers();
-            var ARandomVertexFromLargestClasser = largestClasser.Vertices.ToList().First();
-            vertexToClasserId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertexFromLargestClasser);
+            vertexToClusterId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertex);
+            ConstructClusters();
+            var ARandomVertexFromLargestCluster = largestCluster.Vertices.ToList().First();
+            vertexToClusterId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertexFromLargestCluster);
         }
     }
 }

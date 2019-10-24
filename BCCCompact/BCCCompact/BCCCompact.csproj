@@ -133,7 +133,7 @@
     <Compile Include="BCC Compact\Models\Location.cs" />
     <Compile Include="BCC Compact\logic\Engines\LocationCalculater.cs" />
     <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\BCCAlgorithm.cs" />
-    <Compile Include="BCC Compact\Models\Classer.cs" />
+    <Compile Include="BCC Compact\Models\Cluster.cs" />
     <Compile Include="BCC Compact\logic\Engines\PreProcess\Classering\ClasserMaker.cs" />
     <Compile Include="BCC Compact\logic\Engines\PreProcess\ClasserTreeMaker.cs" />
     <Compile Include="BCC Compact\logic\Engines\SizeCalculater.cs" />

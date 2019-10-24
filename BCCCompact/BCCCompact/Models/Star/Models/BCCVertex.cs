@@ -9,8 +9,8 @@ namespace BCCCompact.Models
         public HashSet<BCCVertex> Adjacents = new HashSet<BCCVertex>();
         public double X;
         public double Y;
-        public double angleInCluster;
-        public Cluster Cluster;
+        public double angleInClasser;
+        public Classer Classer;
 
         public BCCVertex(int Id)
         {
@@ -35,7 +35,7 @@ namespace BCCCompact.Models
 
         public int CompareTo(BCCVertex other)
         {
-            double dif = angleInCluster - other.angleInCluster;
+            double dif = angleInClasser - other.angleInClasser;
             return (int)(100000 * dif);
         }
 

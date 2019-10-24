@@ -1,5 +1,6 @@
 ﻿using BCCCompact.Models.BccAlgorithm;
 using System.Collections.Generic;
+
 using System.Linq;
 
 namespace BCCCompact.Models
@@ -10,7 +11,7 @@ namespace BCCCompact.Models
         private Dictionary<BCCVertex, int> low = new Dictionary<BCCVertex, int>();
         private Dictionary<BCCVertex, BCCVertex> parent = new Dictionary<BCCVertex, BCCVertex>();
         private int count = 0;
-        private Dictionary<int, int> clusterIdOfVertex = new Dictionary<int, int>();
+        private Dictionary<int, int> classerIdOfVertex = new Dictionary<int, int>();
         private LinkedList<BCCEdge> stackOfEdges = new LinkedList<BCCEdge>();
         private BCCPath path = new BCCPath();
         private int time = 0;
@@ -22,7 +23,7 @@ namespace BCCCompact.Models
             disc = new Dictionary<BCCVertex, int>();
             low = new Dictionary<BCCVertex, int>();
             parent = new Dictionary<BCCVertex, BCCVertex>();
-            clusterIdOfVertex = new Dictionary<int, int>();
+            classerIdOfVertex = new Dictionary<int, int>();
             
             foreach (var vertex in component.Vertices)
             {
@@ -35,7 +36,7 @@ namespace BCCCompact.Models
             return GetResultOfNoding(component);
         }
         /// <summary>
-        /// start from selected vertex and try to discover the clusters with looking up from this vertex
+        /// start from selected vertex and try to discover the classers with looking up from this vertex
         /// </summary>
         /// <param name="startingVertex"></param>
         private void NodingFromThisVertex(BCCVertex startingVertex)
@@ -54,14 +55,14 @@ namespace BCCCompact.Models
             while (stackOfEdges.Count > 0)
             {
                 var edge = stackOfEdges.Last();
-                clusterIdOfVertex[edge.Source] = count;
-                clusterIdOfVertex[edge.Target] = count;
+                classerIdOfVertex[edge.Source] = count;
+                classerIdOfVertex[edge.Target] = count;
                 stackOfEdges.RemoveLast();
             }
         }
 
         /// <summary>
-        /// return a dictionary that map each vertex to id number of his cluster
+        /// return a dictionary that map each vertex to id number of his classer
         /// </summary>
         /// <param name="component"></param>
         /// <returns></returns>
@@ -72,15 +73,16 @@ namespace BCCCompact.Models
             
             foreach (var vertex in component.Vertices)
             {
-                if (clusterIdOfVertex.ContainsKey(vertex.Id))
+                if (classerIdOfVertex.ContainsKey(vertex.Id))
                 {
-                    result[vertex] = clusterIdOfVertex[vertex.Id];
+                    result[vertex] = classerIdOfVertex[vertex.Id];
                 }
                 else
                 {
                     i++;
                     result[vertex] = -1;
                 }
+
             }
 
             return result;
@@ -129,13 +131,13 @@ namespace BCCCompact.Models
                     while (stackOfEdges.Last().Source != u.Id || stackOfEdges.Last().Target != adjacent.Id)
                     {
                         var e = stackOfEdges.Last();
-                        clusterIdOfVertex[e.Source] = count;
-                        clusterIdOfVertex[e.Target] = count;
+                        classerIdOfVertex[e.Source] = count;
+                        classerIdOfVertex[e.Target] = count;
                         stackOfEdges.RemoveLast();
                     }
                     var edge = stackOfEdges.Last();
-                    clusterIdOfVertex[edge.Source] = count;
-                    clusterIdOfVertex[edge.Target] = count;
+                    classerIdOfVertex[edge.Source] = count;
+                    classerIdOfVertex[edge.Target] = count;
                     stackOfEdges.RemoveLast();
 
                     count++;

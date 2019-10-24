@@ -15,21 +15,21 @@ namespace BCCCompact.Models
 
         public void Calcute()
         {
-            CalcuteClusters(component.LargestCluster);
-            CalcuteVertices(component.LargestCluster);
+            CalcuteClassers(component.LargestClasser);
+            CalcuteVertices(component.LargestClasser);
         }
 
         /// <summary>
         /// now we have angles and lengths and its easy to calcute all locations with sin and cos
         /// </summary>
         /// <param name="component"></param>
-        private void CalcuteClusters(Cluster currentCluster)
+        private void CalcuteClassers(Classer currentClasser)
         {
-            foreach (var child in currentCluster.Children)
+            foreach (var child in currentClasser.Children)
             {
-                child.XCenter = currentCluster.XCenter + child.EdgeToParentLenght * Math.Sin(child.AngleToConnectToParent);
-                child.YCenter = currentCluster.YCenter + child.EdgeToParentLenght * Math.Cos(child.AngleToConnectToParent);
-                CalcuteClusters(child);
+                child.XCenter = currentClasser.XCenter + child.EdgeToParentLenght * Math.Sin(child.AngleToConnectToParent);
+                child.YCenter = currentClasser.YCenter + child.EdgeToParentLenght * Math.Cos(child.AngleToConnectToParent);
+                CalcuteClassers(child);
             }
         }
 
@@ -37,36 +37,36 @@ namespace BCCCompact.Models
         /// now we have angles and lengths and its easy to calcute location with sin and cos
         /// </summary>
         /// <param name="component"></param>
-        private void CalcuteVertices(Cluster currentCluster)
+        private void CalcuteVertices(Classer currentClasser)
         {
-            var vertex_angle = currentCluster.AnglesOfInnerVertices;
+            var vertex_angle = currentClasser.AnglesOfInnerVertices;
 
             if (vertex_angle.Count == 1)
             {
-                SetOwnVertexLocation(currentCluster);
+                SetOwnVertexLocation(currentClasser);
             }
             else
             {
                 foreach (var vertex in vertex_angle.Keys)
                 {
                     double angle = vertex_angle[vertex];
-                    double x = currentCluster.XCenter + currentCluster.InternallRadius * Math.Sin(angle) * bounderMLT;
-                    double y = currentCluster.YCenter + currentCluster.InternallRadius * Math.Cos(angle) * bounderMLT;
+                    double x = currentClasser.XCenter + currentClasser.InternallRadius * Math.Sin(angle) * bounderMLT;
+                    double y = currentClasser.YCenter + currentClasser.InternallRadius * Math.Cos(angle) * bounderMLT;
                     vertex.SetLocation(x, y);
                 }
             }
 
-            foreach (var child in currentCluster.Children)
+            foreach (var child in currentClasser.Children)
             {
                 CalcuteVertices(child);
             }
         }
 
-        private void SetOwnVertexLocation(Cluster currentCluster)
+        private void SetOwnVertexLocation(Classer currentClasser)
         {
-            var vertex = currentCluster.AnglesOfInnerVertices.Keys.ToList().First();
-            double x = currentCluster.XCenter;
-            double y = currentCluster.YCenter;
+            var vertex = currentClasser.AnglesOfInnerVertices.Keys.ToList().First();
+            double x = currentClasser.XCenter;
+            double y = currentClasser.YCenter;
             vertex.SetLocation(x, y);
         }
     }

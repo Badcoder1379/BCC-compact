@@ -14,10 +14,10 @@ namespace BCCCompact.Models
         public ComponentMaker(BCCGraph graph)
         {
             this.graph = graph;
-            
             foreach (var vertex in graph.Vertices)
             {
-                visitedVertices.Add(vertex, false);
+                visitedVertices[vertex] = false;
+
             }
         }
 

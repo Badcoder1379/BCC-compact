@@ -5,6 +5,6 @@ namespace BCCCompact.Models
     public class Component
     {
         public HashSet<BCCVertex> Vertices = new HashSet<BCCVertex>();
-        public Cluster LargestCluster;
+        public Classer LargestClasser;
     }
 }

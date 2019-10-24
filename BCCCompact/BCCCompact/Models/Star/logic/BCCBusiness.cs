@@ -23,10 +23,10 @@ namespace BCCCompact.BCC_Compact.logic
 
             foreach (var component in components)
             {
-                new ClusterMaker(component).Process();
-                new ClusterTreeMaker(component).Process();
+                new ClasserMaker(component).Process();
+                new ClasserTreeMaker(component).Process();
                 new SizeCalculater(component).Process();
-                new AroundCirclePicker(component).PickClusters();
+                new AroundCirclePicker(component).PickClassers();
             }
 
             new ComponentSetter(components).SetComponents();

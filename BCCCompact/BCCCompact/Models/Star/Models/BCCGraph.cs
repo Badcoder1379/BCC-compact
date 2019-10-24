@@ -4,7 +4,7 @@ namespace BCCCompact.Models
 {
     public class BCCGraph
     {
-        public int VerticesCount;
+        public int V;
         public List<BCCVertex> Vertices = new List<BCCVertex>();
 
         private void AddEdge(int v, int w)
@@ -14,8 +14,8 @@ namespace BCCCompact.Models
 
         public BCCGraph(int v, List<BCCEdge> edges)
         {
-            VerticesCount = v;
-            for (int i = 0; i < VerticesCount; i++)
+            V = v;
+            for (int i = 0; i < V; i++)
             {
                 Vertices.Add(new BCCVertex(i));
             }

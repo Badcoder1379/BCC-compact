@@ -3,26 +3,26 @@ using System.Linq;
 
 namespace BCCCompact.Models
 {
-    class ClusterTreeMaker
+    class ClasserTreeMaker
     {
-        private readonly Cluster FatherCluster;
+        private readonly Classer FatherClasser;
         private readonly Stack<BCCVertex> stackOfVertices = new Stack<BCCVertex>();
         private readonly HashSet<BCCVertex> visitedVertices = new HashSet<BCCVertex>();
-        private readonly HashSet<Cluster> visitedClusters = new HashSet<Cluster>();
+        private readonly HashSet<Classer> visitedClassers = new HashSet<Classer>();
 
-        public ClusterTreeMaker(Component component)
+        public ClasserTreeMaker(Component component)
         {
-            FatherCluster = component.LargestCluster;
+            FatherClasser = component.LargestClasser;
         }
 
         /// <summary>
-        /// this method gets a component and returns a tree of clusters that each cluster has a lot of vertices
+        /// this method gets a component and returns a tree of classers that each classer has a lot of vertices
         /// </summary>
         /// <param name="component"></param>
         public void Process()
         {
-            var randomVertex = FatherCluster.Vertices.ToList().First();
-            visitedClusters.Add(randomVertex.Cluster);
+            var randomVertex = FatherClasser.Vertices.ToList().First();
+            visitedClassers.Add(randomVertex.Classer);
             visitedVertices.Add(randomVertex);
             stackOfVertices.Push(randomVertex);
             while (stackOfVertices.Count > 0)
@@ -41,17 +41,17 @@ namespace BCCCompact.Models
             foreach (var adjacent in current.Adjacents.Where(x => !visitedVertices.Contains(x)))
             {
                 visitedVertices.Add(adjacent);
-                var cluster1 = current.Cluster;
-                var cluster2 = adjacent.Cluster;
+                var classer1 = current.Classer;
+                var classer2 = adjacent.Classer;
 
-                if (cluster1 != cluster2 && !visitedClusters.Contains(cluster2))
+                if (classer1 != classer2 && !visitedClassers.Contains(classer2))
                 {
-                    cluster1.AddAdjacenty(current, cluster2);
-                    cluster2.AddAdjacenty(adjacent, cluster1);
-                    cluster1.Children.Add(cluster2);
-                    cluster2.Parent = cluster1;
-                    cluster2.VertexConnectorToParent = adjacent;
-                    visitedClusters.Add(cluster2);
+                    classer1.AddAdjacenty(current, classer2);
+                    classer2.AddAdjacenty(adjacent, classer1);
+                    classer1.Children.Add(classer2);
+                    classer2.Parent = classer1;
+                    classer2.VertexConnectorToParent = adjacent;
+                    visitedClassers.Add(classer2);
                 }
 
                 stackOfVertices.Push(adjacent);

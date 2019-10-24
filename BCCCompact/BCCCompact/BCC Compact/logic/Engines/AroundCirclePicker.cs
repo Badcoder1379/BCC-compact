@@ -6,64 +6,64 @@ namespace BCCCompact.Models
 {
     public class AroundCirclePicker
     {
-        private readonly Classer largestClasser;
+        private readonly Cluster largestCluster;
 
-        public AroundCirclePicker(Component component) => this.largestClasser = component.LargestClasser;
+        public AroundCirclePicker(Component component) => this.largestCluster = component.LargestCluster;
 
         /// <summary>
-        /// now for each classer we know size and radius and used angle and length and ... 
-        /// this method will pick children of each parent classer around his and vertices of each classer too
+        /// now for each cluster we know size and radius and used angle and length and ... 
+        /// this method will pick children of each parent cluster around his and vertices of each cluster too
         /// </summary>
         /// <param name="component"></param>
-        public void PickClassers() => Pick(largestClasser);
+        public void PickClusters() => Pick(largestCluster);
 
         
-        private void Pick(Classer currentClasser)
+        private void Pick(Cluster currentCluster)
         {
-            PickVerticesAroundCircle(currentClasser);
+            PickVerticesAroundCircle(currentCluster);
 
-            foreach (Classer child in currentClasser.Children)
+            foreach (Cluster child in currentCluster.Children)
             {
                 Pick(child);
             }
         }
 
-        private LinkedList<BCCVertex> GetAdjacentyVerticesList(Classer currentClasser)
+        private LinkedList<BCCVertex> GetAdjacentyVerticesList(Cluster currentCluster)
         {
-            var adjacenty = currentClasser.Adjacenty;
+            var adjacenty = currentCluster.Adjacenty;
             var VerticesList = new LinkedList<BCCVertex>(adjacenty.Keys);
 
-            if (currentClasser.Parent != null)
+            if (currentCluster.Parent != null)
             {
-                VerticesList.Remove(currentClasser.VertexConnectorToParent);
-                VerticesList.AddFirst(currentClasser.VertexConnectorToParent);
+                VerticesList.Remove(currentCluster.VertexConnectorToParent);
+                VerticesList.AddFirst(currentCluster.VertexConnectorToParent);
             }
 
             return VerticesList;
         }
 
-        private void PickVerticesAroundCircle(Classer currentClasser)
+        private void PickVerticesAroundCircle(Cluster currentCluster)
         {
-            var otherVertices = new HashSet<BCCVertex>(currentClasser.Vertices);
-            var adjacenty = currentClasser.Adjacenty;
-            var VerticesList = GetAdjacentyVerticesList(currentClasser);
+            var otherVertices = new HashSet<BCCVertex>(currentCluster.Vertices);
+            var adjacenty = currentCluster.Adjacenty;
+            var VerticesList = GetAdjacentyVerticesList(currentCluster);
 
-            if (currentClasser.Children.Count == 1 && currentClasser.Vertices.Count == 1)
+            if (currentCluster.Children.Count == 1 && currentCluster.Vertices.Count == 1)
             {
-                var child = currentClasser.Children.ToList().First();
-                child.AngleToConnectToParent = currentClasser.AngleToConnectToParent;
+                var child = currentCluster.Children.ToList().First();
+                child.AngleToConnectToParent = currentCluster.AngleToConnectToParent;
             }
             else
             {
-                double angleCounter = Math.PI + currentClasser.AngleToConnectToParent;
+                double angleCounter = Math.PI + currentCluster.AngleToConnectToParent;
 
                 foreach (var vertex in VerticesList)
                 {
-                    var classers = adjacenty[vertex];
-                    angleCounter += currentClasser.FreeAngleAround / (VerticesList.Count + 1);
+                    var clusters = adjacenty[vertex];
+                    angleCounter += currentCluster.FreeAngleAround / (VerticesList.Count + 1);
                     double firstAngle = angleCounter;
 
-                    foreach (var child in classers.Where(x => x != currentClasser.Parent))
+                    foreach (var child in clusters.Where(x => x != currentCluster.Parent))
                     {
                         double shareAngle = child.AngleShareFromParentCenter;
                         angleCounter += shareAngle / 2;
@@ -71,31 +71,31 @@ namespace BCCCompact.Models
                         angleCounter += shareAngle / 2;
                     }
 
-                    currentClasser.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
+                    currentCluster.PickVertexByAngle(vertex, (firstAngle + angleCounter) / 2);
                     otherVertices.Remove(vertex);
                 }
             }
 
-            SetSomeVerticesAroundAClasser(currentClasser, otherVertices.ToList());
-            Arrange(currentClasser);
+            SetSomeVerticesAroundACluster(currentCluster, otherVertices.ToList());
+            Arrange(currentCluster);
         }
 
-        private void Arrange(Classer currentClasser)
+        private void Arrange(Cluster currentCluster)
         {
-            var verticesList = new List<BCCVertex>(currentClasser.AnglesOfInnerVertices.Keys);
+            var verticesList = new List<BCCVertex>(currentCluster.AnglesOfInnerVertices.Keys);
             verticesList.Sort();
 
-            SetSomeVerticesAroundAClasser(currentClasser, verticesList);
+            SetSomeVerticesAroundACluster(currentCluster, verticesList);
         }
 
-        private void SetSomeVerticesAroundAClasser(Classer classer, List<BCCVertex> vertices)
+        private void SetSomeVerticesAroundACluster(Cluster cluster, List<BCCVertex> vertices)
         {
             var count = vertices.Count;
             var i = 0;
 
             foreach (var vertex in vertices)
             {
-                classer.PickVertexByAngle(vertex, Math.PI * 2 * i / count);
+                cluster.PickVertexByAngle(vertex, Math.PI * 2 * i / count);
                 i++;
             }
         }

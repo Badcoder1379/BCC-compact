@@ -20,20 +20,20 @@ namespace BCCCompact.Models
         {
             var largest = GetLargestComponent(components);
             double sumOfSizes = GetSumOfSizes(components);
-            sumOfSizes -= largest.LargestCluster.ExternallRadius;
+            sumOfSizes -= largest.LargestClasser.ExternallRadius;
 
             double angleCounter = 0;
 
             foreach (var child in components.Where(x => x != largest))
             {
-                double angle = Math.PI * 2 * (child.LargestCluster.ExternallRadius / sumOfSizes);
+                double angle = Math.PI * 2 * (child.LargestClasser.ExternallRadius / sumOfSizes);
                 angle = Math.Min(angle, Math.PI / 2);
                 angle /= 2;
                 angleCounter += angle;
-                double lenght = child.LargestCluster.ExternallRadius / Math.Sin(angle / 2);
-                lenght = Math.Max(lenght, largest.LargestCluster.ExternallRadius + child.LargestCluster.ExternallRadius);
-                child.LargestCluster.XCenter = lenght * Math.Sin(angleCounter);
-                child.LargestCluster.YCenter = lenght * Math.Cos(angleCounter);
+                double lenght = child.LargestClasser.ExternallRadius / Math.Sin(angle / 2);
+                lenght = Math.Max(lenght, largest.LargestClasser.ExternallRadius + child.LargestClasser.ExternallRadius);
+                child.LargestClasser.XCenter = lenght * Math.Sin(angleCounter);
+                child.LargestClasser.YCenter = lenght * Math.Cos(angleCounter);
                 angleCounter += angle;
             }
         }
@@ -44,7 +44,7 @@ namespace BCCCompact.Models
 
             foreach (var component in components)
             {
-                sumOfSizes += component.LargestCluster.ExternallRadius;
+                sumOfSizes += component.LargestClasser.ExternallRadius;
             }
 
             return sumOfSizes;
@@ -54,10 +54,10 @@ namespace BCCCompact.Models
         {
             var largest = new Component
             {
-                LargestCluster = new Cluster()
+                LargestClasser = new Classer()
             };
 
-            foreach (var component in components.Where(x => x.LargestCluster.ExternallRadius > largest.LargestCluster.ExternallRadius))
+            foreach (var component in components.Where(x => x.LargestClasser.ExternallRadius > largest.LargestClasser.ExternallRadius))
             {
                 largest = component;
             }

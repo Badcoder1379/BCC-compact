@@ -5,7 +5,7 @@ namespace BCCCompact.Models.BccAlgorithm
     public class BCCPath
     {
         private readonly HashSet<BCCVertex> vertices = new HashSet<BCCVertex>();
-        private readonly Stack<BCCVertex> verticesStack = new Stack<BCCVertex>();
+        private readonly Stack<BCCVertex> list = new Stack<BCCVertex>();
         private readonly Dictionary<BCCVertex, int> children = new Dictionary<BCCVertex, int>();
 
         /// <summary>
@@ -15,7 +15,7 @@ namespace BCCCompact.Models.BccAlgorithm
         public void Push(BCCVertex vertex)
         {
             vertices.Add(vertex);
-            verticesStack.Push(vertex);
+            list.Push(vertex);
             children[vertex] = 0;
         }
 
@@ -35,7 +35,7 @@ namespace BCCCompact.Models.BccAlgorithm
         /// <returns></returns>
         public BCCVertex Peek()
         {
-            return verticesStack.Peek();
+            return list.Peek();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace BCCCompact.Models.BccAlgorithm
         /// <returns></returns>
         public BCCVertex Pop()
         {
-            var vertex = verticesStack.Pop();
+            var vertex = list.Pop();
             vertices.Remove(vertex);
             return vertex;
         }
@@ -64,7 +64,7 @@ namespace BCCCompact.Models.BccAlgorithm
         /// <returns></returns>
         public int Children()
         {
-            return children[verticesStack.Peek()];
+            return children[list.Peek()];
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace BCCCompact.Models.BccAlgorithm
         /// </summary>
         public void ChildrenUp()
         {
-            children[verticesStack.Peek()] = children[verticesStack.Peek()] + 1;
+            children[list.Peek()] = children[list.Peek()] + 1;
         }
     }
 }
