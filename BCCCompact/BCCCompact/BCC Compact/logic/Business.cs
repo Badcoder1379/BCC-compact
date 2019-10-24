@@ -40,7 +40,6 @@ namespace BCCCompact.BCC_Compact.logic
             {
                 new LocationCalculater(component).Calcute();
             }
-            graph.ConstructResults();
         }
     }
 }

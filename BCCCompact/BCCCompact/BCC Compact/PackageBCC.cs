@@ -19,20 +19,16 @@ namespace BCCCompact.Models
             this.graph = graph;
         }
 
-
-
-        /// <summary>
-        /// this method give the gragh and set the vertices locations
-        /// </summary>
-        /// <param name="graph"></param>
+        
         public void Process()
         {
             ConvertData();
             var business = new Business(bccGraph);
             business.Process();
+            ConstrucResult();
         }
 
-        public void ConvertData()
+        private void ConvertData()
         {
             int v = graph.Nodes.Count;
             var edges = new List<BCCEdge>();
@@ -55,9 +51,15 @@ namespace BCCCompact.Models
             guidToInt[guid] = newId;
         }
 
-        public void ConstrucResult()
+        private void ConstrucResult()
         {
-
+            foreach (var node in graph.Nodes)
+            {
+                var guid = node.NodeId;
+                Vertex vertex = bccGraph.GetVertexById(guidToInt[guid]);
+                node.X = vertex.X;
+                node.Y = vertex.Y;
+            }
         }
 
     }
