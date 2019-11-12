@@ -3,21 +3,22 @@ using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
-    public class BCCVertex : IEquatable<BCCVertex>, IComparable<BCCVertex>
+    public class BccVertex : IEquatable<BccVertex>, IComparable<BccVertex>
     {
-        public int Id;
-        public HashSet<BCCVertex> Adjacents = new HashSet<BCCVertex>();
-        public double X;
-        public double Y;
-        public double angleInCluster;
-        public Cluster Cluster;
+        public int Id { get; set; }
+        public HashSet<BccVertex> Adjacents { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double AngleInCluster { get; set; }
+        public Cluster Cluster { get; set; }
 
-        public BCCVertex(int Id)
+        public BccVertex(int Id)
         {
             this.Id = Id;
+            Adjacents = new HashSet<BccVertex>();
         }
 
-        public void AddAdjacent(BCCVertex vertex)
+        public void AddAdjacent(BccVertex vertex)
         {
             Adjacents.Add(vertex);
         }
@@ -28,16 +29,15 @@ namespace BCCCompact.Models
             this.Y = Y;
         }
 
-        public bool Equals(BCCVertex other)
+        public bool Equals(BccVertex other)
         {
             return other.Id == Id;
         }
 
-        public int CompareTo(BCCVertex other)
+        public int CompareTo(BccVertex other)
         {
-            double dif = angleInCluster - other.angleInCluster;
+            double dif = AngleInCluster - other.AngleInCluster;
             return (int)(100000 * dif);
         }
-
     }
 }

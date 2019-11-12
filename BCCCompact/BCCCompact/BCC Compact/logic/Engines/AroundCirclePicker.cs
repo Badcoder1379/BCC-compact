@@ -17,7 +17,6 @@ namespace BCCCompact.Models
         /// <param name="component"></param>
         public void PickClusters() => Pick(largestCluster);
 
-        
         private void Pick(Cluster currentCluster)
         {
             PickVerticesAroundCircle(currentCluster);
@@ -28,10 +27,10 @@ namespace BCCCompact.Models
             }
         }
 
-        private LinkedList<BCCVertex> GetAdjacentyVerticesList(Cluster currentCluster)
+        private LinkedList<BccVertex> GetAdjacentyVerticesList(Cluster currentCluster)
         {
             var adjacenty = currentCluster.Adjacenty;
-            var VerticesList = new LinkedList<BCCVertex>(adjacenty.Keys);
+            var VerticesList = new LinkedList<BccVertex>(adjacenty.Keys);
 
             if (currentCluster.Parent != null)
             {
@@ -44,13 +43,13 @@ namespace BCCCompact.Models
 
         private void PickVerticesAroundCircle(Cluster currentCluster)
         {
-            var otherVertices = new HashSet<BCCVertex>(currentCluster.Vertices);
+            var otherVertices = new HashSet<BccVertex>(currentCluster.Vertices);
             var adjacenty = currentCluster.Adjacenty;
             var VerticesList = GetAdjacentyVerticesList(currentCluster);
 
             if (currentCluster.Children.Count == 1 && currentCluster.Vertices.Count == 1)
             {
-                var child = currentCluster.Children.ToList().First();
+                var child = currentCluster.Children.First();
                 child.AngleToConnectToParent = currentCluster.AngleToConnectToParent;
             }
             else
@@ -82,13 +81,13 @@ namespace BCCCompact.Models
 
         private void Arrange(Cluster currentCluster)
         {
-            var verticesList = new List<BCCVertex>(currentCluster.AnglesOfInnerVertices.Keys);
+            var verticesList = new List<BccVertex>(currentCluster.AnglesOfInnerVertices.Keys);
             verticesList.Sort();
 
             SetSomeVerticesAroundACluster(currentCluster, verticesList);
         }
 
-        private void SetSomeVerticesAroundACluster(Cluster cluster, List<BCCVertex> vertices)
+        private void SetSomeVerticesAroundACluster(Cluster cluster, List<BccVertex> vertices)
         {
             var count = vertices.Count;
             var i = 0;

@@ -6,8 +6,8 @@ namespace BCCCompact.Models
     class ClusterTreeMaker
     {
         private readonly Cluster FatherCluster;
-        private readonly Stack<BCCVertex> stackOfVertices = new Stack<BCCVertex>();
-        private readonly HashSet<BCCVertex> visitedVertices = new HashSet<BCCVertex>();
+        private readonly Stack<BccVertex> stackOfVertices = new Stack<BccVertex>();
+        private readonly HashSet<BccVertex> visitedVertices = new HashSet<BccVertex>();
         private readonly HashSet<Cluster> visitedClusters = new HashSet<Cluster>();
 
         public ClusterTreeMaker(Component component)
@@ -21,10 +21,11 @@ namespace BCCCompact.Models
         /// <param name="component"></param>
         public void Process()
         {
-            var randomVertex = FatherCluster.Vertices.ToList().First();
+            var randomVertex = FatherCluster.Vertices.First();
             visitedClusters.Add(randomVertex.Cluster);
             visitedVertices.Add(randomVertex);
             stackOfVertices.Push(randomVertex);
+
             while (stackOfVertices.Count > 0)
             {
                 IterateOnVertices();

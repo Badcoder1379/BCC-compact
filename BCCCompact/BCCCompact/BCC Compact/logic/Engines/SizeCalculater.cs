@@ -36,7 +36,7 @@ namespace BCCCompact.Models
                 return;
             }
 
-            var angleShareOfEachVertex = new Dictionary<BCCVertex, double>();
+            var angleShareOfEachVertex = new Dictionary<BccVertex, double>();
             double maxExternallRadius = cluster.InternallRadius;
 
             foreach (var vertex in cluster.Adjacenty.Keys)
@@ -92,7 +92,7 @@ namespace BCCCompact.Models
         /// <param name="vertex"></param>
         /// <param name="cluster"></param>
         /// <returns></returns>
-        public double GetSumOfChildrenSizes(BCCVertex vertex, Cluster cluster)
+        public double GetSumOfChildrenSizes(BccVertex vertex, Cluster cluster)
         {
             double sumOfSize = 0;
 

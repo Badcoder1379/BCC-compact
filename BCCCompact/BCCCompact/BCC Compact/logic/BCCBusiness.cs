@@ -2,11 +2,11 @@
 
 namespace BCCCompact.BCC_Compact.logic
 {
-    public class BCCBusiness
+    public class BccBusiness
     {
-        private readonly BCCGraph graph;
+        private readonly BccGraph graph;
 
-        public BCCBusiness(BCCGraph graph)
+        public BccBusiness(BccGraph graph)
         {
             this.graph = graph;
         }

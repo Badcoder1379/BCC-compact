@@ -1,4 +1,4 @@
-﻿using BCCCompact.Models.Compacts.BCC.Engines.ComponentMaker;
+﻿using BCCCompact.Models.Compacts.Bcc.Engines.ComponentMaker;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,11 +7,11 @@ namespace BCCCompact.Models
     public class ComponentMaker
     {
         private readonly Stack<IteratorPack> verticesToUtil = new Stack<IteratorPack>();
-        private readonly Dictionary<BCCVertex, bool> visitedVertices = new Dictionary<BCCVertex, bool>();
+        private readonly Dictionary<BccVertex, bool> visitedVertices = new Dictionary<BccVertex, bool>();
         public readonly HashSet<Component> Components = new HashSet<Component>();
-        private readonly BCCGraph graph;
+        private readonly BccGraph graph;
 
-        public ComponentMaker(BCCGraph graph)
+        public ComponentMaker(BccGraph graph)
         {
             this.graph = graph;
             
@@ -43,8 +43,8 @@ namespace BCCCompact.Models
 
         private void IterateOnVertices(IteratorPack currentPack)
         {
-            var currentVertex = currentPack.vertex;
-            var component = currentPack.component;
+            var currentVertex = currentPack.Vertex;
+            var component = currentPack.Component;
             visitedVertices[currentVertex] = true;
             component.Vertices.Add(currentVertex);
 

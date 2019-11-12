@@ -1,14 +1,14 @@
-﻿namespace BCCCompact.Models.Compacts.BCC.Engines.ComponentMaker
+﻿namespace BCCCompact.Models.Compacts.Bcc.Engines.ComponentMaker
 {
     public class IteratorPack
     {
-        public BCCVertex vertex;
-        public Component component;
+        public BccVertex Vertex { get; set; }
+        public Component Component { get; set; }
 
-        public IteratorPack(BCCVertex vertex, Component component)
+        public IteratorPack(BccVertex vertex, Component component)
         {
-            this.vertex = vertex;
-            this.component = component;
+            this.Vertex = vertex;
+            this.Component = component;
         }
     }
 }

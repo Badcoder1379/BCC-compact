@@ -4,7 +4,12 @@ namespace BCCCompact.Models
 {
     public class Component
     {
-        public HashSet<BCCVertex> Vertices = new HashSet<BCCVertex>();
-        public Cluster LargestCluster;
+        public HashSet<BccVertex> Vertices { get; set; }
+        public Cluster LargestCluster { get; set; }
+
+        public Component()
+        {
+            Vertices = new HashSet<BccVertex>();
+        }
     }
 }

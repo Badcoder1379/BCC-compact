@@ -7,6 +7,7 @@ namespace BCCCompact.Models
     public class ComponentSetter
     {
         private readonly HashSet<Component> components;
+
         public ComponentSetter(HashSet<Component> components)
         {
             this.components = components;

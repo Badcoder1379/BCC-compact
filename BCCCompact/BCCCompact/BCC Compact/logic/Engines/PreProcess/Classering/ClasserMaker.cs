@@ -8,7 +8,7 @@ namespace BCCCompact.Models
         private readonly Component component;
         private readonly HashSet<Cluster> clusters = new HashSet<Cluster>();
         private Cluster largestCluster;
-        private Dictionary<BCCVertex, int> vertexToClusterId = new Dictionary<BCCVertex, int>();
+        private Dictionary<BccVertex, int> vertexToClusterId = new Dictionary<BccVertex, int>();
 
         public ClusterMaker(Component component)
         {
@@ -36,7 +36,7 @@ namespace BCCCompact.Models
 
             foreach (var vertex in component.Vertices)
             {
-                int clusterId = vertexToClusterId[vertex];
+                var clusterId = vertexToClusterId[vertex];
 
                 if (!clusterIdToCluster.ContainsKey(clusterId))
                 {
@@ -60,11 +60,11 @@ namespace BCCCompact.Models
         /// </summary>
         private void ClusterLabelTagging()
         {
-            var ARandomVertex = component.Vertices.ToList().First();
-            vertexToClusterId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertex);
+            var ARandomVertex = component.Vertices.First();
+            vertexToClusterId = new BccAlgorithm().NodingComponentFromThisVertex(component, ARandomVertex);
             ConstructClusters();
-            var ARandomVertexFromLargestCluster = largestCluster.Vertices.ToList().First();
-            vertexToClusterId = new BCCAlgorithm().NodingComponentFromThisVertex(component, ARandomVertexFromLargestCluster);
+            var ARandomVertexFromLargestCluster = largestCluster.Vertices.First();
+            vertexToClusterId = new BccAlgorithm().NodingComponentFromThisVertex(component, ARandomVertexFromLargestCluster);
         }
     }
 }

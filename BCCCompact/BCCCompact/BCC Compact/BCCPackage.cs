@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace BCCCompact.Models
 {
-    public class BCCPackage
+    public class BccPackage
     {
         private readonly Graph graph;
-        private BCCGraph bccGraph;
+        private BccGraph bccGraph;
         private readonly Dictionary<Guid, int> guidToInt = new Dictionary<Guid, int>();
 
-        public BCCPackage(Graph graph)
+        public BccPackage(Graph graph)
         {
             this.graph = graph;
         }
@@ -19,7 +19,7 @@ namespace BCCCompact.Models
         public void Process()
         {
             ConvertData();
-            var business = new BCCBusiness(bccGraph);
+            var business = new BccBusiness(bccGraph);
             business.Process();
             ConstrucResult();
         }
@@ -27,18 +27,21 @@ namespace BCCCompact.Models
         private void ConvertData()
         {
             int v = graph.Nodes.Count;
-            var edges = new List<BCCEdge>();
+            var edges = new List<BccEdge>();
+
             foreach (var node in graph.Nodes)
             {
                 AddVertex(node.NodeId);
             }
+
             foreach (var edge in graph.Edges)
             {
                 var source = edge.FromNode;
                 var target = edge.ToNode;
-                edges.Add(new BCCEdge(guidToInt[source], guidToInt[target]));
+                edges.Add(new BccEdge(guidToInt[source], guidToInt[target]));
             }
-            bccGraph = new BCCGraph(v, edges);
+
+            bccGraph = new BccGraph(v, edges);
         }
 
         private void AddVertex(Guid guid)
@@ -52,7 +55,7 @@ namespace BCCCompact.Models
             foreach (var node in graph.Nodes)
             {
                 var guid = node.NodeId;
-                BCCVertex vertex = bccGraph.GetVertexById(guidToInt[guid]);
+                BccVertex vertex = bccGraph.GetVertexById(guidToInt[guid]);
                 node.X = vertex.X;
                 node.Y = vertex.Y;
             }

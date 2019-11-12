@@ -64,7 +64,7 @@ namespace BCCCompact.Models
 
         private void SetOwnVertexLocation(Cluster currentCluster)
         {
-            var vertex = currentCluster.AnglesOfInnerVertices.Keys.ToList().First();
+            var vertex = currentCluster.AnglesOfInnerVertices.Keys.First();
             double x = currentCluster.XCenter;
             double y = currentCluster.YCenter;
             vertex.SetLocation(x, y);

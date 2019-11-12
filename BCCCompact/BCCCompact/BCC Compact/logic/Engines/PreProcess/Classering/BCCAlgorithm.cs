@@ -1,27 +1,27 @@
-﻿using BCCCompact.Models.BccAlgorithm;
+﻿using BCCCompact.Models.BCCAlgorithm;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BCCCompact.Models
 {
-    public class BCCAlgorithm
+    public class BccAlgorithm
     {
-        private Dictionary<BCCVertex, int> disc = new Dictionary<BCCVertex, int>();
-        private Dictionary<BCCVertex, int> low = new Dictionary<BCCVertex, int>();
-        private Dictionary<BCCVertex, BCCVertex> parent = new Dictionary<BCCVertex, BCCVertex>();
+        private Dictionary<BccVertex, int> disc = new Dictionary<BccVertex, int>();
+        private Dictionary<BccVertex, int> low = new Dictionary<BccVertex, int>();
+        private Dictionary<BccVertex, BccVertex> parent = new Dictionary<BccVertex, BccVertex>();
         private int count = 0;
         private Dictionary<int, int> clusterIdOfVertex = new Dictionary<int, int>();
-        private LinkedList<BCCEdge> stackOfEdges = new LinkedList<BCCEdge>();
-        private BCCPath path = new BCCPath();
+        private LinkedList<BccEdge> stackOfEdges = new LinkedList<BccEdge>();
+        private BccPath path = new BccPath();
         private int time = 0;
 
-        public Dictionary<BCCVertex, int> NodingComponentFromThisVertex(Component component, BCCVertex startingVertex)
+        public Dictionary<BccVertex, int> NodingComponentFromThisVertex(Component component, BccVertex startingVertex)
         {
             count = 0;
             time = 0;
-            disc = new Dictionary<BCCVertex, int>();
-            low = new Dictionary<BCCVertex, int>();
-            parent = new Dictionary<BCCVertex, BCCVertex>();
+            disc = new Dictionary<BccVertex, int>();
+            low = new Dictionary<BccVertex, int>();
+            parent = new Dictionary<BccVertex, BccVertex>();
             clusterIdOfVertex = new Dictionary<int, int>();
             
             foreach (var vertex in component.Vertices)
@@ -34,15 +34,16 @@ namespace BCCCompact.Models
             NodingFromThisVertex(startingVertex);
             return GetResultOfNoding(component);
         }
+
         /// <summary>
         /// start from selected vertex and try to discover the clusters with looking up from this vertex
         /// </summary>
         /// <param name="startingVertex"></param>
-        private void NodingFromThisVertex(BCCVertex startingVertex)
+        private void NodingFromThisVertex(BccVertex startingVertex)
         {
             count = 0;
-            stackOfEdges = new LinkedList<BCCEdge>();
-            path = new BCCPath();
+            stackOfEdges = new LinkedList<BccEdge>();
+            path = new BccPath();
             disc[startingVertex] = low[startingVertex] = ++time;
             path.Push(startingVertex);
 
@@ -65,9 +66,9 @@ namespace BCCCompact.Models
         /// </summary>
         /// <param name="component"></param>
         /// <returns></returns>
-        private Dictionary<BCCVertex, int> GetResultOfNoding(Component component)
+        private Dictionary<BccVertex, int> GetResultOfNoding(Component component)
         {
-            var result = new Dictionary<BCCVertex, int>();
+            var result = new Dictionary<BccVertex, int>();
             int i = 0;
             
             foreach (var vertex in component.Vertices)
@@ -99,7 +100,7 @@ namespace BCCCompact.Models
                 {
                     path.ChildrenUp();
                     parent[v] = u;
-                    stackOfEdges.AddLast(new BCCEdge(u.Id, v.Id));
+                    stackOfEdges.AddLast(new BccEdge(u.Id, v.Id));
                     disc[v] = low[v] = ++time;
                     path.Push(v);
                     return;
@@ -109,7 +110,7 @@ namespace BCCCompact.Models
                     if (low[u] > disc[v])
                         low[u] = disc[v];
 
-                    stackOfEdges.AddLast(new BCCEdge(u.Id, v.Id));
+                    stackOfEdges.AddLast(new BccEdge(u.Id, v.Id));
                 }
             }
 
